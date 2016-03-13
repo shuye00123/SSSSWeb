@@ -33,7 +33,7 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>com/depart/model/domain/Depart.hbm.xml</value>
+				<value>com/SSSSWeb/model/domain/Depart.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

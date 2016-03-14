@@ -28,7 +28,20 @@ public class UserDAO {
 		session.save(user);
 		return i;
 	}
-	
+	public ArrayList selectAllUser(){
+		Session session = sf.getCurrentSession();
+		String hql = "select * from User";
+		Query query = session.createSQLQuery(hql);
+		ArrayList resultList = (ArrayList) query.list();
+		return resultList;
+	}
+	public ArrayList selectUser(String name){
+		Session session = sf.getCurrentSession();
+		String hql = "select * from User"+"where username="+name;
+		Query query = session.createSQLQuery(hql);
+		ArrayList resultList = (ArrayList) query.list();
+		return resultList;
+	}
 	public void updateUser(User u) {
 		Session session = sf.getCurrentSession();
 		User oldUser=(User)session.get(User.class, u.getUserid());
@@ -44,13 +57,15 @@ public class UserDAO {
 		 
 		return u;
 	}
-
-
 	public void ChangePsw(User user) {
 		Session session = sf.getCurrentSession();
 		User oldUser=(User)session.get(User.class, user.getUserid());
 		oldUser.setPassword(user.getPassword());
 		session.save(oldUser);
 	}
-
+	public void DeleteUser(User user){
+		Session session = sf.getCurrentSession();
+		User u = (User)session.get(User.class, user.getUserid());
+		session.delete(u);
+	}
 }

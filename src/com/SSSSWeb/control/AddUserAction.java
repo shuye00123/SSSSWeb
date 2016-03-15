@@ -7,7 +7,7 @@ import com.SSSSWeb.model.domain.User;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class AddUser extends ActionSupport implements ModelDriven<User>{
+public class AddUserAction extends ActionSupport implements ModelDriven<User>{
 	private User user=new User();
 	private UserService service;
 	public User getUser() {

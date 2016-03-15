@@ -34,25 +34,30 @@
 		</property>
 	</bean>
 	
-	<bean id="departDAO" class="com.depart.model.business.dao.DepartDAO">
+	<bean id="UserDAO" class="com.SSSSWeb.model.business.dao.UserDAO">
 		<property name="sf" ref="sessionFactory"></property>
 	</bean>
-	<bean id="departService" class="com.depart.model.business.service.DepartService">
-		<property name="departDAO" ref="departDAO"></property>
+	<bean id="UserService" class="com.SSSSWeb.model.business.service.UserService">
+		<property name="UserDAO" ref="UserDAO"></property>
 	</bean>
-	<bean id="DepartSelectAction" class="com.depart.control.SelectDepartAction">
-		<property name="ds" ref="departService"></property>
+	<bean id="AddUserAction" class="com.SSSSWeb.control.AddUserAction">
+		<property name="ds" ref="UserService"></property>
 	</bean>
-	<bean id="DepartEditAction" class="com.depart.control.EditDepartAction">
-		<property name="ds" ref="departService"></property>
+	<bean id="ChangePswAction" class="com.SSSSWeb.control.ChangePswAction">
+		<property name="ds" ref="UserService"></property>
 	</bean>
-	<bean id="DepartAddAction" class="com.depart.control.AddDepartAction">
-		<property name="ds" ref="departService"></property>
+	<bean id="ChangeUserAction" class="com.SSSSWeb.control.ChangeUserAction">
+		<property name="ds" ref="UserService"></property>
 	</bean>
-	<bean id="DepartDeleteAction" class="com.depart.control.DeleteDepartAction">
-		<property name="ds" ref="departService"></property>
+	<bean id="DeleteUserAction" class="com.SSSSWeb.control.DeleteUserAction">
+		<property name="ds" ref="UserService"></property>
 	</bean>
-	
+	<bean id="SelectAllUserAction" class="com.SSSSWeb.control.SelectAllUserUserAction">
+		<property name="ds" ref="UserService"></property>
+	</bean>
+	<bean id="SelectUserAction" class="com.SSSSWeb.control.SelectUserUserAction">
+		<property name="ds" ref="UserService"></property>
+	</bean>
 	<!-- 配置事务管理器 -->
 	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>

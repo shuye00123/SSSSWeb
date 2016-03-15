@@ -7,11 +7,10 @@ import com.SSSSWeb.model.domain.User;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class SelectUser extends ActionSupport implements ModelDriven<User>{
+public class SelectAllUserAction extends ActionSupport implements ModelDriven<User>{
 	private List list;
 	private User user = new User();
 	private UserService service;
-	private String name;
 	public List getList() {
 		return list;
 	}
@@ -30,15 +29,9 @@ public class SelectUser extends ActionSupport implements ModelDriven<User>{
 	public void setService(UserService service) {
 		this.service = service;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	@Override
 	public String execute() throws Exception {
-		list = service.SelectUser(name);
+		list = service.SelectAllUser();
 		return "success";
 	}
 	public User getModel() {

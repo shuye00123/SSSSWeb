@@ -9,21 +9,21 @@ import com.SSSSWeb.model.domain.User;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class ChangePsw extends ActionSupport implements SessionAware,ModelDriven<User>{
+public class ChangeUserAction extends ActionSupport implements SessionAware,ModelDriven<User>{
 	private UserService service;
 	private Map<String,Object> session;
 	private User user=new User();
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	public UserService getService() {
 		return service;
 	}
 	public void setService(UserService service) {
 		this.service = service;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public Map<String, Object> getSession() {
 		return session;
@@ -31,11 +31,11 @@ public class ChangePsw extends ActionSupport implements SessionAware,ModelDriven
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
-	public String execute() throws Exception {
-		service.ChangePsw(user);
+	public String execute() throws Exception{
+		service.updateUser(user);
 		return "success";
 	}
-	public User getModel() {
+	public User getModel(){
 		return user;
 	}
 }

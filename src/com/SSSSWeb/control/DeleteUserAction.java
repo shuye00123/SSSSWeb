@@ -1,22 +1,18 @@
 package com.SSSSWeb.control;
 
-import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.SSSSWeb.model.business.service.UserService;
 import com.SSSSWeb.model.domain.User;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class SelectAllUser extends ActionSupport implements ModelDriven<User>{
-	private List list;
+public class DeleteUserAction extends ActionSupport implements SessionAware,ModelDriven<User>{
 	private User user = new User();
 	private UserService service;
-	public List getList() {
-		return list;
-	}
-	public void setList(List list) {
-		this.list = list;
-	}
+	private Map<String,Object> session;
 	public User getUser() {
 		return user;
 	}
@@ -29,13 +25,17 @@ public class SelectAllUser extends ActionSupport implements ModelDriven<User>{
 	public void setService(UserService service) {
 		this.service = service;
 	}
-	@Override
-	public String execute() throws Exception {
-		list = service.SelectAllUser();
+	public Map<String, Object> getSession() {
+		return session;
+	}
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+	public String execute() throws Exception{
+		service.DeleteUser(user);
 		return "success";
 	}
-	public User getModel() {
-		// TODO Auto-generated method stub
+	public User getModel(){
 		return user;
 	}
 }

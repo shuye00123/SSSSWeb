@@ -20,6 +20,12 @@ public class UserService {
 		i=userDAO.insertUser(user);
 		return i;
 	}
+	public UserDAO getUserDAO() {
+		return userDAO;
+	}
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
+	}
 	@Transactional
 	public void updateUser(User user) {
 		userDAO.updateUser(user);

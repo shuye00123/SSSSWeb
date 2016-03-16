@@ -37,7 +37,7 @@ public class SignInAction extends ActionSupport implements SessionAware, ModelDr
 
 
 	
-	public String login() throws Exception {
+	public String execute() throws Exception {
 		User u = service.checkUser(user);
 		if (u !=null) {
 			session.put("user", u);

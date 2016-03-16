@@ -29,34 +29,37 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>com/SSSSWeb/model/domain/Depart.hbm.xml</value>
+				<value>com/SSSSWeb/model/domain/User.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
 	
-	<bean id="UserDAO" class="com.SSSSWeb.model.business.dao.UserDAO">
+	<bean id="userDAO" class="com.SSSSWeb.model.business.dao.UserDAO">
 		<property name="sf" ref="sessionFactory"></property>
 	</bean>
-	<bean id="UserService" class="com.SSSSWeb.model.business.service.UserService">
-		<property name="UserDAO" ref="UserDAO"></property>
+	<bean id="userService" class="com.SSSSWeb.model.business.service.UserService">
+		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	<bean id="SignInAction" class="com.SSSSWeb.control.SignInAction">
+		<property name="service" ref="userService"></property>
 	</bean>
 	<bean id="AddUserAction" class="com.SSSSWeb.control.AddUserAction">
-		<property name="ds" ref="UserService"></property>
+		<property name="service" ref="userService"></property>
 	</bean>
 	<bean id="ChangePswAction" class="com.SSSSWeb.control.ChangePswAction">
-		<property name="ds" ref="UserService"></property>
+		<property name="service" ref="userService"></property>
 	</bean>
 	<bean id="ChangeUserAction" class="com.SSSSWeb.control.ChangeUserAction">
-		<property name="ds" ref="UserService"></property>
+		<property name="service" ref="userService"></property>
 	</bean>
 	<bean id="DeleteUserAction" class="com.SSSSWeb.control.DeleteUserAction">
-		<property name="ds" ref="UserService"></property>
+		<property name="service" ref="userService"></property>
 	</bean>
-	<bean id="SelectAllUserAction" class="com.SSSSWeb.control.SelectAllUserUserAction">
-		<property name="ds" ref="UserService"></property>
+	<bean id="SelectAllUserAction" class="com.SSSSWeb.control.SelectAllUserAction">
+		<property name="service" ref="userService"></property>
 	</bean>
-	<bean id="SelectUserAction" class="com.SSSSWeb.control.SelectUserUserAction">
-		<property name="ds" ref="UserService"></property>
+	<bean id="SelectUserAction" class="com.SSSSWeb.control.SelectUserAction">
+		<property name="service" ref="userService"></property>
 	</bean>
 	<!-- 配置事务管理器 -->
 	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">

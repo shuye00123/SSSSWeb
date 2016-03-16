@@ -3,11 +3,11 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.neuedu.model.domain.User" table="user" >
+    <class name="com.SSSSWeb.model.domain.User" table="user" >
         <id name="userid" type="int">
             <column name="USERID"  />
-            <generator class="sequence">
-            	<param name="sequence">SEQ_DEPT</param>
+            <generator class="identity">
+            	<param name="identity">SEQ_DEPT</param>
             </generator>
         </id>
         <property name="username" type="java.lang.String">

@@ -4,7 +4,19 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
-   <include file="struts-user.xml"></include>
+	<!-- 告诉Struts框架，Action 类对象由spring来管理 -->
+	<constant name="struts.objectFactory" value="spring"></constant>
+    <package name="default" namespace="/" extends="struts-default">
+		
+		<global-results>
+			<result name="failure">/failure.jsp</result>
+		</global-results>
+     	
+     	<action name="signin" class="SignInAction">
+     		<result name="success">/index.jsp</result>
+     		<result name="input">/signin.jsp</result>
+     	</action>
+       
+    </package>
 
 </struts>

@@ -45,13 +45,12 @@ public class UserDAO {
 	public void updateUser(User u) {
 		Session session = sf.getCurrentSession();
 		User oldUser=(User)session.get(User.class, u.getUserid());
-		oldUser.setDepartment(u.getDepartment());
 		oldUser.setPost(u.getPost());
 		session.save(oldUser);
 	}
 	public User CheckUser(User user){
 		Session session = sf.getCurrentSession();
-		String hql="from Use where  username= '"+ user.getUsername()+"' and password='"+ user.getPassword()+"'";
+		String hql="from User where  username= '"+ user.getUsername()+"' and password='"+ user.getPassword()+"'";
 		Query query=session.createQuery(hql);
 		User u=(User)query.uniqueResult();
 		 

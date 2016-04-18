@@ -5,7 +5,6 @@ public class User {
 	private String username;
 	private String password;
 	private String usex;
-	private String department;
 	private String post;
 	public int getUserid() {
 		return userid;
@@ -30,12 +29,6 @@ public class User {
 	}
 	public void setUsex(String usex) {
 		this.usex = usex;
-	}
-	public String getDepartment() {
-		return department;
-	}
-	public void setDepartment(String department) {
-		this.department = department;
 	}
 	public String getPost() {
 		return post;

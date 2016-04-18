@@ -10,53 +10,57 @@
 
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName"
-			value="oracle.jdbc.driver.OracleDriver">
-		</property>
-		<property name="url"
-			value="jdbc:oracle:thin:@localhost:1521:orcl">
-		</property>
-		<property name="username" value="scott"></property>
-		<property name="password" value="tiger"></property>
+		<property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8"></property>
+		<property name="username" value=""></property>
+		<property name="password" value=""></property>
 	</bean>
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
-					org.hibernate.dialect.Oracle9Dialect
+					org.hibernate.dialect.MySQLDialect
 				</prop>
 			</props>
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>com/depart/model/domain/Depart.hbm.xml</value>
+				<value>com/SSSSWeb/model/domain/User.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
 	
-	<bean id="departDAO" class="com.depart.model.business.dao.DepartDAO">
+	<bean id="userDAO" class="com.SSSSWeb.model.business.dao.UserDAO">
 		<property name="sf" ref="sessionFactory"></property>
 	</bean>
-	<bean id="departService" class="com.depart.model.business.service.DepartService">
-		<property name="departDAO" ref="departDAO"></property>
+	<bean id="userService" class="com.SSSSWeb.model.business.service.UserService">
+		<property name="userDAO" ref="userDAO"></property>
 	</bean>
-	<bean id="DepartSelectAction" class="com.depart.control.SelectDepartAction">
-		<property name="ds" ref="departService"></property>
+	<bean id="SignInAction" class="com.SSSSWeb.control.SignInAction">
+		<property name="service" ref="userService"></property>
 	</bean>
-	<bean id="DepartEditAction" class="com.depart.control.EditDepartAction">
-		<property name="ds" ref="departService"></property>
+	<bean id="AddUserAction" class="com.SSSSWeb.control.AddUserAction">
+		<property name="service" ref="userService"></property>
 	</bean>
-	<bean id="DepartAddAction" class="com.depart.control.AddDepartAction">
-		<property name="ds" ref="departService"></property>
+	<bean id="ChangePswAction" class="com.SSSSWeb.control.ChangePswAction">
+		<property name="service" ref="userService"></property>
 	</bean>
-	<bean id="DepartDeleteAction" class="com.depart.control.DeleteDepartAction">
-		<property name="ds" ref="departService"></property>
+	<bean id="ChangeUserAction" class="com.SSSSWeb.control.ChangeUserAction">
+		<property name="service" ref="userService"></property>
 	</bean>
-	
+	<bean id="DeleteUserAction" class="com.SSSSWeb.control.DeleteUserAction">
+		<property name="service" ref="userService"></property>
+	</bean>
+	<bean id="SelectAllUserAction" class="com.SSSSWeb.control.SelectAllUserAction">
+		<property name="service" ref="userService"></property>
+	</bean>
+	<bean id="SelectUserAction" class="com.SSSSWeb.control.SelectUserAction">
+		<property name="service" ref="userService"></property>
+	</bean>
 	<!-- 配置事务管理器 -->
 	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>

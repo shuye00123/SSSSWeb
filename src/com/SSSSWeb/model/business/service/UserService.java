@@ -55,7 +55,6 @@ public class UserService {
 			u.setUsername(obj[1].toString());
 			u.setPassword(obj[2].toString());
 			u.setUsex(obj[3].toString());
-			u.setDepartment(obj[4].toString());
 			u.setPost(obj[5].toString());
 			resultList.add(u);
 		}
@@ -72,7 +71,6 @@ public class UserService {
 			u.setUsername(obj[1].toString());
 			u.setPassword(obj[2].toString());
 			u.setUsex(obj[3].toString());
-			u.setDepartment(obj[4].toString());
 			u.setPost(obj[5].toString());
 			resultList.add(u);
 		}

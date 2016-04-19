@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.SSSSWeb.model.domain.Users" table="users">
+		<id name="userid" column="userid" type="int">
+			<generator class="identity" />
+		</id>
+		<property name="username" type="java.lang.String">
+			<column name="username" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="password" />
+		</property>
+		<property name="usex" type="java.lang.String">
+			<column name="usex" />
+		</property>
+		<property name="post" type="java.lang.String>
+			<column name="post" />
+		</property>
+	</class>
+</hibernate-mapping>

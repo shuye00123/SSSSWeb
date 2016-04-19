@@ -35,6 +35,7 @@
               <nav>
                 <ul class="nav masthead-nav">
                   <li class="active"><a href="#">Home</a></li>
+                  <li><a href="signin.jsp">登录</a></li>
                 </ul>
               </nav>
             </div>
@@ -44,7 +45,7 @@
             <h1 class="cover-heading">这是一个汽车4S点管理平台！</h1>
             <p class="lead">您可以在这里管理您店铺的日常工作。快点击下面的按钮开始新任务吧！</p>
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">登录</a>
+              <a href="signin.jsp" class="btn btn-lg btn-default">登录</a>
             </p>
           </div>
 

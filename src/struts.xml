@@ -14,7 +14,7 @@
      	
      	<action name="signin" class="SignInAction">
      		<result name="success">/signin.jsp</result>
-     		<result name="input">/signin.jsp</result>
+     		<result name="input">/example.jsp</result>
      	</action>
        
     </package>

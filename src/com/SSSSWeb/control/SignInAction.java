@@ -56,7 +56,7 @@ public class SignInAction extends ActionSupport implements SessionAware, ModelDr
         Users u = service.checkUser(user);
         if (u !=null) {
             session.put("user", u);
-            return "success"+u.getPost();
+            return "success";
         }
         return "input"; 
     }
@@ -66,6 +66,8 @@ public class SignInAction extends ActionSupport implements SessionAware, ModelDr
 
     public Users getModel() {
         // TODO Auto-generated method stub
+        //user.setUsername("舒野");
+        //user.setPassword("123");
         return user;
     }
 }

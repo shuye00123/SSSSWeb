@@ -4,12 +4,21 @@
  */
 package com.SSSSWeb.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * 
  * @author sy25471
  * @version $Id: Users.java, v 0.1 2016年4月19日 上午10:24:37 sy25471 Exp $
  */
+@Entity
+@Table(name="users")
 public class Users {
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int userid;
     private String username;
     private String password;

@@ -13,8 +13,8 @@
 		</global-results>
      	
      	<action name="signin" class="SignInAction">
-     		<result name="success">/WEB-INF/signin.jsp</result>
-     		<result name="input">/WEB-INF/example.jsp</result>
+     		<result name="success">/signin.jsp</result>
+     		<result name="input">/example.jsp</result>
      	</action>
        
     </package>

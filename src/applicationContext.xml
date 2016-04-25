@@ -8,36 +8,34 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 	
 	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource">
+		class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value=""></property>
+		<property name="password" value="a6820028"></property>
 	</bean>
 	
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="dataSource">
-			<ref bean="dataSource" />
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">
-					org.hibernate.dialect.MySQLDialect
-				</prop>
-			</props>
-		</property>
-		<property name="mappingResources">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
 			<list>
-				<value>com/SSSSWeb/model/domain/Users.hbm.xml</value>
-			</list>
-		</property>
+        		<value>com.SSSSWeb.model.domain.Users</value>
+    		</list>
+  		</property>
+  		
+  		<property name="hibernateProperties">
+    		<value>
+      			hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+      			hibernate.show_sql=true
+    		</value>
+  		</property>
 	</bean>
 	
 	<bean id="usersDAO" class="com.SSSSWeb.model.business.dao.UsersDAO">
 		<property name="sf" ref="sessionFactory"></property>
 	</bean>
-	<bean id="usersService" class="com.SSSSWeb.model.business.service.UserService">
+	<bean id="usersService" class="com.SSSSWeb.model.business.service.UsersService">
 		<property name="usersDAO" ref="usersDAO"></property>
 	</bean>
 	<bean id="SignInAction" class="com.SSSSWeb.control.SignInAction">
@@ -45,7 +43,7 @@
 	</bean>
 	
 	<!-- 配置事务管理器 -->
-	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	

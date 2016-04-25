@@ -14,10 +14,10 @@
     <title>汽车4S店管理平台</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
+    <link href="css/cover.css" rel="stylesheet">
 
   </head>
 
@@ -43,7 +43,7 @@
 
           <div class="inner cover">
             <h1 class="cover-heading">这是一个汽车4S点管理平台！</h1>
-            <p class="lead">您可以在这里管理您店铺的日常工作。快点击下面的按钮开始新任务吧！</p>
+            <p class="lead">您可以在这里管理您店铺的日常工作。快点击下面的按钮登录系统开始工作吧！</p>
             <p class="lead">
               <a href="signin.jsp" class="btn btn-lg btn-default">登录</a>
             </p>

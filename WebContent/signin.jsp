@@ -1,29 +1,64 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><title>无标题文档</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<title>登录</title>
-	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">	
-	<link href="signin.css" rel="stylesheet">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>登录</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/cover.css" rel="stylesheet">
+
+  </head>
 
 <body>
-	<div class="container">
-		<form class="form-signin" method="post" action="signin">
+<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">4S店管理</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li ><a href="index.jsp">Home</a></li>
+                  <li class="active"><a href="signin.jsp">登录</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <form class="form-signin" method="post" action="signin">
 			<h2 class="form-signin-heading">请登录</h2>
-			<lable for="inputEmail"  class="sr-only">用户名</lable>
-			<input type="text" id="username" class="form-control" placeholder="Password">
-			<lable for="inputPassword" class="sr-only">密码</lable>
-			<input type="password" id="password" class="form-control" placeholder="Password" required>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-		</form>
-	
-	</div><!-- /container -->
-	
+			<lable for="inputEmail"  class="sr-only">帐号</lable>
+			<input type="text" id="username" class="form-control" placeholder="帐号" required>
+			<lable for="inputPassword" class="sr-only">密码 </lable>
+			<input type="password" id="password" class="form-control" placeholder="密码" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+		  </form>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
 </body>
 </html>

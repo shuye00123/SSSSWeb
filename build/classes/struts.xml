@@ -13,7 +13,7 @@
 		</global-results>
      	
      	<action name="signin" class="SignInAction">
-     		<result name="success">/example.jsp</result>
+     		<result name="success">/main.jsp</result>
      		<result name="input">/signin.jsp</result>
      	</action>
        

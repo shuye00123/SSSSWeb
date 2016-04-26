@@ -28,10 +28,16 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-1.12.3.min.js"></script>
   </head>
 
   <body>
-
+	<script>
+	$(function ()
+	{ $("#example_bottom").popover({placement:'bottom',title: '${session.user["username"]}', content: '${session.user["usex"]}  ${session.user["post"]}'});
+	});
+	</script>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -41,12 +47,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">4S店管理平台</a>
+          <a class="navbar-brand" href="main.jsp">4S店管理平台</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">主页</a></li>
-            <li><a href="#">个人资料</a></li>
+            <li><a href="main.jsp">主页</a></li>
+            <li><a href="#" id="example_bottom" rel="popover" >个人资料</a></li>
             <li><a href="index.jsp">退出登录</a></li>
           </ul>
           <form class="navbar-form navbar-right">

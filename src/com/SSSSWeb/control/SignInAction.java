@@ -6,14 +6,10 @@ package com.SSSSWeb.control;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.SSSSWeb.model.business.service.UsersService;
 import com.SSSSWeb.model.domain.Users;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -60,10 +56,6 @@ public class SignInAction extends ActionSupport implements SessionAware, ModelDr
         }
         return "input"; 
     }
-    private Map<String, Object> getSession() {
-        return ActionContext.getContext().getSession();
-    }
-
     public Users getModel() {
         // TODO Auto-generated method stub
         //user.setUsername("舒野");

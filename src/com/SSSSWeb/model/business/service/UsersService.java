@@ -53,8 +53,8 @@ public class UsersService {
         usersDAO.DeleteUser(user);
     }
     @Transactional
-    public int PageNum(){
-        int pageNum = usersDAO.PageNum();
+    public int PageNum(int pageSize){
+        int pageNum = usersDAO.PageNum(pageSize);
         return pageNum;
     }
     @Transactional

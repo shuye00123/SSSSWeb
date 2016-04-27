@@ -11,7 +11,7 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     /**  */
     private static final long serialVersionUID = 6409965646263698989L;
     private List list;
-    private int pageSize=10;
+    private int pageSize=1;
     private int pageNow=1;
     private int pageNum;
     public int getPageNow() {
@@ -43,7 +43,7 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     @Override
     public String execute() throws Exception {
         list = service.SelectAllUser(pageSize, pageNow);
-        pageNum = service.PageNum();
+        pageNum = service.PageNum(pageSize);
         return "success";
     }
     public Users getModel(){

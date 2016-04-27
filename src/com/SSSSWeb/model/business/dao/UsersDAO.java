@@ -37,17 +37,24 @@ public class UsersDAO {
         ArrayList resultList = (ArrayList) query.list();
         if(resultList.size() > 0){
             i=1;
+            session.close();
             return i;
         }
         session.save(user);
+        session.close();
         return i;
     }
-    public int PageNum(){
+    public int PageNum(int pageSize){
+        int pageNum;
         Session session = sf.openSession();
         String hql = "select * from Users";
         Query query = session.createSQLQuery(hql);
         ArrayList resultList = (ArrayList) query.list();
-        int pageNum = resultList.size()/10+1;
+        if(resultList.size()/pageSize==0)
+            pageNum = 1;
+        else
+            pageNum = resultList.size()/pageSize;
+        session.close();
         return pageNum;
     }
     public ArrayList selectAllUser(int pageSize, int pageNow){
@@ -55,6 +62,7 @@ public class UsersDAO {
         String hql = "select * from Users limit "+(pageNow*pageSize-pageSize)+","+pageSize;
         Query query = session.createSQLQuery(hql);
         ArrayList resultList = (ArrayList) query.list();
+        session.close();
         return resultList;
     }
     public ArrayList selectUser(String name){
@@ -62,12 +70,14 @@ public class UsersDAO {
         String hql = "select * from Users"+"where username="+name;
         Query query = session.createSQLQuery(hql);
         ArrayList resultList = (ArrayList) query.list();
+        session.close();
         return resultList;
     }
     public void updateUser(Users u) {
         Session session = sf.openSession();
         Users oldUsers=(Users)session.get(Users.class, u.getUserid());
         oldUsers.setPost(u.getPost());
+        session.close();
         session.save(oldUsers);
     }
     public Users CheckUser(Users user){
@@ -75,7 +85,7 @@ public class UsersDAO {
         String hql="from Users where  username= '"+ user.getUsername()+"' and password='"+ user.getPassword()+"'";
         Query query=session.createQuery(hql);
         Users u=(Users)query.uniqueResult();
-         
+        session.close();
         return u;
     }
     public void ChangePsw(Users user) {
@@ -83,10 +93,12 @@ public class UsersDAO {
         Users oldUsers=(Users)session.get(Users.class, user.getUserid());
         oldUsers.setPassword(user.getPassword());
         session.save(oldUsers);
+        session.close();
     }
     public void DeleteUser(Users user){
         Session session = sf.openSession();
         Users u = (Users)session.get(Users.class, user.getUserid());
         session.delete(u);
+        session.close();
     } 
 }

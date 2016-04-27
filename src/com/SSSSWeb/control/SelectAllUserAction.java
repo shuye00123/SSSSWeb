@@ -11,6 +11,14 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     /**  */
     private static final long serialVersionUID = 6409965646263698989L;
     private List list;
+    private int pageSize=10;
+    private int pageNow=1;
+    public int getPageNow() {
+        return pageNow;
+    }
+    public void setPageNow(int pageNow) {
+        this.pageNow = pageNow;
+    }
     private Users user = new Users();
     private UsersService service;
     public List getList() {
@@ -33,10 +41,11 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     }
     @Override
     public String execute() throws Exception {
-        list = service.SelectAllUser();
+        list = service.SelectAllUser(pageSize, pageNow);
         return "success";
     }
     public Users getModel(){
         return user;
     }
+
 }

@@ -79,7 +79,7 @@
             <li><a href="">More navigation</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="">查找员工</a></li>
+            <li><a href="selectAllUser">查找员工</a></li>
             <li><a href="">增加员工</a></li>
             <li><a href="">编辑员工</a></li>
           </ul>

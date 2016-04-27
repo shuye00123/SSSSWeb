@@ -53,8 +53,8 @@ public class UsersService {
         usersDAO.DeleteUser(user);
     }
     @Transactional
-    public ArrayList<Users> SelectAllUser(){
-        ArrayList list = usersDAO.selectAllUser();
+    public ArrayList<Users> SelectAllUser(int pageSize, int pageNow){
+        ArrayList list = usersDAO.selectAllUser(pageSize, pageNow);
         ArrayList resultList = new ArrayList();
         for(int i=0;i<list.size();i++){
             Object[] obj = (Object[]) list.get(i);
@@ -63,7 +63,7 @@ public class UsersService {
             u.setUsername(obj[1].toString());
             u.setPassword(obj[2].toString());
             u.setUsex(obj[3].toString());
-            u.setPost(obj[5].toString());
+            u.setPost(obj[4].toString());
             resultList.add(u);
         }
         return resultList;
@@ -79,7 +79,7 @@ public class UsersService {
             u.setUsername(obj[1].toString());
             u.setPassword(obj[2].toString());
             u.setUsex(obj[3].toString());
-            u.setPost(obj[5].toString());
+            u.setPost(obj[4].toString());
             resultList.add(u);
         }
         return resultList;

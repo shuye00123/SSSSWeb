@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
@@ -30,6 +31,7 @@
     <![endif]-->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/extendPagination.js"></script>
   </head>
 
   <body>
@@ -86,47 +88,45 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">员工列表</h1>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>员工ID</th>
-                  <th>姓名</th>
-                  <th>性别</th>
-                  <th>职位</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <table class="table table-hover piece" style="margin-left: 0;">
+          <thead>
+          	<tr>
+          		<th>ID</th>
+          		<th>姓名</th>
+          		<th>性别</th>
+          		<th>职位</th>
+          	</tr>
+          </thead>
+          <tbody>
+          	<s:iterator value="list" >  
+       		<tr>  
+          		<td><s:property value="userid"/></td>  
+          		<td><s:property value="username"/></td>  
+          		<td><s:property value="usex"/></td>  
+          		<td><s:property value="post"/></td>  
+       		</tr>  
+    		</s:iterator>  
+          </tbody>
+          </table>
+          	<s:url id="url_pre" value="selectAllUser">  
+         		<s:param name="pageNow" value="pageNow-1"></s:param>  
+     		</s:url>  
+  
+     		<s:url id="url_next" value="selectAllUser">  
+         		<s:param name="pageNow" value="pageNow+1"></s:param>  
+     		</s:url>    
+  
+     		<s:a href="%{url_pre}">上一页</s:a>  
+       
+     		<s:iterator value="students" status="status">
+        	<s:url id="url" value="selectAllUser">  
+            	<s:param name="pageNow" value="pageNow"/>  
+        	</s:url>  
+     		</s:iterator>  
+  
+     		<s:a href="%{url_next}">下一页</s:a>   
         </div>
       </div>
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>	

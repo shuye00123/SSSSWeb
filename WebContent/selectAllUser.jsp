@@ -19,19 +19,9 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<script src="js/jquery-1.12.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-1.12.3.min.js"></script>
-    <script src="js/extendPagination.js"></script>
+    
   </head>
 
   <body>
@@ -95,6 +85,7 @@
           		<th>姓名</th>
           		<th>性别</th>
           		<th>职位</th>
+          		<th>编辑</th>
           	</tr>
           </thead>
           <tbody>
@@ -103,7 +94,9 @@
           		<td><s:property value="userid"/></td>  
           		<td><s:property value="username"/></td>  
           		<td><s:property value="usex"/></td>  
-          		<td><s:property value="post"/></td>  
+          		<td><s:property value="post"/></td> 
+          		<td><a class="btn btn-default" data-toggle="modal" 
+   data-target="#myModal"/>修改资料</a></td>
        		</tr>  
     		</s:iterator>  
           </tbody>
@@ -136,5 +129,31 @@
         </div>
       </div>
     </div>
+    <!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   		<div class="modal-dialog">
+      		<div class="modal-content">
+         		<div class="modal-header">
+            		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  		&times;
+            		</button>
+            		<h4 class="modal-title" id="myModalLabel">
+               			修改资料
+            		</h4>
+         		</div>
+         	<div class="modal-body">
+            	在这里添加一些文本
+         	</div>
+         	<div class="modal-footer">
+            	<button type="button" class="btn btn-default" 
+               		data-dismiss="modal">关闭
+            	</button>
+            	<button type="button" class="btn btn-primary">
+               		提交更改
+            	</button>
+         	</div>
+      		</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
   </body>
 </html>	

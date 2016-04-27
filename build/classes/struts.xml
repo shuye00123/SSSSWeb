@@ -19,7 +19,10 @@
      	<action name="selectAllUser" class="SelectAllUserAction">
      		<result name="success">/selectAllUser.jsp</result>
      	</action>
-       
+        <action name="changeUser" class="ChangeUserAction">
+     		<result name="success">/selectAllUser.jsp</result>
+     	</action>
+        
     </package>
 
 </struts>

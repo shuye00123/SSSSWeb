@@ -115,16 +115,24 @@
      		<s:url id="url_next" value="selectAllUser">  
          		<s:param name="pageNow" value="pageNow+1"></s:param>  
      		</s:url>    
-  
-     		<s:a href="%{url_pre}">上一页</s:a>  
-       
-     		<s:iterator value="students" status="status">
+  			
+  			<s:if test="%{pageNow!=1}">
+     			<s:a href="%{url_pre}" class="btn btn-primary btn-lg" role="button">上一页</s:a>
+     		</s:if>
+       		<s:else>
+       			<s:a href="%{url_pre}" class="btn btn-primary btn-lg disabled" role="button">上一页</s:a>
+       		</s:else>
+     		<s:iterator value="list" status="status">
         	<s:url id="url" value="selectAllUser">  
             	<s:param name="pageNow" value="pageNow"/>  
         	</s:url>  
      		</s:iterator>  
-  
-     		<s:a href="%{url_next}">下一页</s:a>   
+  			<s:if test="%{pageNum>pageNow}">
+     			<s:a href="%{url_next}" class="btn btn-primary btn-lg" role="button">下一页</s:a>
+     		</s:if>
+     		<s:else>
+     			<s:a href="%{url_next}" class="btn btn-primary btn-lg disabled" role="button">下一页</s:a>
+     		</s:else>
         </div>
       </div>
     </div>

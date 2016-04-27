@@ -53,6 +53,11 @@ public class UsersService {
         usersDAO.DeleteUser(user);
     }
     @Transactional
+    public int PageNum(){
+        int pageNum = usersDAO.PageNum();
+        return pageNum;
+    }
+    @Transactional
     public ArrayList<Users> SelectAllUser(int pageSize, int pageNow){
         ArrayList list = usersDAO.selectAllUser(pageSize, pageNow);
         ArrayList resultList = new ArrayList();

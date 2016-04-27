@@ -13,6 +13,7 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     private List list;
     private int pageSize=10;
     private int pageNow=1;
+    private int pageNum;
     public int getPageNow() {
         return pageNow;
     }
@@ -42,10 +43,17 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     @Override
     public String execute() throws Exception {
         list = service.SelectAllUser(pageSize, pageNow);
+        pageNum = service.PageNum();
         return "success";
     }
     public Users getModel(){
         return user;
+    }
+    public int getPageNum() {
+        return pageNum;
+    }
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 
 }

@@ -44,6 +44,9 @@
 	<bean id="SelectAllUserAction" class="com.SSSSWeb.control.SelectAllUserAction">
 		<property name="service" ref="usersService"></property>
 	</bean>
+	<bean id="SelectUserAction" class="com.SSSSWeb.control.SelectUserAction">
+		<property name="service" ref="usersService"></property>
+	</bean>
 	<bean id="ChangeUserAction" class="com.SSSSWeb.control.ChangeUserAction">
 		<property name="service" ref="usersService"></property>
 	</bean>

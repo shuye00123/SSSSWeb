@@ -44,12 +44,25 @@ public class UsersDAO {
         session.close();
         return i;
     }
-    public int PageNum(int pageSize){
+    public int PageNum(int pageSize, String value){
         int pageNum;
+        String hql=null;
+        ArrayList resultList;
         Session session = sf.openSession();
-        String hql = "select * from Users";
-        Query query = session.createSQLQuery(hql);
-        ArrayList resultList = (ArrayList) query.list();
+        if(value==null){
+            hql = "select * from Users";
+            Query query = session.createSQLQuery(hql);
+            resultList = (ArrayList) query.list();
+        }else{
+            hql = "select * from Users"+" where username= '"+value+"'";
+            Query query = session.createSQLQuery(hql);
+            System.out.println(query.list());
+            if(query.list()!=null){
+                hql = "select * from Users"+" where post= '"+value+"'";
+                query = session.createSQLQuery(hql);
+            }
+            resultList = (ArrayList) query.list();
+        }
         if(resultList.size()/pageSize==0)
             pageNum = 1;
         else
@@ -65,10 +78,15 @@ public class UsersDAO {
         session.close();
         return resultList;
     }
-    public ArrayList selectUser(String name){
+    public ArrayList selectUser(String key, int pageSize, int pageNow){
         Session session = sf.openSession();
-        String hql = "select * from Users"+"where username="+name;
+        String hql = "select * from Users "+"where username= '"+key+"' limit "+(pageNow*pageSize-pageSize)+","+pageSize;
+        System.out.println(hql);
         Query query = session.createSQLQuery(hql);
+        if(query.list()!=null){
+            hql = "select * from Users "+"where post= '"+key+"' limit "+(pageNow*pageSize-pageSize)+","+pageSize;
+            query = session.createSQLQuery(hql);
+        }
         ArrayList resultList = (ArrayList) query.list();
         session.close();
         return resultList;

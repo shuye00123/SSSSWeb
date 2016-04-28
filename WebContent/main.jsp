@@ -19,24 +19,17 @@
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  	<script src="js/jquery-1.12.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-1.12.3.min.js"></script>
+    
   </head>
 
   <body>
 	<script>
 	$(function ()
-	{ $("#example_bottom").popover({placement:'bottom',title: '${session.user["username"]}', content: ' ${session.user["post"]} ${session.user["usex"]}'});
-	});
+			{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
+				content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
+			});
 	</script>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -78,11 +71,11 @@
             <li><a href="">Another nav item</a></li>
             <li><a href="">More navigation</a></li>
           </ul>
+          <s:if test="%{user.post==管理员}">
           <ul class="nav nav-sidebar">
-            <li><a href="selectAllUser">查找员工</a></li>
-            <li><a href="">增加员工</a></li>
-            <li><a href="">编辑员工</a></li>
+            <li><a href="selectAllUser" >员工操作</a></li>
           </ul>
+          </s:if>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
@@ -206,15 +199,44 @@
         </div>
       </div>
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+	<div class="modal fade" id="pswModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   		<div class="modal-dialog">
+      		<div class="modal-content">
+         		<div class="modal-header">
+            		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  		&times;
+            		</button>
+            		<h4 class="modal-title" id="myModalLabel">
+               			修改密码
+            		</h4>
+         		</div>
+         <form action="changePsw" method="post">
+         	<div class="modal-body">
+            	<div class="form-group">
+    				<label for="password">原密码</label>
+    				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+  				</div>
+  				<div class="form-group">
+    				<label for="password">新密码</label>
+    				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+  				</div>
+  				<div class="form-group">
+    				<label for="repassword">新密码</label>
+    				<input type="password" class="form-control" id="repassword" name="repassword" placeholder="密码">
+  				</div>
+         	</div>
+         	<div class="modal-footer">
+            	<button type="button" class="btn btn-default" 
+               		data-dismiss="modal">关闭
+            	</button>
+            	<button type="submit" class="btn btn-primary" >
+               		提交更改
+            	</button>
+         	</div>
+         </form>
+      		</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+    
   </body>
 </html>	

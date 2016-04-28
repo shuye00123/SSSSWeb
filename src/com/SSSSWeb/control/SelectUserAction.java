@@ -7,24 +7,35 @@ import com.SSSSWeb.model.domain.Users;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class SelectUserAction extends ActionSupport implements ModelDriven<Users> {
+public class SelectUserAction extends ActionSupport {
     /**  */
     private static final long serialVersionUID = 3154874431184397098L;
     private List list;
-    private Users user;
     private UsersService service;
-    private String name;
+    private String key;
+    private int pageNum;
+    private int pageSize=1;
+    private int pageNow=1;
+    
+    public int getPageSize() {
+        return pageSize;
+    }
+    
+    public int getPageNow() {
+        return pageNow;
+    }
+    public String getKey() {
+        return key;
+    }
+    public void setKey(String key) {
+        this.key = key;
+        System.out.println(key);
+    }
     public List getList() {
         return list;
     }
     public void setList(List list) {
         this.list = list;
-    }
-    public Users getUser() {
-        return user;
-    }
-    public void setUser(Users user) {
-        this.user = user;
     }
     public UsersService getService() {
         return service;
@@ -32,18 +43,17 @@ public class SelectUserAction extends ActionSupport implements ModelDriven<Users
     public void setService(UsersService service) {
         this.service = service;
     }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+    
     @Override
     public String execute() throws Exception {
-        list = service.SelectUser(name);
+        list = service.SelectUser(key,pageSize,pageNow);
+        setPageNum(service.PageNum(pageSize, key));
         return "success";
     }
-    public Users getModel(){
-        return user;
+    public int getPageNum() {
+        return pageNum;
+    }
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 }

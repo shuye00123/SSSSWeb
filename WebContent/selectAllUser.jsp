@@ -27,7 +27,8 @@
   <body>
 	<script>
 	$(function ()
-	{ $("#example_bottom").popover({placement:'bottom',title: '${session.user["username"]}', content: ' ${session.user["post"]} ${session.user["usex"]}'});
+	{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
+		content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
 	});
 	</script>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -47,8 +48,8 @@
             <li><a href="#" id="example_bottom" rel="popover" >个人资料</a></li>
             <li><a href="index.jsp">退出登录</a></li>
           </ul>
-          <form class="navbar-form navbar-right" action="selectuser">
-            <input type="text" class="form-control" placeholder="Search...">
+          <form class="navbar-form navbar-right" action="selectUser">
+            <input type="text" class="form-control" name="key" placeholder="Search...">
           </form>
         </div>
       </div>
@@ -70,11 +71,11 @@
             <li><a href="">Another nav item</a></li>
             <li><a href="">More navigation</a></li>
           </ul>
+          <c:if test="${user.post eq '管理员'}">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="selectAllUser.action" >查找员工</a></li>
-            <li><a href="">增加员工</a></li>
-            <li><a href="">编辑员工</a></li>
+            <li class="active"><a href="selectAllUser" >员工操作</a></li>
           </ul>
+          </c:if>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">员工列表</h1>
@@ -86,6 +87,7 @@
           		<th>性别</th>
           		<th>职位</th>
           		<th>编辑</th>
+          		<th>删除用户</th>
           	</tr>
           </thead>
           <tbody>
@@ -96,7 +98,9 @@
           		<td><s:property value="usex"/></td>  
           		<td><s:property value="post"/></td> 
           		<td><a class="btn btn-default" data-toggle="modal" 
-   data-target="#myModal"/>修改资料</a></td>
+   data-target="#myModal" role="button" />修改资料</a></td>
+   				<td><a class="btn btn-danger" data-toggle="modal" 
+   data-target="#errorModal" role="button" />删除用户</a></td>
        		</tr>  
     		</s:iterator>  
           </tbody>
@@ -141,17 +145,98 @@
                			修改资料
             		</h4>
          		</div>
+         <form action="changeUser" method="post">
          	<div class="modal-body">
-            	在这里添加一些文本
+            	<div class="form-group">
+    				<label for="username">姓名</label>
+    				<input type="text" class="form-control" id="username" name="username" placeholder="姓名">
+  				</div>
+  				<div class="form-group">
+    				<label for="post">职位</label>
+    				<input type="text" class="form-control" id="post" name="post" placeholder="职位">
+  				</div>
+  				<div class="radio">
+  					<label>
+    				<input type="radio" name="usex" id="optionsRadios1" value="男" checked>男
+  					</label>
+  					<label>
+    				<input type="radio" name="usex" id="optionsRadios2" value="女" >女
+  					</label>
+				</div>
          	</div>
          	<div class="modal-footer">
             	<button type="button" class="btn btn-default" 
                		data-dismiss="modal">关闭
             	</button>
-            	<button type="button" class="btn btn-primary">
+            	<button type="submit" class="btn btn-primary" >
                		提交更改
             	</button>
          	</div>
+         </form>
+      		</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   		<div class="modal-dialog">
+      		<div class="modal-content">
+         		<div class="modal-header">
+            		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  		&times;
+            		</button>
+            		<h4 class="modal-title" id="myModalLabel">
+               			警告
+            		</h4>
+         		</div>
+         	<div class="modal-body">
+            	你确定要删除此用户吗?<br>
+            	<em>用户资料将被永久删除</em>
+         	</div>
+         	<div class="modal-footer">
+            	<button type="button" class="btn btn-default" 
+               		data-dismiss="modal">关闭
+            	</button>
+            	<button type="submit" class="btn btn-danger" >
+               		删除
+            	</button>
+         	</div>
+      		</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<div class="modal fade" id="pswModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   		<div class="modal-dialog">
+      		<div class="modal-content">
+         		<div class="modal-header">
+            		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  		&times;
+            		</button>
+            		<h4 class="modal-title" id="myModalLabel">
+               			修改密码
+            		</h4>
+         		</div>
+         <form action="changePsw" method="post">
+         	<div class="modal-body">
+            	<div class="form-group">
+    				<label for="password">原密码</label>
+    				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+  				</div>
+  				<div class="form-group">
+    				<label for="password">新密码</label>
+    				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+  				</div>
+  				<div class="form-group">
+    				<label for="repassword">新密码</label>
+    				<input type="password" class="form-control" id="repassword" name="repassword" placeholder="密码">
+  				</div>
+         	</div>
+         	<div class="modal-footer">
+            	<button type="button" class="btn btn-default" 
+               		data-dismiss="modal">关闭
+            	</button>
+            	<button type="submit" class="btn btn-primary" >
+               		提交更改
+            	</button>
+         	</div>
+         </form>
       		</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>

@@ -53,8 +53,8 @@ public class UsersService {
         usersDAO.DeleteUser(user);
     }
     @Transactional
-    public int PageNum(int pageSize){
-        int pageNum = usersDAO.PageNum(pageSize);
+    public int PageNum(int pageSize, String value){
+        int pageNum = usersDAO.PageNum(pageSize, value);
         return pageNum;
     }
     @Transactional
@@ -74,8 +74,8 @@ public class UsersService {
         return resultList;
     }
     @Transactional
-    public ArrayList<Users> SelectUser(String name){
-        ArrayList list = usersDAO.selectUser(name);
+    public ArrayList<Users> SelectUser(String key, int pageSize, int pageNow){
+        ArrayList list = usersDAO.selectUser(key,pageSize,pageNow);
         ArrayList resultList = new ArrayList();
         for(int i=0;i<list.size();i++){
             Object[] obj = (Object[]) list.get(i);

@@ -42,8 +42,9 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     }
     @Override
     public String execute() throws Exception {
+        String value = null;
         list = service.SelectAllUser(pageSize, pageNow);
-        pageNum = service.PageNum(pageSize);
+        pageNum = service.PageNum(pageSize, value);
         return "success";
     }
     public Users getModel(){

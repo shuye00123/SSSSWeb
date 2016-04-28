@@ -19,6 +19,9 @@
      	<action name="selectAllUser" class="SelectAllUserAction">
      		<result name="success">/selectAllUser.jsp</result>
      	</action>
+     	<action name="selectUser" class="SelectUserAction">
+     		<result name="success">/selectUser.jsp</result>
+     	</action>
         <action name="changeUser" class="ChangeUserAction">
      		<result name="success">/selectAllUser.jsp</result>
      	</action>

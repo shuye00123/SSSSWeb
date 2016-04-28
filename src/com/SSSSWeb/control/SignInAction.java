@@ -6,6 +6,9 @@ package com.SSSSWeb.control;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.SSSSWeb.model.business.service.UsersService;
@@ -23,7 +26,6 @@ public class SignInAction extends ActionSupport implements SessionAware, ModelDr
     private UsersService service;
     private Map<String,Object> session;
     private Users user=new Users();
-
     public UsersService getService() {
         return service;
     }
@@ -46,13 +48,13 @@ public class SignInAction extends ActionSupport implements SessionAware, ModelDr
     
     public String execute() throws Exception {
         //user.setUsername();
-        if(user.getUsername()==null||user.getPassword()==null)
-            return "input";
-        System.out.println(user.getUsername()+','+user.getPassword());
         Users u = service.checkUser(user);
         if (u !=null) {
             session.put("user", u);
             return "success";
+        }else{
+            HttpServletRequest request=ServletActionContext.getRequest();
+            request.setAttribute("Message", "false");
         }
         return "input"; 
     }

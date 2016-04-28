@@ -13,8 +13,11 @@
 		</global-results>
      	
      	<action name="signin" class="SignInAction">
-     		<result name="success">/main.jsp</result>
+     		<result name="success">/main.jsp</result>	
      		<result name="input">/signin.jsp</result>
+     	</action>
+     	<action name="signout" class="SignOutAction">
+     		<result name="success">/index.jsp</result>
      	</action>
      	<action name="selectAllUser" class="SelectAllUserAction">
      		<result name="success">/selectAllUser.jsp</result>

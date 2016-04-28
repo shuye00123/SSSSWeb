@@ -58,7 +58,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar ">
+          <ul class="nav nav-sidebar">
             <li><a href="#">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Reports</a></li>
             <li><a href="#">Analytics</a></li>
@@ -71,14 +71,14 @@
             <li><a href="">Another nav item</a></li>
             <li><a href="">More navigation</a></li>
           </ul>
-          <c:if test="${user.post eq "管理员"}">
+          <c:if test="${user.post eq '管理员'}">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="selectAllUser" >员工操作</a></li>
           </ul>
           </c:if>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">员工列表</h1>
+          <h1 class="page-header">查询结果</h1>
           <table class="table table-hover piece" style="margin-left: 0;">
           <thead>
           	<tr>
@@ -105,11 +105,11 @@
     		</s:iterator>  
           </tbody>
           </table>
-          	<s:url id="url_pre" value="selectAllUser">  
+          	<s:url id="url_pre" value="selectUser">  
          		<s:param name="pageNow" value="pageNow-1"></s:param>  
      		</s:url>  
   
-     		<s:url id="url_next" value="selectAllUser">  
+     		<s:url id="url_next" value="selectUser">  
          		<s:param name="pageNow" value="pageNow+1"></s:param>  
      		</s:url>    
   			
@@ -120,7 +120,7 @@
        			<s:a href="%{url_pre}" class="btn btn-primary btn-lg disabled" role="button">上一页</s:a>
        		</s:else>
      		<s:iterator value="list" status="status">
-        	<s:url id="url" value="selectAllUser">  
+        	<s:url id="url" value="selectUser">  
             	<s:param name="pageNow" value="pageNow"/>  
         	</s:url>  
      		</s:iterator>  

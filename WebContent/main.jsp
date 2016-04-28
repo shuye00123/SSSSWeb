@@ -46,7 +46,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="main.jsp">主页</a></li>
             <li><a href="#" id="example_bottom" rel="popover" >个人资料</a></li>
-            <li><a href="index.jsp">退出登录</a></li>
+            <li><a href="signout">退出登录</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">

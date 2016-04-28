@@ -18,7 +18,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
-
+	<script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </head>
 
 <body>
@@ -39,9 +40,21 @@
               </nav>
             </div>
           </div>
-
+          <div id="err">
+			<div></div>
+		  </div>
+          <script type="text/JavaScript"> 
+			var msg="${requestScope.Message}";
+			if(msg!=""){
+				var html ='<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>用户名或密码错误</div>';
+				var target = document.getElementById('err');
+				target.innerHTML = html;
+			}
+		  </script>
+			
+		  
           <form class="form-signin" method="post" action="signin">
-			<h2 class="form-signin-heading">请登录</h2>
+			<h2 class="form-signin-heading">${flag}请登录</h2>
 			<lable for="inputEmail"  class="sr-only">帐号</lable>
 			<input type="text" id="username" name="username" class="form-control" placeholder="帐号" required>
 			<lable for="inputPassword" class="sr-only">密码 </lable>

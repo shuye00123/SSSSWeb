@@ -41,6 +41,9 @@
 	<bean id="SignInAction" class="com.SSSSWeb.control.SignInAction">
 		<property name="service" ref="usersService"></property>
 	</bean>
+	<bean id="SignOutAction" class="com.SSSSWeb.control.SignOutAction">
+		<property name="service" ref="usersService"></property>
+	</bean>
 	<bean id="SelectAllUserAction" class="com.SSSSWeb.control.SelectAllUserAction">
 		<property name="service" ref="usersService"></property>
 	</bean>

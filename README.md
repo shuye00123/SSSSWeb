@@ -11,12 +11,12 @@ jar包可以再/webcontent/WEB-INF/lib里找到
 
 ###MySQL库结构
 ```sql
-create table users (<br>
-userid int(6) not null auto_increment,<br>
-username varchar(8),<br>
-password varchar(10),<br>
-usex varchar(2),<br>
-post varchar(12),<br>
-primary key (userid)<br>
+create table users (
+userid int(6) not null auto_increment,
+username varchar(8),
+password varchar(10),
+usex varchar(2),
+post varchar(12),
+primary key (userid)
 );
 ```

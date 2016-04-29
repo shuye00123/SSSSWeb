@@ -237,10 +237,16 @@
 		</div><!-- /.modal -->
 	</div>
     <script>
+    <!-- 
+	popover初始化  
+-->
     $(function ()
     		{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
     			content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
     		});
+    <!-- 
+  	bootstrapValidator激活
+  -->
 	$(document).ready(function() {
 		$('#pswForm').bootstrapValidator({
 	        message: 'This value is not valid',

@@ -258,16 +258,23 @@
 		</div><!-- /.modal -->
 	</div>
 	<script type="text/javascript">
+	<!-- 
+	popover初始化  
+-->
 	$(function ()
 	{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
 		content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
 	});
+	
 	$(document).ready(function() {
 		  $(".btn-warning").click(function() {
 		    var id = $(this).attr('rel');
 		    $("#myModal .modal-content > form").attr("action", "changeUser?userid=" + id);
 		    $("#myModal").modal();
 		  });
+		  <!-- 
+		  	bootstrapValidator激活
+		  -->
 		  $('#addForm').bootstrapValidator({
 		        message: 'This value is not valid',
 		        feedbackIcons: {

@@ -39,8 +39,6 @@ public class ChangePswAction extends ActionSupport implements SessionAware{
     @Override
     public String execute() throws Exception{
         user=(Users)session.get("user");
-        System.out.println(user.getUsername());
-        System.out.println(newpassword);
         Users u = service.checkUser(user);
         if (u !=null) {
             service.ChangePsw(user, newpassword);

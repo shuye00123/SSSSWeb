@@ -13,24 +13,17 @@
 
     <title>汽车4S店管理平台</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+	<link href="css/bootstrapValidator.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-
-  	<script src="js/jquery-1.12.3.min.js"></script>
+	<script src="js/jquery-1.12.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrapValidator.js"></script>
     
   </head>
 
   <body>
-	<script>
-	$(function ()
-			{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
-				content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
-			});
-	</script>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -216,7 +209,7 @@
                			修改密码
             		</h4>
          		</div>
-         <form action="changePsw" method="post">
+         <form action="changePsw" method="post" id="pswForm">
          	<div class="modal-body">
             	<div id="err"><div class="form-group">
     				<label for="password">原密码</label>
@@ -243,6 +236,67 @@
       		</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
-    
+    <script>
+    $(function ()
+    		{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
+    			content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
+    		});
+	$(document).ready(function() {
+		$('#pswForm').bootstrapValidator({
+	        message: 'This value is not valid',
+	        feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {
+	        	password: {
+	                validators: {
+	                    notEmpty: {
+	                        message: '密码不能为空'
+	                    },
+	                    stringLength: {
+	                        min: 1,
+	                        max: 10,
+	                        message: '密码长度必须小于10位'
+	                    },
+	                }
+	            },
+	        	newpassword: {
+	                validators: {
+	                    notEmpty: {
+	                        message: '密码不能为空'
+	                    },
+	                    stringLength: {
+	                        min: 1,
+	                        max: 10,
+	                        message: '密码长度必须小于10位'
+	                    },
+	                    identical: {
+	                        field: 'repassword',
+	                        message: '两次新密码不同'
+	                    }
+	                }
+	            },
+	            repassword: {
+	                validators: {
+	                	notEmpty: {
+	                        message: '密码不能为空'
+	                    },
+	                    stringLength: {
+	                        min: 1,
+	                        max: 10,
+	                        message: '密码长度必须小于10位'
+	                    },
+	                    identical: {
+	                        field: 'newpassword',
+	                        message: '两次新密码不同'
+	                    }
+	                }
+	            }
+	        }
+	  });
+	});
+</script>
   </body>
 </html>	

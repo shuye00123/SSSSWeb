@@ -236,7 +236,7 @@
   				</div>
   				<div class="form-group">
     				<label for="password">新密码</label>
-    				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+    				<input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="密码">
   				</div>
   				<div class="form-group">
     				<label for="repassword">新密码</label>
@@ -372,10 +372,27 @@
 		            validating: 'glyphicon glyphicon-refresh'
 		        },
 		        fields: {
+		        	password: {
+		                validators: {
+		                    notEmpty: {
+		                        message: '密码不能为空'
+		                    },
+		                    stringLength: {
+		                        min: 1,
+		                        max: 10,
+		                        message: '密码长度必须小于10位'
+		                    },
+		                }
+		            },
 		        	newpassword: {
 		                validators: {
 		                    notEmpty: {
-		                        message: 'The password is required and can\'t be empty'
+		                        message: '密码不能为空'
+		                    },
+		                    stringLength: {
+		                        min: 1,
+		                        max: 10,
+		                        message: '密码长度必须小于10位'
 		                    },
 		                    identical: {
 		                        field: 'repassword',
@@ -385,8 +402,13 @@
 		            },
 		            repassword: {
 		                validators: {
-		                    notEmpty: {
-		                        message: 'The confirm password is required and can\'t be empty'
+		                	notEmpty: {
+		                        message: '密码不能为空'
+		                    },
+		                    stringLength: {
+		                        min: 1,
+		                        max: 10,
+		                        message: '密码长度必须小于10位'
 		                    },
 		                    identical: {
 		                        field: 'newpassword',

@@ -14,30 +14,17 @@
 
     <title>汽车4S店管理平台</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+	<link href="css/bootstrapValidator.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
 	<script src="js/jquery-1.12.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrapValidator.js"></script>
     
   </head>
 
   <body>
-	<script>
-	$(function ()
-	{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
-		content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
-	});
-	$(document).ready(function() {
-		  $(".btn-default").click(function() {
-		    var id = $(this).attr('rel');
-		    $("#myModal .modal-content > form").attr("action", "changeUser?userid=" + id);
-		    $("#myModal").modal();
-		  });
-		});
-	</script>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -107,7 +94,7 @@
           		<td><s:property value="username"/></td>  
           		<td><s:property value="usex"/></td>  
           		<td><s:property value="post"/></td> 
-          		<td><a href="javascript:void(0);" class="btn btn-default" rel="${userid}" role="button" /><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>修改资料</a></td>
+          		<td><a href="javascript:void(0);" class="btn btn-warning" rel="${userid}" role="button" /><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>修改资料</a></td>
    				<td><a href="deleteUser?userid=${userid}" class="btn btn-danger" role="button" /><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除用户</a></td>
        		</tr>  
     		</s:iterator>  
@@ -153,7 +140,7 @@
                			添加员工
             		</h4>
          		</div>
-         <form action="addUser" method="post">
+         <form action="addUser" method="post" id="addForm">
          	<div class="modal-body">
             	<div class="form-group">
     				<label for="username">姓名</label>
@@ -199,7 +186,7 @@
                			修改资料
             		</h4>
          		</div>
-         <form action="changeUser" method="post">
+         <form action="changeUser" method="post" id="changeForm">
          	<div class="modal-body">
             	<div class="form-group">
     				<label for="username">姓名</label>
@@ -241,7 +228,7 @@
                			修改密码
             		</h4>
          		</div>
-         <form action="changePsw" method="post">
+         <form action="changePsw" method="post" id="pswForm">
          	<div class="modal-body">
             	<div class="form-group">
     				<label for="password">原密码</label>
@@ -268,5 +255,148 @@
       		</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
+	<script type="text/javascript">
+	$(function ()
+	{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
+		content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
+	});
+	$(document).ready(function() {
+		  $(".btn-warning").click(function() {
+		    var id = $(this).attr('rel');
+		    $("#myModal .modal-content > form").attr("action", "changeUser?userid=" + id);
+		    $("#myModal").modal();
+		  });
+		  $('#addForm').bootstrapValidator({
+		        message: 'This value is not valid',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        },
+		        fields: {
+		            username: {
+		                message: 'The username is not valid',
+		                validators: {
+		                    notEmpty: {
+		                        message: '姓名不能为空'
+		                    },
+		                    stringLength: {
+		                        min: 1,
+		                        max: 8,
+		                        message: '姓名长度必须小于8'
+		                    },
+		                    regexp: {
+		                        regexp: /^[A-Za-z\u4e00-\u9fa5]+$/,
+		                        message: '含有非法字符'
+		                    }
+		                }
+		            },
+		            password: {
+		                validators: {
+		                    notEmpty: {
+		                        message: '密码不能为空'
+		                    },
+		                    stringLength: {
+		                        min: 1,
+		                        max: 10,
+		                        message: '密码长度必须小于8位'
+		                    },
+		                }
+		            },
+		            post: {
+		                validators: {
+		                    notEmpty: {
+		                        message: '职位不能为空'
+		                    },
+		                    stringLength: {
+		                        min: 1,
+		                        max: 4,
+		                        message: '长度必须小于4位'
+		                    },
+		                    regexp: {
+		                        regexp: /^[A-Za-z\u4e00-\u9fa5]+$/,
+		                        message: '含有非法字符'
+		                    }
+		                }
+		            }
+		        }
+		    });
+		  $('#changeForm').bootstrapValidator({
+		        message: 'This value is not valid',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        },
+		        fields: {
+		        	username: {
+		                message: 'The username is not valid',
+		                validators: {
+		                    notEmpty: {
+		                        message: '姓名不能为空'
+		                    },
+		                    stringLength: {
+		                        min: 1,
+		                        max: 8,
+		                        message: '姓名长度必须小于8'
+		                    },
+		                    regexp: {
+		                        regexp: /^[A-Za-z\u4e00-\u9fa5]+$/,
+		                        message: '含有非法字符'
+		                    }
+		                }
+		            },
+		            post: {
+		                validators: {
+		                    notEmpty: {
+		                        message: '职位不能为空'
+		                    },
+		                    stringLength: {
+		                        min: 1,
+		                        max: 4,
+		                        message: '长度必须小于4位'
+		                    },
+		                    regexp: {
+		                        regexp: /^[A-Za-z\u4e00-\u9fa5]+$/,
+		                        message: '含有非法字符'
+		                    }
+		                }
+		            }
+		        }
+		  });
+		  $('#pswForm').bootstrapValidator({
+		        message: 'This value is not valid',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        },
+		        fields: {
+		        	newpassword: {
+		                validators: {
+		                    notEmpty: {
+		                        message: 'The password is required and can\'t be empty'
+		                    },
+		                    identical: {
+		                        field: 'repassword',
+		                        message: '两次新密码不同'
+		                    }
+		                }
+		            },
+		            repassword: {
+		                validators: {
+		                    notEmpty: {
+		                        message: 'The confirm password is required and can\'t be empty'
+		                    },
+		                    identical: {
+		                        field: 'newpassword',
+		                        message: '两次新密码不同'
+		                    }
+		                }
+		            }
+		        }
+		  });
+		});
+	</script>
   </body>
 </html>	

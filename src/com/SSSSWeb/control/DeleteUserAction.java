@@ -13,7 +13,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class DeleteUserAction extends ActionSupport implements SessionAware {
-    /**  */
+    /**
+     * 本action接收传来的userid，调用service的findUser方法寻找目标对象，delete方法删除对象
+     *   */
     private static final long serialVersionUID = 942250617781853325L;
     private UsersService service;
     private int userid;

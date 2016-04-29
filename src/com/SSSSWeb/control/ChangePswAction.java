@@ -12,7 +12,9 @@ import com.SSSSWeb.model.domain.Users;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ChangePswAction extends ActionSupport implements SessionAware{
-    /**  */
+    /**
+     * 本action从session中获取user,接收新密码，调用service密码验证，成功后修改密码
+     *   */
     private static final long serialVersionUID = 4948899620692423928L;
     private UsersService service;
     private Map<String, Object> session;

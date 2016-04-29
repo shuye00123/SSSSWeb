@@ -12,7 +12,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class SelectAllUserAction extends ActionSupport implements ModelDriven<Users> {
-    /**  */
+    /**
+     * 本action定义value,pageSzie和pageNow三个变量，value为空，调用pageNum返回分页数量，调用selectAllUser分页查询
+     *   */
     private static final long serialVersionUID = 6409965646263698989L;
     private List list;
     private int pageSize=2;

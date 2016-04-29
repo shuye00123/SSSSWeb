@@ -19,7 +19,9 @@ import com.opensymphony.xwork2.ModelDriven;
  * @version $Id: InsertUsersAction.java, v 0.1 2016年4月19日 上午11:32:46 sy25471 Exp $
  */
 public class AddUserAction extends ActionSupport implements ModelDriven<Users> {
-    /**  */
+    /** 
+     * 本action使用直接新建user对象，调用service的insertUser方法,失败返回1
+     *  */
     private static final long serialVersionUID = 4878223622943894007L;
     private Users user = new Users();
     private UsersService service;

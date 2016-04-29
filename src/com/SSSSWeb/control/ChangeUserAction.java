@@ -13,7 +13,9 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 public class ChangeUserAction extends ActionSupport implements SessionAware{
-    /**  */
+    /**
+     * 本action接收传来的4个变量并判空，调用service的findUser方法寻找目标对象，update方法更新对象
+     *   */
     private static final long serialVersionUID = 6247927281259946654L;
     private UsersService service;
     private Users user = new Users();

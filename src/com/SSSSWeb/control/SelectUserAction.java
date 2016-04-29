@@ -2,6 +2,10 @@ package com.SSSSWeb.control;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.SSSSWeb.model.business.service.UsersService;
 import com.SSSSWeb.model.domain.Users;
 import com.opensymphony.xwork2.ActionSupport;
@@ -14,7 +18,7 @@ public class SelectUserAction extends ActionSupport {
     private UsersService service;
     private String key;
     private int pageNum;
-    private int pageSize=1;
+    private int pageSize=2;
     private int pageNow=1;
     
     public int getPageSize() {
@@ -46,9 +50,15 @@ public class SelectUserAction extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        list = service.SelectUser(key,pageSize,pageNow);
-        setPageNum(service.PageNum(pageSize, key));
-        return "success";
+        try{
+            list = service.SelectUser(key,pageSize,pageNow);
+            setPageNum(service.PageNum(pageSize, key));
+            return "success";
+        }catch(Exception e){
+            HttpServletRequest request=ServletActionContext.getRequest();
+            request.setAttribute("Message", e.toString());
+        }
+        return "failure";
     }
     public int getPageNum() {
         return pageNum;

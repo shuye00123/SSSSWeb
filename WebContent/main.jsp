@@ -199,6 +199,12 @@
         </div>
       </div>
     </div>
+    <script type="text/JavaScript"> 
+			var msg="${requestScope.Message}";
+			if(msg!=""){
+				alert(msg);
+			}
+	</script>
 	<div class="modal fade" id="pswModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    		<div class="modal-dialog">
       		<div class="modal-content">
@@ -212,13 +218,13 @@
          		</div>
          <form action="changePsw" method="post">
          	<div class="modal-body">
-            	<div class="form-group">
+            	<div id="err"><div class="form-group">
     				<label for="password">原密码</label>
     				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
-  				</div>
+  				</div></div>
   				<div class="form-group">
     				<label for="password">新密码</label>
-    				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+    				<input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="密码">
   				</div>
   				<div class="form-group">
     				<label for="repassword">新密码</label>

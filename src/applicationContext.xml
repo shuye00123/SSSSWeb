@@ -53,6 +53,15 @@
 	<bean id="ChangeUserAction" class="com.SSSSWeb.control.ChangeUserAction">
 		<property name="service" ref="usersService"></property>
 	</bean>
+	<bean id="ChangePswAction" class="com.SSSSWeb.control.ChangePswAction">
+		<property name="service" ref="usersService"></property>
+	</bean>
+	<bean id="DeleteUserAction" class="com.SSSSWeb.control.DeleteUserAction">
+		<property name="service" ref="usersService"></property>
+	</bean>
+	<bean id="AddUserAction" class="com.SSSSWeb.control.AddUserAction">
+		<property name="service" ref="usersService"></property>
+	</bean>
 	
 	<!-- 配置事务管理器 -->
 	<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

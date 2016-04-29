@@ -2,6 +2,10 @@ package com.SSSSWeb.control;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.SSSSWeb.model.business.service.UsersService;
 import com.SSSSWeb.model.domain.Users;
 import com.opensymphony.xwork2.ActionSupport;
@@ -11,7 +15,7 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     /**  */
     private static final long serialVersionUID = 6409965646263698989L;
     private List list;
-    private int pageSize=1;
+    private int pageSize=2;
     private int pageNow=1;
     private int pageNum;
     public int getPageNow() {
@@ -43,9 +47,15 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     @Override
     public String execute() throws Exception {
         String value = null;
-        list = service.SelectAllUser(pageSize, pageNow);
-        pageNum = service.PageNum(pageSize, value);
-        return "success";
+        try{
+            list = service.SelectAllUser(pageSize, pageNow);
+            pageNum = service.PageNum(pageSize, value);
+            return "success";
+        }catch(Exception e){
+            HttpServletRequest request=ServletActionContext.getRequest();
+            request.setAttribute("Message", e.toString());
+        }
+        return "failure";
     }
     public Users getModel(){
         return user;

@@ -16,11 +16,16 @@ public class SignOutAction extends ActionSupport implements SessionAware {
     /**  */
     private static final long serialVersionUID = 416661821021248465L;
     private UsersService service;
-    public String execute() throws Exception{
+    public String execute() {
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpSession session = request.getSession();
-        session.invalidate();
-        return "success";
+        try{
+            session.invalidate();
+            return "success";
+        }catch(Exception e){
+            request.setAttribute("Message", e.toString());
+        }
+        return "input";
     }
     public void setSession(Map<String, Object> session) {
     }

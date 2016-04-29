@@ -30,6 +30,13 @@
 	{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
 		content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
 	});
+	$(document).ready(function() {
+		  $(".btn-default").click(function() {
+		    var id = $(this).attr('rel');
+		    $("#myModal .modal-content > form").attr("action", "changeUser?userid=" + id);
+		    $("#myModal").modal();
+		  });
+		});
 	</script>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -79,6 +86,9 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">查询结果</h1>
+          <div class="col-md-11 col-md-offset-11">
+          	<button class="btn btn-success" data-toggle="modal" data-target="#addModal" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加员工</button>
+          </div>
           <table class="table table-hover piece" style="margin-left: 0;">
           <thead>
           	<tr>
@@ -97,10 +107,8 @@
           		<td><s:property value="username"/></td>  
           		<td><s:property value="usex"/></td>  
           		<td><s:property value="post"/></td> 
-          		<td><a class="btn btn-default" data-toggle="modal" 
-   data-target="#myModal" role="button" /><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>修改资料</a></td>
-   				<td><a class="btn btn-danger" data-toggle="modal" 
-   data-target="#errorModal" role="button" /><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除用户</a></td>
+          		<td><a href="javascript:void(0);" class="btn btn-default" rel="${userid}" role="button" /><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>修改资料</a></td>
+   				<td><a href="deleteUser?userid=${userid}" class="btn btn-danger" role="button" /><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除用户</a></td>
        		</tr>  
     		</s:iterator>  
           </tbody>
@@ -134,6 +142,52 @@
       </div>
     </div>
     <!-- 模态框（Modal） -->
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   		<div class="modal-dialog">
+      		<div class="modal-content">
+         		<div class="modal-header">
+            		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  		&times;
+            		</button>
+            		<h4 class="modal-title" id="myModalLabel">
+               			添加员工
+            		</h4>
+         		</div>
+         <form action="addUser" method="post">
+         	<div class="modal-body">
+            	<div class="form-group">
+    				<label for="username">姓名</label>
+    				<input type="text" class="form-control" id="username" name="username" placeholder="姓名">
+  				</div>
+  				<div class="form-group">
+    				<label for="password">密码</label>
+    				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+  				</div>
+  				<div class="form-group">
+    				<label for="post">职位</label>
+    				<input type="text" class="form-control" id="post" name="post" placeholder="职位">
+  				</div>
+  				<div class="radio">
+  					<label>
+    				<input type="radio" name="usex" id="optionsRadios1" value="男">男
+  					</label>
+  					<label>
+    				<input type="radio" name="usex" id="optionsRadios2" value="女" >女
+  					</label>
+				</div>
+         	</div>
+         	<div class="modal-footer">
+            	<button type="button" class="btn btn-default" 
+               		data-dismiss="modal">关闭
+            	</button>
+            	<button type="submit" class="btn btn-primary" >
+               		提交
+            	</button>
+         	</div>
+         </form>
+      		</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    		<div class="modal-dialog">
       		<div class="modal-content">
@@ -157,7 +211,7 @@
   				</div>
   				<div class="radio">
   					<label>
-    				<input type="radio" name="usex" id="optionsRadios1" value="男" checked>男
+    				<input type="radio" name="usex" id="optionsRadios1" value="男">男
   					</label>
   					<label>
     				<input type="radio" name="usex" id="optionsRadios2" value="女" >女
@@ -173,32 +227,6 @@
             	</button>
          	</div>
          </form>
-      		</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-   		<div class="modal-dialog">
-      		<div class="modal-content">
-         		<div class="modal-header">
-            		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                  		&times;
-            		</button>
-            		<h4 class="modal-title" id="myModalLabel">
-               			警告
-            		</h4>
-         		</div>
-         	<div class="modal-body">
-            	<p class="bg-danger">你确定要删除此用户吗?<br>
-            	<em>用户资料将被永久删除</em></p>
-         	</div>
-         	<div class="modal-footer">
-            	<button type="button" class="btn btn-default" 
-               		data-dismiss="modal">关闭
-            	</button>
-            	<button type="submit" class="btn btn-danger" >
-               		删除
-            	</button>
-         	</div>
       		</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>

@@ -44,8 +44,8 @@ public class UsersService {
         return user;
     }
     @Transactional
-    public void ChangePsw(Users user) {
-        usersDAO.ChangePsw(user);
+    public void ChangePsw(Users user, String newpassword) {
+        usersDAO.ChangePsw(user, newpassword);
         
     }
     @Transactional
@@ -56,6 +56,18 @@ public class UsersService {
     public int PageNum(int pageSize, String value){
         int pageNum = usersDAO.PageNum(pageSize, value);
         return pageNum;
+    }
+    @Transactional
+    public Users FindUserById(int id){
+        ArrayList list = usersDAO.findUserById(id);
+        Object[] obj = (Object[]) list.get(0);
+        Users u = new Users();
+        u.setUserid(Integer.valueOf(obj[0].toString()));
+        u.setUsername(obj[1].toString());
+        u.setPassword(obj[2].toString());
+        u.setUsex(obj[3].toString());
+        u.setPost(obj[4].toString());
+        return u;
     }
     @Transactional
     public ArrayList<Users> SelectAllUser(int pageSize, int pageNow){

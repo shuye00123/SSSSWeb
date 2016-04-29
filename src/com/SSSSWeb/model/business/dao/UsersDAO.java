@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.SSSSWeb.model.domain.Users;
 
@@ -66,9 +67,17 @@ public class UsersDAO {
         if(resultList.size()/pageSize==0)
             pageNum = 1;
         else
-            pageNum = resultList.size()/pageSize;
+            pageNum = (int)Math.ceil(resultList.size()/(double)pageSize);
         session.close();
         return pageNum;
+    }
+    public ArrayList findUserById(int id){
+        Session session = sf.openSession();
+        String hql = "select * from Users where userid= '"+id+"'";
+        Query query = session.createSQLQuery(hql);
+        ArrayList resultList = (ArrayList) query.list();
+        session.close();
+        return resultList;
     }
     public ArrayList selectAllUser(int pageSize, int pageNow){
         Session session = sf.openSession();
@@ -92,10 +101,14 @@ public class UsersDAO {
     }
     public void updateUser(Users u) {
         Session session = sf.openSession();
-        Users oldUsers=(Users)session.get(Users.class, u.getUserid());
-        oldUsers.setPost(u.getPost());
+        Transaction tx = session.beginTransaction(); 
+        Users oldUser=(Users)session.get(Users.class, u.getUserid());
+        oldUser.setPost(u.getPost());
+        oldUser.setUsername(u.getUsername());
+        oldUser.setUsex(u.getUsex());
+        session.save(oldUser);
+        tx.commit();
         session.close();
-        session.save(oldUsers);
     }
     public Users CheckUser(Users user){
         Session session = sf.openSession();
@@ -105,17 +118,21 @@ public class UsersDAO {
         session.close();
         return u;
     }
-    public void ChangePsw(Users user) {
+    public void ChangePsw(Users user, String newpassword) {
         Session session = sf.openSession();
-        Users oldUsers=(Users)session.get(Users.class, user.getUserid());
-        oldUsers.setPassword(user.getPassword());
-        session.save(oldUsers);
+        Transaction tx = session.beginTransaction(); 
+        Users oldUser=(Users)session.get(Users.class, user.getUserid());
+        oldUser.setPassword(newpassword);
+        System.out.println(session.save(oldUser));
+        tx.commit();
         session.close();
     }
     public void DeleteUser(Users user){
         Session session = sf.openSession();
+        Transaction tx = session.beginTransaction(); 
         Users u = (Users)session.get(Users.class, user.getUserid());
         session.delete(u);
+        tx.commit();
         session.close();
     } 
 }

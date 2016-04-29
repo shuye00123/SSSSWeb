@@ -4,6 +4,10 @@
  */
 package com.SSSSWeb.control;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.SSSSWeb.model.business.service.UsersService;
 import com.SSSSWeb.model.domain.Users;
 import com.opensymphony.xwork2.ActionSupport;
@@ -34,11 +38,16 @@ public class AddUserAction extends ActionSupport implements ModelDriven<Users> {
     @Override
     public String execute() throws Exception{
         int i;
-        i=service.insertUser(user);
-        if(i == 0){
-            return "success";
+        try{
+            i=service.insertUser(user);
+            if(i == 0){
+                return "success";
+            }
+        }catch(Exception e){
+            HttpServletRequest request=ServletActionContext.getRequest();
+            request.setAttribute("Message", e.toString());
         }
-        return "input";
+        return "failure";
     }
     public Users getModel(){
         return user;

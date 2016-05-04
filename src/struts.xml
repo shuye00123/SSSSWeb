@@ -7,18 +7,29 @@
 	<!-- 告诉Struts框架，Action 类对象由spring来管理 -->
 	<constant name="struts.objectFactory" value="spring"></constant>
     <package name="default" namespace="/" extends="struts-default">
-		
+		 <!-- 定义一个拦截器 -->  
+        <interceptors>  
+            <interceptor name="authority"  
+                class="com.SSSSWeb.interceptor.CheckPrivilegeInterceptor">  
+            </interceptor>  
+            <!-- 拦截器栈 -->  
+            <interceptor-stack name="mydefault">  
+                <interceptor-ref name="defaultStack" />  
+                <interceptor-ref name="authority" />  
+            </interceptor-stack>  
+        </interceptors>
+        <default-interceptor-ref name="mydefault">
+		</default-interceptor-ref>
 		<global-results>
 			<result name="failure">/main.jsp</result>
+			<result name="input">/signin.jsp</result>
 		</global-results>
      	
      	<action name="signin" class="SignInAction">
-     		<result name="success">/main.jsp</result>	
-     		<result name="input">/signin.jsp</result>
+     		<result name="success">/main.jsp</result>
      	</action>
      	<action name="signout" class="SignOutAction">
      		<result name="success">/index.jsp</result>
-     		<result name="input">/index.jsp</result>
      	</action>
      	<action name="selectAllUser" class="SelectAllUserAction">
      		<result name="success">/selectAllUser.jsp</result>

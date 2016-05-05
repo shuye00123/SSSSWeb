@@ -21,6 +21,7 @@
 		<property name="annotatedClasses">
 			<list>
         		<value>com.SSSSWeb.model.domain.Users</value>
+        		<value>com.SSSSWeb.model.domain.Posts</value>
     		</list>
   		</property>
   		

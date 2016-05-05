@@ -73,9 +73,6 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">查询结果</h1>
-          <div class="col-md-11 col-md-offset-11">
-          	<button class="btn btn-success" data-toggle="modal" data-target="#addModal" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加员工</button>
-          </div>
           <table class="table table-hover piece" style="margin-left: 0;">
           <thead>
           	<tr>

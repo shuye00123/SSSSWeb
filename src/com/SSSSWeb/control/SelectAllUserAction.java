@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.SSSSWeb.model.business.service.PostsService;
 import com.SSSSWeb.model.business.service.UsersService;
 import com.SSSSWeb.model.domain.Users;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,14 +21,22 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     private int pageSize=2;
     private int pageNow=1;
     private int pageNum;
-    public int getPageNow() {
+    private List postlist;
+    private PostsService pservice;
+    private Users user = new Users();
+    private UsersService service;
+    public List getPostlist() {
+		return postlist;
+	}
+	public void setPostlist(List postlist) {
+		this.postlist = postlist;
+	}
+	public int getPageNow() {
         return pageNow;
     }
     public void setPageNow(int pageNow) {
         this.pageNow = pageNow;
     }
-    private Users user = new Users();
-    private UsersService service;
     public List getList() {
         return list;
     }
@@ -52,6 +61,7 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
         try{
             list = service.SelectAllUser(pageSize, pageNow);
             pageNum = service.PageNum(pageSize, value);
+            postlist = pservice.postList();
             return "success";
         }catch(Exception e){
             HttpServletRequest request=ServletActionContext.getRequest();

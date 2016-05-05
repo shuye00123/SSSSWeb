@@ -24,7 +24,14 @@ public class Users {
     private String password;
     private String usex;
     private String post;
-    public int getUserid() {
+    private String phonenum;
+    public String getPhonenum() {
+		return phonenum;
+	}
+	public void setPhonenum(String phonenum) {
+		this.phonenum = phonenum;
+	}
+	public int getUserid() {
         return userid;
     }
     public void setUserid(int userid) {

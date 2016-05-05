@@ -23,6 +23,7 @@ public class ChangeUserAction extends ActionSupport implements SessionAware{
     private String username;
     private String usex;
     private String post;
+    private String phonenum;
     private Map<String, Object> session;
     public UsersService getService() {
         return service;
@@ -69,12 +70,14 @@ public class ChangeUserAction extends ActionSupport implements SessionAware{
     
     public String execute() throws Exception{
         user=service.FindUserById(userid);
-        if(!post.isEmpty()){
+        if(post!=null){
             user.setPost(post);}
         if(!username.isEmpty()){
             user.setUsername(username);}
         if(usex!=null){
             user.setUsex(usex);}
+        if(!phonenum.isEmpty()){
+            user.setPhonenum(phonenum);}
         try{
             service.updateUser(user);
             return "success";
@@ -84,4 +87,10 @@ public class ChangeUserAction extends ActionSupport implements SessionAware{
         }
         return "failure";
     }
+	public String getPhonenum() {
+		return phonenum;
+	}
+	public void setPhonenum(String phonenum) {
+		this.phonenum = phonenum;
+	}
 }

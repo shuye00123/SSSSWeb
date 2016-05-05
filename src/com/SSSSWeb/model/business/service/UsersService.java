@@ -65,8 +65,9 @@ public class UsersService {
         u.setUserid(Integer.valueOf(obj[0].toString()));
         u.setUsername(obj[1].toString());
         u.setPassword(obj[2].toString());
-        u.setUsex(obj[3].toString());
-        u.setPost(obj[4].toString());
+        u.setPhonenum(obj[3].toString());
+        u.setUsex(obj[4].toString());
+        u.setPost(obj[5].toString());
         return u;
     }
     @Transactional
@@ -79,8 +80,9 @@ public class UsersService {
             u.setUserid(Integer.valueOf(obj[0].toString()));
             u.setUsername(obj[1].toString());
             u.setPassword(obj[2].toString());
-            u.setUsex(obj[3].toString());
-            u.setPost(obj[4].toString());
+            u.setPhonenum(obj[3].toString());
+            u.setUsex(obj[4].toString());
+            u.setPost(obj[5].toString());
             resultList.add(u);
         }
         return resultList;
@@ -95,8 +97,9 @@ public class UsersService {
             u.setUserid(Integer.valueOf(obj[0].toString()));
             u.setUsername(obj[1].toString());
             u.setPassword(obj[2].toString());
-            u.setUsex(obj[3].toString());
-            u.setPost(obj[4].toString());
+            u.setPhonenum(obj[3].toString());
+            u.setUsex(obj[4].toString());
+            u.setPost(obj[5].toString());
             resultList.add(u);
         }
         return resultList;

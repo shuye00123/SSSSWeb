@@ -78,6 +78,7 @@
           	<tr>
           		<th>ID</th>
           		<th>姓名</th>
+          		<th>联系方式</th>
           		<th>性别</th>
           		<th>职位</th>
           		<th>编辑</th>
@@ -88,7 +89,8 @@
           	<s:iterator value="list" >  
        		<tr>  
           		<td><s:property value="userid"/></td>  
-          		<td><s:property value="username"/></td>  
+          		<td><s:property value="username"/></td>
+          		<td><s:property value="phonenum"/></td>
           		<td><s:property value="usex"/></td>  
           		<td><s:property value="post"/></td> 
           		<td><a href="javascript:void(0);" class="btn btn-warning" rel="${userid}" role="button" /><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>修改资料</a></td>
@@ -126,52 +128,7 @@
       </div>
     </div>
     <!-- 模态框（Modal） -->
-	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-   		<div class="modal-dialog">
-      		<div class="modal-content">
-         		<div class="modal-header">
-            		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                  		&times;
-            		</button>
-            		<h4 class="modal-title" id="myModalLabel">
-               			添加员工
-            		</h4>
-         		</div>
-         <form action="addUser" method="post" id="addForm">
-         	<div class="modal-body">
-            	<div class="form-group">
-    				<label for="username">姓名</label>
-    				<input type="text" class="form-control" id="username" name="username" placeholder="姓名">
-  				</div>
-  				<div class="form-group">
-    				<label for="password">密码</label>
-    				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
-  				</div>
-  				<div class="form-group">
-    				<label for="post">职位</label>
-    				<input type="text" class="form-control" id="post" name="post" placeholder="职位">
-  				</div>
-  				<div class="radio">
-  					<label>
-    				<input type="radio" name="usex" id="optionsRadios1" value="男">男
-  					</label>
-  					<label>
-    				<input type="radio" name="usex" id="optionsRadios2" value="女" >女
-  					</label>
-				</div>
-         	</div>
-         	<div class="modal-footer">
-            	<button type="button" class="btn btn-default" 
-               		data-dismiss="modal">关闭
-            	</button>
-            	<button type="submit" class="btn btn-primary" >
-               		提交
-            	</button>
-         	</div>
-         </form>
-      		</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
+	
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    		<div class="modal-dialog">
       		<div class="modal-content">
@@ -188,6 +145,10 @@
             	<div class="form-group">
     				<label for="username">姓名</label>
     				<input type="text" class="form-control" id="username" name="username" placeholder="姓名">
+  				</div>
+  				<div class="form-group">
+    				<label for="phonenum">手机号码</label>
+    				<input type="text" class="form-control" id="phonenum" name="phonenum" placeholder="手机号码">
   				</div>
   				<div class="form-group">
     				<label for="post">职位</label>
@@ -270,61 +231,7 @@
 		  <!-- 
 		  	bootstrapValidator激活
 		  -->
-		  $('#addForm').bootstrapValidator({
-		        message: 'This value is not valid',
-		        feedbackIcons: {
-		            valid: 'glyphicon glyphicon-ok',
-		            invalid: 'glyphicon glyphicon-remove',
-		            validating: 'glyphicon glyphicon-refresh'
-		        },
-		        fields: {
-		            username: {
-		                message: 'The username is not valid',
-		                validators: {
-		                    notEmpty: {
-		                        message: '姓名不能为空'
-		                    },
-		                    stringLength: {
-		                        min: 1,
-		                        max: 8,
-		                        message: '姓名长度必须小于8'
-		                    },
-		                    regexp: {
-		                        regexp: /^[A-Za-z\u4e00-\u9fa5]+$/,
-		                        message: '含有非法字符'
-		                    }
-		                }
-		            },
-		            password: {
-		                validators: {
-		                    notEmpty: {
-		                        message: '密码不能为空'
-		                    },
-		                    stringLength: {
-		                        min: 1,
-		                        max: 10,
-		                        message: '密码长度必须小于8位'
-		                    },
-		                }
-		            },
-		            post: {
-		                validators: {
-		                    notEmpty: {
-		                        message: '职位不能为空'
-		                    },
-		                    stringLength: {
-		                        min: 1,
-		                        max: 4,
-		                        message: '长度必须小于4位'
-		                    },
-		                    regexp: {
-		                        regexp: /^[A-Za-z\u4e00-\u9fa5]+$/,
-		                        message: '含有非法字符'
-		                    }
-		                }
-		            }
-		        }
-		    });
+		  
 		  $('#changeForm').bootstrapValidator({
 		        message: 'This value is not valid',
 		        feedbackIcons: {
@@ -336,9 +243,6 @@
 		        	username: {
 		                message: 'The username is not valid',
 		                validators: {
-		                    notEmpty: {
-		                        message: '姓名不能为空'
-		                    },
 		                    stringLength: {
 		                        min: 1,
 		                        max: 8,
@@ -350,18 +254,16 @@
 		                    }
 		                }
 		            },
-		            post: {
+		            phonenum: {
+		                message: 'The phonenum is not valid',
 		                validators: {
-		                    notEmpty: {
-		                        message: '职位不能为空'
-		                    },
 		                    stringLength: {
-		                        min: 1,
-		                        max: 4,
-		                        message: '长度必须小于4位'
+		                        min: 11,
+		                        max: 11,
+		                        message: '长度必须为11位'
 		                    },
 		                    regexp: {
-		                        regexp: /^[A-Za-z\u4e00-\u9fa5]+$/,
+		                        regexp: /^[0-9]+$/,
 		                        message: '含有非法字符'
 		                    }
 		                }

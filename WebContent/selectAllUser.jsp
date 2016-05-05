@@ -83,6 +83,7 @@
           	<tr>
           		<th>ID</th>
           		<th>姓名</th>
+          		<th>联系方式</th>
           		<th>性别</th>
           		<th>职位</th>
           		<th>编辑</th>
@@ -93,7 +94,8 @@
           	<s:iterator value="list" >  
        		<tr>  
           		<td><s:property value="userid"/></td>  
-          		<td><s:property value="username"/></td>  
+          		<td><s:property value="username"/></td>
+          		<td><s:property value="phonenum"/></td>   
           		<td><s:property value="usex"/></td>  
           		<td><s:property value="post"/></td> 
           		<td><a href="javascript:void(0);" class="btn btn-warning" rel="${userid}" role="button" /><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>修改资料</a></td>
@@ -153,8 +155,16 @@
     				<input type="password" class="form-control" id="password" name="password" placeholder="密码">
   				</div>
   				<div class="form-group">
+    				<label for="phonenum">手机号码</label>
+    				<input type="text" class="form-control" id="phonenum" name="phonenum" placeholder="手机号码">
+  				</div>
+  				<div class="form-group">
     				<label for="post">职位</label>
-    				<input type="text" class="form-control" id="post" name="post" placeholder="职位">
+    				<select class="form-control" name="post">
+  						<s:iterator value="postlist" >
+  						<option value="${post}"><s:property value="post"/>||<s:property value="task"/></option>
+  						</s:iterator>
+					</select>
   				</div>
   				<div class="radio">
   					<label>
@@ -195,8 +205,16 @@
     				<input type="text" class="form-control" id="username" name="username" placeholder="姓名">
   				</div>
   				<div class="form-group">
+    				<label for="phonenum">手机号码</label>
+    				<input type="text" class="form-control" id="phonenum" name="phonenum" placeholder="手机号码">
+  				</div>
+  				<div class="form-group">
     				<label for="post">职位</label>
-    				<input type="text" class="form-control" id="post" name="post" placeholder="职位">
+    				<select class="form-control" name="post">
+  						<s:iterator value="postlist" >
+  						<option value="${post}"><s:property value="post"/>||<s:property value="task"/></option>
+  						</s:iterator>
+					</select>
   				</div>
   				<div class="radio">
   					<label>
@@ -312,18 +330,16 @@
 		                    },
 		                }
 		            },
-		            post: {
+		            phonenum: {
+		                message: 'The phonenum is not valid',
 		                validators: {
-		                    notEmpty: {
-		                        message: '职位不能为空'
-		                    },
 		                    stringLength: {
-		                        min: 1,
-		                        max: 4,
-		                        message: '长度必须小于4位'
+		                        min: 11,
+		                        max: 11,
+		                        message: '长度必须为11位'
 		                    },
 		                    regexp: {
-		                        regexp: /^[A-Za-z\u4e00-\u9fa5]+$/,
+		                        regexp: /^[0-9]+$/,
 		                        message: '含有非法字符'
 		                    }
 		                }
@@ -341,9 +357,6 @@
 		        	username: {
 		                message: 'The username is not valid',
 		                validators: {
-		                    notEmpty: {
-		                        message: '姓名不能为空'
-		                    },
 		                    stringLength: {
 		                        min: 1,
 		                        max: 8,
@@ -355,18 +368,16 @@
 		                    }
 		                }
 		            },
-		            post: {
+		            phonenum: {
+		                message: 'The phonenum is not valid',
 		                validators: {
-		                    notEmpty: {
-		                        message: '职位不能为空'
-		                    },
 		                    stringLength: {
-		                        min: 1,
-		                        max: 4,
-		                        message: '长度必须小于4位'
+		                        min: 11,
+		                        max: 11,
+		                        message: '长度必须为11位'
 		                    },
 		                    regexp: {
-		                        regexp: /^[A-Za-z\u4e00-\u9fa5]+$/,
+		                        regexp: /^[0-9]+$/,
 		                        message: '含有非法字符'
 		                    }
 		                }

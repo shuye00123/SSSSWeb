@@ -12,7 +12,7 @@
 		<property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value="a6820028"></property>
+		<property name="password" value=""></property>
 	</bean>
 	
 	<bean id="sessionFactory"
@@ -33,6 +33,12 @@
   		</property>
 	</bean>
 	
+	<bean id="postsDAO" class="com.SSSSWeb.model.business.dao.PostsDAO">
+		<property name="sf" ref="sessionFactory"></property>
+	</bean>
+	<bean id="postsService" class="com.SSSSWeb.model.business.service.PostsService">
+		<property name="postsDAO" ref="postsDAO"></property>
+	</bean>
 	<bean id="usersDAO" class="com.SSSSWeb.model.business.dao.UsersDAO">
 		<property name="sf" ref="sessionFactory"></property>
 	</bean>

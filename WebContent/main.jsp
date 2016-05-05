@@ -237,72 +237,10 @@
 		</div><!-- /.modal -->
 	</div>
     <script>
-    <!-- 
-	popover初始化  
--->
     $(function ()
     		{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
     			content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
     		});
-    <!-- 
-  	bootstrapValidator激活
-  -->
-	$(document).ready(function() {
-		$('#pswForm').bootstrapValidator({
-	        message: 'This value is not valid',
-	        feedbackIcons: {
-	            valid: 'glyphicon glyphicon-ok',
-	            invalid: 'glyphicon glyphicon-remove',
-	            validating: 'glyphicon glyphicon-refresh'
-	        },
-	        fields: {
-	        	password: {
-	                validators: {
-	                    notEmpty: {
-	                        message: '密码不能为空'
-	                    },
-	                    stringLength: {
-	                        min: 1,
-	                        max: 10,
-	                        message: '密码长度必须小于10位'
-	                    },
-	                }
-	            },
-	        	newpassword: {
-	                validators: {
-	                    notEmpty: {
-	                        message: '密码不能为空'
-	                    },
-	                    stringLength: {
-	                        min: 1,
-	                        max: 10,
-	                        message: '密码长度必须小于10位'
-	                    },
-	                    identical: {
-	                        field: 'repassword',
-	                        message: '两次新密码不同'
-	                    }
-	                }
-	            },
-	            repassword: {
-	                validators: {
-	                	notEmpty: {
-	                        message: '密码不能为空'
-	                    },
-	                    stringLength: {
-	                        min: 1,
-	                        max: 10,
-	                        message: '密码长度必须小于10位'
-	                    },
-	                    identical: {
-	                        field: 'newpassword',
-	                        message: '两次新密码不同'
-	                    }
-	                }
-	            }
-	        }
-	  });
-	});
-</script>
+	</script>
   </body>
 </html>	

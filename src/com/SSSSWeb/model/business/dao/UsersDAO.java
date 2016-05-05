@@ -134,5 +134,13 @@ public class UsersDAO {
         session.delete(u);
         tx.commit();
         session.close();
-    } 
+    }
+    public ArrayList postList(){
+		Session session = sf.openSession();
+        String hql = "select * from Posts";
+        Query query = session.createSQLQuery(hql);
+        ArrayList resultList = (ArrayList) query.list();
+        session.close();
+        return resultList;
+	}
 }

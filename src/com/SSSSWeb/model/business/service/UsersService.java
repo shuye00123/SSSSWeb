@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.SSSSWeb.model.business.dao.UsersDAO;
+import com.SSSSWeb.model.domain.Posts;
 import com.SSSSWeb.model.domain.Users;
 
 /**
@@ -104,4 +105,18 @@ public class UsersService {
         }
         return resultList;
     }
+    @Transactional
+	public ArrayList<Posts> postList(){
+		ArrayList list = usersDAO.postList();
+        ArrayList resultList = new ArrayList();
+        for(int i=0;i<list.size();i++){
+            Object[] obj = (Object[]) list.get(i);
+            Posts p = new Posts();
+            p.setPostid(Integer.valueOf(obj[0].toString()));
+            p.setPost(obj[1].toString());
+            p.setTask(obj[2].toString());
+            resultList.add(p);
+        }
+        return resultList;
+	}
 }

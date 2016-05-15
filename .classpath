@@ -10,5 +10,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ssh"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/Users/SDD/workspace/SSSSWeb/WebContent/WEB-INF/lib/mdp.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -31,7 +31,6 @@ public class UsersService {
     @Transactional
     public int insertUser(Users user) {
         int i;
-        user.setPassword(md4p.p2md(user.getPassword()));
         i=usersDAO.insertUser(user);
         return i;
     }
@@ -42,13 +41,11 @@ public class UsersService {
     }
     @Transactional
     public Users checkUser(Users user) {
-    	user.setPassword(md4p.p2md(user.getPassword()));
         user=usersDAO.CheckUser(user);
         return user;
     }
     @Transactional
     public void ChangePsw(Users user, String newpassword) {
-        user.setPassword(md4p.p2md(newpassword));
     	usersDAO.ChangePsw(user, newpassword);
         
     }

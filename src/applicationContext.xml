@@ -33,12 +33,7 @@
   		</property>
 	</bean>
 	
-	<bean id="postsDAO" class="com.SSSSWeb.model.business.dao.PostsDAO">
-		<property name="sf" ref="sessionFactory"></property>
-	</bean>
-	<bean id="postsService" class="com.SSSSWeb.model.business.service.PostsService">
-		<property name="postsDAO" ref="postsDAO"></property>
-	</bean>
+	
 	<bean id="usersDAO" class="com.SSSSWeb.model.business.dao.UsersDAO">
 		<property name="sf" ref="sessionFactory"></property>
 	</bean>

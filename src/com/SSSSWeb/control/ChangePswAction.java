@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ChangePswAction extends ActionSupport implements SessionAware{
     /**
-     * æœ¬actionä»sessionä¸­è·å–user,æ¥æ”¶æ–°å¯†ç ï¼Œè°ƒç”¨serviceå¯†ç éªŒè¯ï¼ŒæˆåŠŸåä¿®æ”¹å¯†ç 
+     * ±¾action´ÓsessionÖĞ»ñÈ¡user,½ÓÊÕĞÂÃÜÂë£¬µ÷ÓÃserviceÃÜÂëÑéÖ¤£¬³É¹¦ºóĞŞ¸ÄÃÜÂë
      *   */
     private static final long serialVersionUID = 4948899620692423928L;
     private UsersService service;
@@ -45,12 +45,12 @@ public class ChangePswAction extends ActionSupport implements SessionAware{
         if (u !=null) {
             service.ChangePsw(user, newpassword);
             HttpServletRequest request=ServletActionContext.getRequest();
-            request.setAttribute("Message", "ä¿®æ”¹å¯†ç æˆåŠŸï¼Œä¸‹æ¬¡ç™»å½•ç”Ÿæ•ˆ");
+            request.setAttribute("Message", "ĞŞ¸ÄÃÜÂë³É¹¦£¬ÏÂ´ÎµÇÂ¼ÉúĞ§");
             session.put("user",u);
             return "success";
         }else{
             HttpServletRequest request=ServletActionContext.getRequest();
-            request.setAttribute("Message", "ä¿®æ”¹å¯†ç å¤±è´¥");
+            request.setAttribute("Message", "ĞŞ¸ÄÃÜÂëÊ§°Ü");
         }
         return "failure";
     }

@@ -8,21 +8,21 @@
 	<constant name="struts.objectFactory" value="spring"></constant>
     <package name="default" namespace="/" extends="struts-default">
 		 <!-- 定义一个拦截器 -->  
-        <interceptors>  
+        <!-- <interceptors>  
             <interceptor name="authority"  
                 class="com.SSSSWeb.interceptor.CheckPrivilegeInterceptor">  
             </interceptor>  
-            <!-- 拦截器栈 -->  
+            拦截器栈  
             <interceptor-stack name="mydefault">  
                 <interceptor-ref name="defaultStack" />  
                 <interceptor-ref name="authority" />  
             </interceptor-stack>  
         </interceptors>
         <default-interceptor-ref name="mydefault">
-		</default-interceptor-ref>
+		</default-interceptor-ref> -->
 		<global-results>
 			<result name="failure">/main.jsp</result>
-			<result name="input">/signin.jsp</result>
+			<!-- <result name="input">/signin.jsp</result> -->
 		</global-results>
      	
      	<action name="signin" class="SignInAction">
@@ -49,7 +49,67 @@
      	<action name="addUser" class="AddUserAction">
      		<result name="success">/main.jsp</result>
      	</action>
-        
+     	
+        <!-- Supplier -->
+     	<action name="siA" class="siA">
+     		<result>/supplier.jsp</result>
+     	</action> 
+     	<action name="seA" class="seA">
+     		<result>/supplier.jsp</result>
+     	</action>
+     	<action name="sdA" class="sdA">
+     		<result>/supplier.jsp</result>
+     	</action>
+     	
+     	<!-- Goods -->
+     	<action name="sGoodsA" class="sGoodsA">
+     		<result>/menu-list.jsp</result>
+     	</action>
+     	<action name="sDetialGoodsA" class="sDetialGoodsA">
+     		<result>/detial.jsp</result>
+     	</action>
+     	
+     	<!-- Orders -->
+     	<action name="ishopCart" class="ishopCart">
+     		<result>/detial.jsp</result>
+     	</action>
+     	<action name="sshopCart" class="sshopCart">
+     		<result>/shoppingcar.jsp</result>
+     	</action>
+     	<action name="sOrdersA" class="sOrdersA">
+     		<result>/order.jsp</result>
+     	</action>
+     	
+     	
+     	<!-- Customer -->
+     	<action name="iCoustomerA" class="iCoustomerA">
+     		<result>/login.jsp</result>
+     	</action>
+     	<action name="login" class="login">
+     		<result>/buy.jsp</result>
+     	</action>
+     	<action name="eCoustomerA" class="eCoustomerA">
+     		<result>/user.jsp</result>
+     	</action>
+     	<action name="cPswA" class="cPswA">
+     		<result>/user.jsp</result>
+     	</action>
+     	<action name="sCoustomerA" class="sCoustomerA">
+     		<result>/user.jsp</result>
+     	</action>
+     	
+     	
+     	
     </package>
+    
+   <!--  json -->
+    <package name="ajax_json" extends="json-default">
+    	 <action name="ssA" class="ssA">
+     		<result name="success" type="json"/>
+     	</action> 
+     	<action name="iOrdersA" class="iOrdersA">
+     		<result name="success" type="json"/>
+     	</action>
+    </package> 
 
 </struts>

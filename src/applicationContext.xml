@@ -21,7 +21,16 @@
 		<property name="annotatedClasses">
 			<list>
         		<value>com.SSSSWeb.model.domain.Users</value>
-        		<value>com.SSSSWeb.model.domain.Posts</value>
+        		<value>com.SSSSWeb.model.domain.Supplier</value>
+        		<value>com.SSSSWeb.model.domain.GOODS_INF</value>
+        		<value>com.SSSSWeb.model.domain.CAR_IMG_INF</value>
+        		<value>com.SSSSWeb.model.domain.STOCK_INF</value>
+        		<value>com.SSSSWeb.model.domain.GoodsDetial</value>
+        		<value>com.SSSSWeb.model.domain.Customer</value>
+        		<value>com.SSSSWeb.model.domain.Orders</value>
+        		<value>com.SSSSWeb.model.domain.Orders_List</value>
+        		<value>com.SSSSWeb.model.domain.Orders_Count</value>
+        		<value>com.SSSSWeb.model.domain.Orders_Info</value>
     		</list>
   		</property>
   		
@@ -32,7 +41,6 @@
     		</value>
   		</property>
 	</bean>
-	
 	
 	<bean id="usersDAO" class="com.SSSSWeb.model.business.dao.UsersDAO">
 		<property name="sf" ref="sessionFactory"></property>
@@ -64,6 +72,95 @@
 	<bean id="AddUserAction" class="com.SSSSWeb.control.AddUserAction">
 		<property name="service" ref="usersService"></property>
 	</bean>
+	
+	
+	<!-- Supplier -->
+	<bean id="supplierDAO" class="com.SSSSWeb.model.business.dao.SupplierDAO">
+		<property name="sf" ref="sessionFactory"></property>
+	</bean>
+	<bean id="supplierService" class="com.SSSSWeb.model.business.service.SupplierService">
+		<property name="supplierDAO" ref="supplierDAO"></property>
+	</bean>
+	
+	<bean id="ssA" class="com.SSSSWeb.control.SelectSupplierAction">
+		<property name="sp" ref="supplierService"></property>
+	</bean>
+	 
+	<bean id="siA" class="com.SSSSWeb.control.InsertSupplierAction">
+		<property name="sp" ref="supplierService"></property>
+	</bean>
+	
+	<bean id="seA" class="com.SSSSWeb.control.EditSupplierAction">
+		<property name="sp" ref="supplierService"></property>
+	</bean>
+	
+	<bean id="sdA" class="com.SSSSWeb.control.DeleteSupplierAction">
+		<property name="sp" ref="supplierService"></property>
+	</bean>
+	
+	
+	<!-- Goods -->
+	<bean id="goodsDAO" class="com.SSSSWeb.model.business.dao.GoodsDAO">
+		<property name="sf" ref="sessionFactory"></property>
+	</bean>
+	<bean id="goodsService" class="com.SSSSWeb.model.business.service.GoodsService">
+		<property name="goodsDAO" ref="goodsDAO"></property>
+	</bean>
+	<bean id="sGoodsA" class="com.SSSSWeb.control.SelectGoodsAction">
+		<property name="gs" ref="goodsService"></property>
+	</bean>
+	<bean id="sDetialGoodsA" class="com.SSSSWeb.control.SelectDetialCoodsAction">
+		<property name="gs" ref="goodsService"></property>
+	</bean>
+	
+	<!-- Orders -->
+	<bean id="ordersDAO" class="com.SSSSWeb.model.business.dao.OrdersDAO">
+		<property name="sf" ref="sessionFactory"></property>
+	</bean>
+	<bean id="ordersService" class="com.SSSSWeb.model.business.service.OrdersService">
+		<property name="ordersDAO" ref="ordersDAO"></property>
+	</bean>
+	<bean id="ishopCart" class="com.SSSSWeb.control.InsertShopCartAction">
+		<property name="os" ref="ordersService"></property>
+	</bean>
+	<bean id="sshopCart" class="com.SSSSWeb.control.SelectShopCartAction">
+		<property name="os" ref="ordersService"></property>
+	</bean>
+	<bean id="sOrdersA" class="com.SSSSWeb.control.SelectOrdersAction">
+		<property name="os" ref="ordersService"></property>
+	</bean>
+	<bean id="iOrdersA" class="com.SSSSWeb.control.InsertOrdersAction">
+		<property name="os" ref="ordersService"></property>
+	</bean>
+	
+	
+	
+	<!-- Customer -->
+	<bean id="customerDAO" class="com.SSSSWeb.model.business.dao.CustomerDAO">
+		<property name="sf" ref="sessionFactory"></property>
+	</bean>
+	<bean id="customerService" class="com.SSSSWeb.model.business.service.CustomerService">
+		<property name="customerDAO" ref="customerDAO"></property>
+	</bean>
+	<bean id="iCoustomerA" class="com.SSSSWeb.control.InsertCustomerAction">
+		<property name="cs" ref="customerService"></property>
+	</bean>
+	<bean id="login" class="com.SSSSWeb.control.LoginAction">
+		<property name="cs" ref="customerService"></property>
+	</bean>
+	<bean id="eCoustomerA" class="com.SSSSWeb.control.EditCustomerAction">
+		<property name="cs" ref="customerService"></property>
+	</bean>
+	<bean id="cPswA" class="com.SSSSWeb.control.CustomerChangePswAction">
+		<property name="cs" ref="customerService"></property>
+	</bean>
+	<bean id="sCoustomerA" class="com.SSSSWeb.control.CustomerChangePswAction">
+		<property name="cs" ref="customerService"></property>
+	</bean>
+	
+	
+	
+	
 	
 	<!-- 配置事务管理器 -->
 	<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

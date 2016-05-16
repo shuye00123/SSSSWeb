@@ -5,7 +5,7 @@
 package com.SSSSWeb.model.business.service;
 
 import java.util.ArrayList;
-import com.shuye.mdp.md4p;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.SSSSWeb.model.business.dao.UsersDAO;
@@ -46,7 +46,7 @@ public class UsersService {
     }
     @Transactional
     public void ChangePsw(Users user, String newpassword) {
-    	usersDAO.ChangePsw(user, newpassword);
+        usersDAO.ChangePsw(user, newpassword);
         
     }
     @Transactional

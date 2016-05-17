@@ -90,23 +90,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 	
-      <form class="navbar-form navbar-left" role="search">
+      <form action="sGoodsA" method="post" class="navbar-form navbar-left" role="search">
 			<div class="form-group">
-			<input type="text" class="form-control" placeholder="Search">
+			<input type="text" class="form-control" name="chn_name" placeholder="Search">
           </div>
           <button type="submit" class="btn btn-default">搜索</button>
         </form>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">王建程<span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-                <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-            </ul>
-        </li>
+        <s:if test="null==#session.customer||#session.customer.isEmpty()">
+           		<li>
+                    <a href="login.jsp">登录</a>
+                </li>
+                </s:if>
+                <s:else>
+                <li class="dropdown">
+                    <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
+                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
+                        <li class="divider"></li>
+                        <li><a href="logout">退出</a></li>
+                    </ul>
+                </li>
+                </s:else>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -137,14 +144,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:iterator value="list" var="u">
         <s:if test="#b==1">
         <div class="item active">
-            <img class="img1" src="image/11.jpg" alt="<s:property value="#b"/>"><!-- file:///<s:property value="#u.img"/> -->
+            <img class="img1" src="<s:property value="#u.img"/>" alt="<s:property value="#b"/>"><!-- file:///<s:property value="#u.img"/> -->
             <div class="carousel-caption">
             </div>
         </div>
     </s:if>
     <s:else>
         <div class="item">
-            <img class="img1" src="image/11.jpg" alt="<s:property value="#b"/>"><!-- file:///<s:property value="#u.img"/> -->
+            <img class="img1" src="<s:property value="#u.img"/>" alt="<s:property value="#b"/>"><!-- file:///<s:property value="#u.img"/> -->
             <div class="carousel-caption">
             </div>
         </div>
@@ -166,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
     </div>
     <div class="detial-right">
-    <form action="ishopCart" method="post">
+    <form action="ishopCart" method="post" onSubmit="">
     <s:set name="c" value="1" />
     <s:iterator value="list" var="u">
         <s:if test="#c==1">
@@ -186,12 +193,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 <a class="btn btn-default add" href="#">+</a>
             </div>
             <div class="col-md-6">
-            <p>总价：<label id="total">¥<s:property value="#u.price"/></label></p>
+            <p>总价：<label class="total"><input type="hidden" class="quantity" value="<s:property value="#u.quantity"/>">¥<s:property value="#u.price"/></label></p>
                 </div>
         </div>
         <div class="row">
             <div class="col-md-9 col-md-offset-3">
-            <button class="btn btn-danger"><img class="img" src="image/shoppingCar.png"/>&nbsp;加入购物车</button>
+            <s:if test="null==#session.customer||#session.customer.isEmpty()">
+            	<button class="btn default"  onclick="refuse();return false;"><img class="img" src="image/shoppingCar.png"/>&nbsp;加入购物车</button>
+            </s:if>
+            <s:else>
+            	<button class="btn btn-danger"><img class="img" src="image/shoppingCar.png"/>&nbsp;加入购物车</button>
+            </s:else>
+            
             </div>
         </div>
         </s:if>
@@ -252,6 +265,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var me = this;
             var t=$(this).parent().find('input[class*=text]');
             t.val(parseInt(t.val())+1);
+            var a=parseInt(t.val());
+            var b = parseInt($(me).parent().siblings().find('label[class*=quantity]').val());
+            if(a>b){
+            	alert("超过库存范围");
+            	t.val($("#quantity").val());
+            }
             setTotal(me);
         });
         $(".reduce").click(function(){
@@ -266,23 +285,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         function setTotal(obj){
             var s=0;
-            //$("#tab td").each(function(){
             s+=parseInt($(obj).parent().find('input[class*=text]').val())*($("#price").val());
-            //});
-			
-            $("#total").html(s.toFixed(2));
+            
+            $(obj).parent().siblings().find('label[class*=total]').html(s.toFixed(2));
         }
         
 		$(".text").blur(function(){
 			var t=$(this);
             t.val(parseInt(t.val()));
+            var a=parseInt(t.val());
+            var b = parseInt($(me).parent().siblings().find('label[class*=quantity]').val());
+            if(a>b){
+            	alert("超过库存范围");
+            	t.val($("#quantity").val());
+            }
             if(parseInt(t.val())<1||isNaN(t.val())){
                 t.val(1);
             }
             setTotal(t);
 		});
 
-    })
+    });
+    function refuse(){
+    	alert("请登入！！！");
+    	return false;
+    }
 </script>
 </body>
 </html>

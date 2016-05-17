@@ -28,6 +28,7 @@ public class Orders_Info {
 	private String color; 
     private int price; 
     private String img;
+    private int quantity;
 	public String getImg() {
 		return img;
 	}
@@ -120,6 +121,12 @@ public class Orders_Info {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	

@@ -48,26 +48,23 @@
 			<div class="collapse navbar-collapse navbar-right"
 				id="bs-example-navbar-collapse-1">
 
-				<form class="navbar-form navbar-left" role="search">
+				<form action="sGoodsA" method="post" class="navbar-form navbar-left" role="search">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
+						<input type="text" class="form-control" name="chn_name" placeholder="Search">
 					</div>
 					<button type="submit" class="btn btn-default">搜索</button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false">王建程<span
-							class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"><span class="glyphicon glyphicon-user"
-									aria-hidden="true"></span>&nbsp个人中心</a></li>
-							<li><a href="#"><span
-									class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
-							<li><a href="#"><span
-									class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-						</ul></li>
+					<li class="dropdown">
+                    <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
+                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
+                        <li class="divider"></li>
+                        <li><a href="logout">退出</a></li>
+                    </ul>
+                </li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -77,13 +74,10 @@
 	<div class="container top">
 		<div class="row">
 			<div class="list-group col-md-2">
-				<a href="user.html" class="list-group-item "><span
-					class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人信息</a>
-				<a href="shoppingcar.html" class="list-group-item"><span
-					class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
-				<a href="order.html" class="list-group-item active"><span
-					class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a>
-			</div>
+            <a href="user.jsp" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人信息</a>
+            <a href="sshopCart" class="list-group-item "><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
+            <a href="sOrdersA" class="list-group-item active"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a>
+        </div>
 			<div class="col-md-10">
 				<ul class="nav nav-tabs" role="tablist" id="feature-tab">
 
@@ -120,15 +114,16 @@
 													<s:if test="#j!=#k">
 														<tr style="background-color: #eaf8ff">
 															<th width="60px">
-																<s:if test='{#order_state == "待发货"}'>
+																<s:if test='#z.order_state == "待发货"'>
 																	<s:date name="#u.order_time" format="yyyy/MM/dd hh:mm" />
 																</s:if> 
-																<s:elseif test='{#order_state == "已发货"}'>
+																<s:elseif test='#z.order_state == "已发货"'>
 																	<s:date name="#u.send_time" format="yyyy/MM/dd hh:mm" />
 																</s:elseif> 
 																<s:else>
 																	<s:date name="#u.settle_time" format="yyyy/MM/dd hh:mm" />
-																</s:else></th>
+																</s:else>
+															</th>
 															<th width="250px">订单号:<s:property value="#u.order_id" /></th>
 															<th width="80px"></th>
 															<th width="80px"></th>
@@ -145,9 +140,21 @@
 															<td><s:property value="#u.num" /></td>
 															<td rowspan="<s:property value="#z.count" />"><label
 																class="total">100.00</label></td>
-															<td rowspan="<s:property value="#z.count" />">待发货</td>
-															<td rowspan="<s:property value="#z.count" />"><a
-																href="#" class="btn btn-primary">取消订单</a></td>
+															<td rowspan="<s:property value="#z.count" />"><s:property value="#z.order_state" /></td>
+															
+																<s:if test='#z.order_state == "待发货"'>
+																	<td rowspan="<s:property value="#z.count" />"><a href="#" class="btn btn-primary">取消订单</a></td>
+																</s:if> 
+																<s:elseif test='#z.order_state == "已发货"'>
+																	<td rowspan="<s:property value="#z.count" />"><a href="#" class="btn btn-primary">确认收货</a></td>
+																</s:elseif> 
+																<s:elseif test='#z.order_state == "交易成功"'>
+																	<td rowspan="<s:property value="#z.count" />">交易成功</td>
+																</s:elseif>
+																<s:else>
+																	<td rowspan="<s:property value="#z.count" />">交易失败</td>
+																</s:else>
+																
 														</tr>
 													</s:if>
 
@@ -174,62 +181,323 @@
 
 								</tr>
 
-
-
-
-
-
-
-								<tr>
-									<table class="table table-bordered">
-										<tr style="background-color: #eaf8ff">
-											<th width="60px">2016-5-5</th>
-											<th width="250px">订单号:0000001112</th>
-											<th width="80px"></th>
-											<th width="80px"></th>
-											<th width="80px"></th>
-											<th width="100px"></th>
-											<th width="80px"></th>
-										</tr>
-										<tr>
-											<td><a href="#"><img class="img" src="image/11.jpg"></a>
-											</td>
-											<td><a class="break" href="#">驿路坊新古典田园沙发欧式组合沙发法式布艺实木客厅家具cxzczxcxzcxzcxzcxzc</a>
-											</td>
-											<td>10.00</td>
-											<td>10</td>
-											<td rowspan=3><label class="total">100.00</label></td>
-											<td rowspan=3>待发货</td>
-											<td rowspan=3><a href="#" class="btn btn-primary">取消订单</a></td>
-										</tr>
-										<tr>
-											<td><a href="#"><img class="img" src="image/11.jpg"></a>
-											</td>
-											<td><a class="break" href="#">驿路坊新古典田园沙发欧式组合沙发法式布艺实木客厅家具cxzczxcxzcxzcxzcxzc</a>
-											</td>
-											<td>10.00</td>
-											<td>10</td>
-										</tr>
-										<tr>
-											<td><a href="#"><img class="img" src="image/11.jpg"></a>
-											</td>
-											<td><a class="break" href="#">驿路坊新古典田园沙发欧式组合沙发法式布艺实木客厅家具cxzczxcxzcxzcxzcxzc</a>
-											</td>
-											<td>10.00</td>
-											<td>10</td>
-										</tr>
-									</table>
-								</tr>
 						</table>
 					</div>
 
-					<div class="tab-pane active" id="tab-send"></div>
+					<div class="tab-pane" id="tab-send">
+						<table class="table">
+							<thead>
+								<tr>
+									<th width="60px"></th>
+									<th width="300px">商品</th>
+									<th width="80px">单价</th>
+									<th width="80px">数量</th>
+									<th width="80px">实付款</th>
+									<th width="100px">交易状态</th>
+									<th width="80px">操作</th>
+								</tr>
+								<tr>
 
-					<div class="tab-pane active" id="tab-sended"></div>
 
-					<div class="tab-pane active" id="tab-success"></div>
+									<s:set name="j" value="-100" />
+									<s:iterator value="list" var="z">
+										<s:if test='#z.order_state == "待发货"'>
+										<table class="table table-bordered">
+											<s:iterator value="list1" var="u">
+												<s:set name="k" value="#u.order_id" />
+												<s:if test="#z.order_id ==#u.order_id ">
+													<s:if test="#j!=#k">
+														<tr style="background-color: #eaf8ff">
+															<th width="60px">
+																
+																	<s:date name="#u.order_time" format="yyyy/MM/dd hh:mm" />
+																
+															</th>
+															<th width="250px">订单号:<s:property value="#u.order_id" /></th>
+															<th width="80px"></th>
+															<th width="80px"></th>
+															<th width="80px"></th>
+															<th width="100px"></th>
+															<th width="80px"></th>
+														</tr>
 
-					<div class="tab-pane active" id="tab-false"></div>
+														<tr>
+															<td><a href="#"><img class="img" src="<s:property value="#u.img" />"></a></td>
+															<td><a class="break" href="#"><s:property value="#u.chn_name" /><s:property value="#u.eng_name" /><s:property value="#u.code" /></a>
+															</td>
+															<td><s:property value="#u.price" /></td>
+															<td><s:property value="#u.num" /></td>
+															<td rowspan="<s:property value="#z.count" />"><labelclass="total">100.00</label></td>
+															<td rowspan="<s:property value="#z.count" />"><s:property value="#z.order_state" /></td>
+																	<td rowspan="<s:property value="#z.count" />"><a href="#" class="btn btn-primary">取消订单</a></td>
+																
+														</tr>
+													</s:if>
+
+													<s:else>
+														<tr>
+															<td><a href="#"><img class="img" src="<s:property value="#u.img" />"></a></td>
+															<td><a class="break" href="#"><s:property value="#u.chn_name" /><s:property value="#u.eng_name" /><s:property value="#u.code" /></a>
+															</td>
+															<td><s:property value="#u.price" /></td>
+															<td><s:property value="#u.num" /></td>
+														</tr>
+
+
+													</s:else>
+													<s:set name="j" value="k" />
+												</s:if>
+
+
+
+											</s:iterator>
+
+										</table>
+										</s:if>
+									</s:iterator>
+
+								</tr>
+
+						</table>
+					</div>
+
+					<div class="tab-pane" id="tab-sended">
+						<table class="table">
+							<thead>
+								<tr>
+									<th width="60px"></th>
+									<th width="300px">商品</th>
+									<th width="80px">单价</th>
+									<th width="80px">数量</th>
+									<th width="80px">实付款</th>
+									<th width="100px">交易状态</th>
+									<th width="80px">操作</th>
+								</tr>
+								<tr>
+
+
+									<s:set name="j" value="-100" />
+									<s:iterator value="list" var="z">
+									<s:if test='#z.order_state == "已发货"'>
+										<table class="table table-bordered">
+											<s:iterator value="list1" var="u">
+												<s:set name="k" value="#u.order_id" />
+												<s:if test="#z.order_id ==#u.order_id ">
+													<s:if test="#j!=#k">
+														<tr style="background-color: #eaf8ff">
+															<th width="60px">
+																	<s:date name="#u.send_time" format="yyyy/MM/dd hh:mm" />
+															</th>
+															<th width="250px">订单号:<s:property value="#u.order_id" /></th>
+															<th width="80px"></th>
+															<th width="80px"></th>
+															<th width="80px"></th>
+															<th width="100px"></th>
+															<th width="80px"></th>
+														</tr>
+
+														<tr>
+															<td><a href="#"><img class="img" src="<s:property value="#u.img" />"></a></td>
+															<td><a class="break" href="#"><s:property value="#u.chn_name" /><s:property value="#u.eng_name" /><s:property value="#u.code" /></a>
+															</td>
+															<td><s:property value="#u.price" /></td>
+															<td><s:property value="#u.num" /></td>
+															<td rowspan="<s:property value="#z.count" />"><label
+																class="total">100.00</label></td>
+															<td rowspan="<s:property value="#z.count" />"><s:property value="#z.order_state" /></td>
+															
+																	<td rowspan="<s:property value="#z.count" />"><a href="#" class="btn btn-primary">确认收货</a></td>
+																
+														</tr>
+													</s:if>
+
+													<s:else>
+														<tr>
+															<td><a href="#"><img class="img" src="<s:property value="#u.img" />"></a></td>
+															<td><a class="break" href="#"><s:property value="#u.chn_name" /><s:property value="#u.eng_name" /><s:property value="#u.code" /></a>
+															</td>
+															<td><s:property value="#u.price" /></td>
+															<td><s:property value="#u.num" /></td>
+														</tr>
+
+
+													</s:else>
+													<s:set name="j" value="k" />
+												</s:if>
+
+
+
+											</s:iterator>
+
+										</table>
+										</s:if>
+									</s:iterator>
+
+								</tr>
+
+						</table>
+					
+					</div>
+
+					<div class="tab-pane" id="tab-success">
+						<table class="table">
+							<thead>
+								<tr>
+									<th width="60px"></th>
+									<th width="300px">商品</th>
+									<th width="80px">单价</th>
+									<th width="80px">数量</th>
+									<th width="80px">实付款</th>
+									<th width="100px">交易状态</th>
+									<th width="80px">操作</th>
+								</tr>
+								<tr>
+
+
+									<s:set name="j" value="-100" />
+									<s:iterator value="list" var="z">
+									<s:if test='#z.order_state == "交易成功"'>
+										<table class="table table-bordered">
+											<s:iterator value="list1" var="u">
+												<s:set name="k" value="#u.order_id" />
+												<s:if test="#z.order_id ==#u.order_id ">
+													<s:if test="#j!=#k">
+														<tr style="background-color: #eaf8ff">
+															<th width="60px">
+																
+																	<s:date name="#u.settle_time" format="yyyy/MM/dd hh:mm" />
+																
+															</th>
+															<th width="250px">订单号:<s:property value="#u.order_id" /></th>
+															<th width="80px"></th>
+															<th width="80px"></th>
+															<th width="80px"></th>
+															<th width="100px"></th>
+															<th width="80px"></th>
+														</tr>
+
+														<tr>
+															<td><a href="#"><img class="img" src="<s:property value="#u.img" />"></a></td>
+															<td><a class="break" href="#"><s:property value="#u.chn_name" /><s:property value="#u.eng_name" /><s:property value="#u.code" /></a>
+															</td>
+															<td><s:property value="#u.price" /></td>
+															<td><s:property value="#u.num" /></td>
+															<td rowspan="<s:property value="#z.count" />"><label
+																class="total">100.00</label></td>
+															<td rowspan="<s:property value="#z.count" />"><s:property value="#z.order_state" /></td>
+															
+															
+																	<td rowspan="<s:property value="#z.count" />">交易成功</td>
+																
+														</tr>
+													</s:if>
+
+													<s:else>
+														<tr>
+															<td><a href="#"><img class="img" src="<s:property value="#u.img" />"></a></td>
+															<td><a class="break" href="#"><s:property value="#u.chn_name" /><s:property value="#u.eng_name" /><s:property value="#u.code" /></a>
+															</td>
+															<td><s:property value="#u.price" /></td>
+															<td><s:property value="#u.num" /></td>
+														</tr>
+
+
+													</s:else>
+													<s:set name="j" value="k" />
+												</s:if>
+
+
+
+											</s:iterator>
+
+										</table>
+										</s:if>
+									</s:iterator>
+
+								</tr>
+
+						</table>
+					
+					</div>
+
+					<div class="tab-pane" id="tab-false">
+						<table class="table">
+							<thead>
+								<tr>
+									<th width="60px"></th>
+									<th width="300px">商品</th>
+									<th width="80px">单价</th>
+									<th width="80px">数量</th>
+									<th width="80px">实付款</th>
+									<th width="100px">交易状态</th>
+									<th width="80px">操作</th>
+								</tr>
+								<tr>
+
+
+									<s:set name="j" value="-100" />
+									<s:iterator value="list" var="z">
+									<s:if test='#z.order_state == "交易失败"'>
+										<table class="table table-bordered">
+											<s:iterator value="list1" var="u">
+												<s:set name="k" value="#u.order_id" />
+												<s:if test="#z.order_id ==#u.order_id ">
+													<s:if test="#j!=#k">
+														<tr style="background-color: #eaf8ff">
+															<th width="60px">
+																
+																	<s:date name="#u.settle_time" format="yyyy/MM/dd hh:mm" />
+															</th>
+															<th width="250px">订单号:<s:property value="#u.order_id" /></th>
+															<th width="80px"></th>
+															<th width="80px"></th>
+															<th width="80px"></th>
+															<th width="100px"></th>
+															<th width="80px"></th>
+														</tr>
+
+														<tr>
+															<td><a href="#"><img class="img" src="<s:property value="#u.img" />"></a></td>
+															<td><a class="break" href="#"><s:property value="#u.chn_name" /><s:property value="#u.eng_name" /><s:property value="#u.code" /></a>
+															</td>
+															<td><s:property value="#u.price" /></td>
+															<td><s:property value="#u.num" /></td>
+															<td rowspan="<s:property value="#z.count" />"><label
+																class="total">100.00</label></td>
+															<td rowspan="<s:property value="#z.count" />"><s:property value="#z.order_state" /></td>
+																	<td rowspan="<s:property value="#z.count" />">交易失败</td>
+																
+														</tr>
+													</s:if>
+
+													<s:else>
+														<tr>
+															<td><a href="#"><img class="img" src="<s:property value="#u.img" />"></a></td>
+															<td><a class="break" href="#"><s:property value="#u.chn_name" /><s:property value="#u.eng_name" /><s:property value="#u.code" /></a>
+															</td>
+															<td><s:property value="#u.price" /></td>
+															<td><s:property value="#u.num" /></td>
+														</tr>
+
+
+													</s:else>
+													<s:set name="j" value="k" />
+													</s:if>
+												
+
+
+												
+											</s:iterator>
+
+										</table>
+										</s:if>
+									</s:iterator>
+
+								</tr>
+
+						</table>
+					
+					</div>
 				</div>
 			</div>
 		</div>

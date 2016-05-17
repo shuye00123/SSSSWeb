@@ -149,16 +149,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <button type="submit" class="btn btn-default">搜索</button>
         </form>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">王建程<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-            <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+        <s:if test="null==#session.customer||#session.customer.isEmpty()">
+           		<li>
+                    <a href="login.jsp">登录</a>
+                </li>
+                </s:if>
+                <s:else>
+                <li class="dropdown">
+                    <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
+                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
+                        <li class="divider"></li>
+                        <li><a href="logout">退出</a></li>
+                    </ul>
+                </li>
+                </s:else>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -411,6 +418,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/jquery-1.12.3.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<script >
+$(function(){
+	
+});
+</script>
 </body>
 </html>

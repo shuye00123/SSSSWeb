@@ -44,6 +44,7 @@ public class OrdersService {
 			Orders_Count to = new Orders_Count();
 			to.setOrder_id(Integer.valueOf(obj[0].toString()));
 			to.setCount(Integer.valueOf(obj[1].toString()));
+			to.setOrder_state(obj[2].toString());
 			reslist.add(to);
 			
 		}
@@ -73,6 +74,7 @@ public class OrdersService {
 			to.setColor(obj[12].toString());
 			to.setPrice(Integer.valueOf(obj[13].toString()));
 			to.setImg(obj[14].toString());
+			to.setQuantity(Integer.valueOf(obj[15].toString()));
 			reslist.add(to);
 		}
 		return reslist;
@@ -103,7 +105,7 @@ public class OrdersService {
 			to.setColor(obj[12].toString());
 			to.setPrice(Integer.valueOf(obj[13].toString()));
 			to.setImg(obj[14].toString());
-			
+			to.setQuantity(Integer.valueOf(obj[15].toString()));
 			reslist.add(to);
 		}
 		return reslist;
@@ -118,6 +120,21 @@ public class OrdersService {
 	public  Orders InsertOrders(Customer c) throws ParseException {
 		Orders o = ordersDAO.InsertOrders(c);
 		return o;
+	}
+
+	@Transactional
+	public void RefuseOrders(int order_id) {
+		ordersDAO.RefuseOrders(order_id);
+	}
+
+	@Transactional
+	public void SuccessOrders(int order_id) {
+		ordersDAO.SuccessOrders(order_id);
+	}
+
+	@Transactional
+	public void DeleteShopCart(int order_id) {
+		ordersDAO.DeleteShopCart(order_id);
 	}
 
 	

@@ -39,8 +39,9 @@ public class LogoutAction  extends ActionSupport implements SessionAware{
 	@Override
 	public String execute() throws Exception {
 		 HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession(false);
-		return "SUCCESS";
+	     HttpSession session = request.getSession();
+	     session.invalidate();
+		return "success";
 	}
 	
 	

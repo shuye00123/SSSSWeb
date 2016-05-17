@@ -133,6 +133,18 @@
 		<property name="os" ref="ordersService"></property>
 	</bean>
 	
+	<bean id="dshopCart" class="com.SSSSWeb.control.DeleteShopCartAction">
+		<property name="os" ref="ordersService"></property>
+	</bean>
+	<bean id="rOrdersA" class="com.SSSSWeb.control.RefuseOrdersAction">
+		<property name="os" ref="ordersService"></property>
+	</bean>
+	<bean id="suOrdersA" class="com.SSSSWeb.control.SuccessOrdersAction">
+		<property name="os" ref="ordersService"></property>
+	</bean>
+	
+	
+	
 	
 	
 	<!-- Customer -->
@@ -146,6 +158,9 @@
 		<property name="cs" ref="customerService"></property>
 	</bean>
 	<bean id="login" class="com.SSSSWeb.control.LoginAction">
+		<property name="cs" ref="customerService"></property>
+	</bean>
+	<bean id="logout" class="com.SSSSWeb.control.LogoutAction">
 		<property name="cs" ref="customerService"></property>
 	</bean>
 	<bean id="eCoustomerA" class="com.SSSSWeb.control.EditCustomerAction">

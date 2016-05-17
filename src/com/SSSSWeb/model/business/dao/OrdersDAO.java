@@ -32,16 +32,16 @@ public class OrdersDAO {
 
 	public void InsertShopCart(Customer c,int id, int num) throws ParseException  {
 		Session session = sf.openSession();
-		String hql="from Orders  where  order_state='π∫ŒÔ≥µ' and customer_id = "+c.getCustomer_id();
+		String hql="from Orders  where  order_state='Ë¥≠Áâ©ËΩ¶' and customer_id = "+c.getCustomer_id();
 		Query query=session.createQuery(hql);
 		Orders o=(Orders)query.uniqueResult();
 		if(o==null){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		o = new  Orders();
-		o.setOrder_time(sdf.parse("0000-00-00 00:00:00"));
-		o.setSend_time(sdf.parse("0000-00-00 00:00:00"));
-		o.setSettle_time(sdf.parse("0000-00-00 00:00:00"));
-		o.setOrder_state("π∫ŒÔ≥µ");
+		o.setOrder_time(sdf.parse("1972-00-00 00:00:00"));
+		o.setSend_time(sdf.parse("1972-00-00 00:00:00"));
+		o.setSettle_time(sdf.parse("1972-00-00 00:00:00"));
+		o.setOrder_state("Ë¥≠Áâ©ËΩ¶");
 		o.setCustomer_id(c.getCustomer_id());
 		session.save(o);
 		}
@@ -69,7 +69,7 @@ public class OrdersDAO {
 
 	public ArrayList<Orders_Count> SelectCount(Customer c) {
 		Session session = sf.openSession();
-		String hql= "select o.order_id,count(*) from Orders o,Orders_List t where o.order_id=t.order_id and o.customer_id =" + c.getCustomer_id() + " group by o.order_id "	;	
+		String hql= "select o.order_id,count(*),o.order_state from Orders o,Orders_List t where o.order_id=t.order_id and o.customer_id =" + c.getCustomer_id() + " group by o.order_id "	;	
 		Query query = session.createQuery(hql);
 		ArrayList resultList = (ArrayList) query.list();
 		session.close();
@@ -78,9 +78,9 @@ public class OrdersDAO {
 	
 	public ArrayList<Orders_Info> SelectOrders(Customer c) {
 		Session session = sf.openSession();
-		String hql="select o.order_id,o.order_time,o.send_time,o.settle_time,o.order_state,o.customer_id,t.order_list_id,t.id,t.num,g.code,g.chn_name,g.eng_name,g.color,g.price,c.url " +
-				" from Orders o,Orders_List t, GOODS_INF g, CAR_IMG_INF c " +
-				" where o.order_id=t.order_id and g.id=t.id and c.goods_id=g.id and o.customer_id =" + c.getCustomer_id() +" and c.level = 1 and o.order_state!= 'π∫ŒÔ≥µ'";
+		String hql="select distinct o.order_id,o.order_time,o.send_time,o.settle_time,o.order_state,o.customer_id,t.order_list_id,t.id,t.num,g.code,g.chn_name,g.eng_name,g.color,g.price,c.url,s.quantity " +
+				" from Orders o,Orders_List t, GOODS_INF g, CAR_IMG_INF c ,STOCK_INF s " +
+				" where o.order_id=t.order_id and g.id=t.id and c.goods_id=g.id and s.goods_id=g.id and o.customer_id =" + c.getCustomer_id() +" and c.level = 1 and o.order_state!= 'Ë¥≠Áâ©ËΩ¶'  ";
 		Query query = session.createQuery(hql);
 		ArrayList resultList = (ArrayList) query.list();
 		session.close();
@@ -89,9 +89,9 @@ public class OrdersDAO {
 
 	public ArrayList<Orders_Info> SelectShopCart(Customer c) {
 		Session session = sf.openSession();
-		String hql="select o.order_id,o.order_time,o.send_time,o.settle_time,o.order_state,o.customer_id,t.order_list_id,t.id,t.num,g.code,g.chn_name,g.eng_name,g.color,g.price,c.url " +
-				"from Orders o,Orders_List t, GOODS_INF g, CAR_IMG_INF c " +
-				" where o.order_id=t.order_id and g.id=t.id and c.goods_id=g.id and o.customer_id = " + c.getCustomer_id() +" and c.level = 1 and o.order_state= 'π∫ŒÔ≥µ'";
+		String hql="select distinct o.order_id,o.order_time,o.send_time,o.settle_time,o.order_state,o.customer_id,t.order_list_id,t.id,t.num,g.code,g.chn_name,g.eng_name,g.color,g.price,c.url,s.quantity " +
+				" from Orders o,Orders_List t, GOODS_INF g, CAR_IMG_INF c ,STOCK_INF s " +
+				" where o.order_id=t.order_id and g.id=t.id and c.goods_id=g.id and o.customer_id = " + c.getCustomer_id() +" and c.level = 1 and o.order_state= 'Ë¥≠Áâ©ËΩ¶' and s.goods_id=g.id ";
 		Query query = session.createQuery(hql);
 		ArrayList resultList = (ArrayList) query.list();
 		session.close();
@@ -120,10 +120,39 @@ public class OrdersDAO {
 		o.setOrder_time(date);
 		o.setSend_time(sdf.parse("0000-00-00 00:00:00"));
 		o.setSettle_time(sdf.parse("0000-00-00 00:00:00"));
-		o.setOrder_state("¥˝∑¢ªı");
+		o.setOrder_state("ÂæÖÂèëË¥ß");
 		o.setCustomer_id(c.getCustomer_id());
 		session.save(o);
 		return o;
+	}
+
+	public void RefuseOrders(int order_id) {
+			Session session = sf.openSession();
+			Transaction tx = session.beginTransaction(); 
+			Orders oldOrders=(Orders)session.get(Orders.class, order_id);
+			oldOrders.setOrder_state("‰∫§ÊòìÂ§±Ë¥•"); 
+			session.save(oldOrders);
+			tx.commit();
+			session.close();
+	}
+
+	public void SuccessOrders(int order_id) {
+			Session session = sf.openSession();
+			Transaction tx = session.beginTransaction(); 
+			Orders oldOrders=(Orders)session.get(Orders.class, order_id);
+			oldOrders.setOrder_state("‰∫§ÊòìÊàêÂäü"); 
+			session.save(oldOrders);
+			tx.commit();
+			session.close();
+	}
+
+	public void DeleteShopCart(int order_id) {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction(); 
+		Orders su=(Orders) session.get(Orders.class, order_id);
+		session.delete(su);
+		tx.commit();
+		session.close();
 	}
 	
 

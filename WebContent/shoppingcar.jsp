@@ -70,21 +70,21 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 
-            <form  action="sGoodsA" method="post" class="navbar-form navbar-left" role="search">
+            <form action="sGoodsA" method="post" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" name="chn_name" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">王建程<span class="caret"></span></a>
+                    <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
+                        <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
                         <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
                         <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="logout">退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -94,8 +94,8 @@
 <div class="container top">
     <div class="row">
         <div class="list-group col-md-2">
-            <a href="user.html" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人信息</a>
-            <a href="shoppingcar.html" class="list-group-item active"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
+            <a href="user.jsp" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人信息</a>
+            <a href="sshopCart" class="list-group-item active"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
             <a href="sOrdersA" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a>
         </div>
         <div class="col-md-10">
@@ -116,7 +116,7 @@
                 <tr>
                     <td><input  type="checkbox" value="<s:property value="#u.id"/>"></td>
                     <td>
-                        <a href="#"><img class="img" src="file:///<s:property value="#u.img"/>"></a>
+                        <a href="#"><img class="img" src="<s:property value="#u.img"/>"></a>
 						<input type="hidden" value="<s:property value="#u.order_list_id"/>">
                     </td>
                     <td>
@@ -150,14 +150,20 @@
 <script src="js/bootstrap.min.js"></script>
 <script>
     $(function(){
-        $(".add").click(function(){
-            var me = this;
+    	$(".add").click(function(){
+			var me = this;
             var t=$(this).parent().find('input[class*=text]');
             t.val(parseInt(t.val())+1);
+            var a=parseInt(t.val());
+            var b = parseInt($(me).parent().siblings().find('label[class*=quantity]').val());
+            if(a>b){
+            	alert("超过库存范围");
+            	t.val($("#quantity").val());
+            }
             setTotal(me);
         });
         $(".reduce").click(function(){
-            var me = this;
+			var me = this;
             var t=$(this).parent().find('input[class*=text]');
             t.val(parseInt(t.val())-1);
             if(parseInt(t.val())<1){
@@ -168,21 +174,25 @@
 
         function setTotal(obj){
             var s=0;
-            //$("#tab td").each(function(){
-            s+=parseInt($(obj).parent().find('input[class*=text]').val())*10.00;
-            //});
-
+            s+=parseInt($(obj).parent().find('input[class*=text]').val())*($("#price").val());
+            
             $(obj).parent().siblings().find('label[class*=total]').html(s.toFixed(2));
         }
-
-        $(".text").blur(function(){
-            var t=$(this);
+        
+		$(".text").blur(function(){
+			var t=$(this);
             t.val(parseInt(t.val()));
+            var a=parseInt(t.val());
+            var b = parseInt($(me).parent().siblings().find('label[class*=quantity]').val());
+            if(a>b){
+            	alert("超过库存范围");
+            	t.val($("#quantity").val());
+            }
             if(parseInt(t.val())<1||isNaN(t.val())){
                 t.val(1);
             }
             setTotal(t);
-        });
+		});
         
         
         $("#all").click(function(){    

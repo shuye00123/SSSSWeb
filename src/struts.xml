@@ -79,6 +79,16 @@
      	<action name="sOrdersA" class="sOrdersA">
      		<result>/order.jsp</result>
      	</action>
+     	<action name="dshopCart" class="dOrdersA">
+     		<result>/order.jsp</result>
+     	</action>
+     	<action name="rOrdersA" class="rOrdersA">
+     		<result>/order.jsp</result>
+     	</action>
+     	<action name="suOrdersA" class="suOrdersA">
+     		<result>/order.jsp</result>
+     	</action>
+     	
      	
      	
      	<!-- Customer -->
@@ -87,6 +97,9 @@
      	</action>
      	<action name="login" class="login">
      		<result>/buy.jsp</result>
+     	</action>
+     	<action name="logout" class="logout">
+     		<result>/login.jsp</result>
      	</action>
      	<action name="eCoustomerA" class="eCoustomerA">
      		<result>/user.jsp</result>

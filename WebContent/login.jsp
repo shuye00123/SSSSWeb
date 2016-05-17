@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="buy.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp首页</a>
+            <a class="navbar-brand" href="buy.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp首页</a>
 
 
         </div>
@@ -49,26 +49,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 
-            <form class="navbar-form navbar-left" role="search">
+            <form action="sGoodsA" method="post" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" name="chn_name" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" style="display:none;">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">王建程<span class="caret"></span></a>
+           	<s:if test="null==#session.customer||#session.customer.isEmpty()||session==null">
+           		<li>
+           		<% System.out.println(session);%>
+                    <a href="login.jsp">登录</a>
+                </li>
+                </s:if>
+                <s:else>
+                <li class="dropdown">
+                    <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
+                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="logout">退出</a></li>
                     </ul>
                 </li>
-                <li style="display:block;">
-                    <a href="#">登录</a>
-                </li>
+                </s:else>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -156,5 +161,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/jquery-1.12.3.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script >
+$(function(){
+});
+</script>
 </body>
 </html>

@@ -74,6 +74,7 @@
 	</bean>
 	
 	
+	
 	<!-- Supplier -->
 	<bean id="supplierDAO" class="com.SSSSWeb.model.business.dao.SupplierDAO">
 		<property name="sf" ref="sessionFactory"></property>

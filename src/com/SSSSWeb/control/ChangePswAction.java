@@ -13,13 +13,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ChangePswAction extends ActionSupport implements SessionAware{
     /**
-     * ±¾action´ÓsessionÖĞ»ñÈ¡user,½ÓÊÕĞÂÃÜÂë£¬µ÷ÓÃserviceÃÜÂëÑéÖ¤£¬³É¹¦ºóĞŞ¸ÄÃÜÂë
+     * æœ¬actionä»sessionä¸­è·å–user,æ¥æ”¶æ–°å¯†ç ï¼Œè°ƒç”¨serviceå¯†ç éªŒè¯ï¼ŒæˆåŠŸåä¿®æ”¹å¯†ç 
      *   */
     private static final long serialVersionUID = 4948899620692423928L;
     private UsersService service;
     private Map<String, Object> session;
     private Users user = new Users();
     private String newpassword;
+    private String password;
     public UsersService getService() {
         return service;
     }
@@ -41,16 +42,17 @@ public class ChangePswAction extends ActionSupport implements SessionAware{
     @Override
     public String execute() throws Exception{
         user=(Users)session.get("user");
+        user.setPassword(password);
         Users u = service.checkUser(user);
         if (u !=null) {
             service.ChangePsw(user, newpassword);
             HttpServletRequest request=ServletActionContext.getRequest();
-            request.setAttribute("Message", "ĞŞ¸ÄÃÜÂë³É¹¦£¬ÏÂ´ÎµÇÂ¼ÉúĞ§");
+            request.setAttribute("Message", "ä¿®æ”¹å¯†ç æˆåŠŸï¼Œä¸‹æ¬¡ç™»å½•ç”Ÿæ•ˆ");
             session.put("user",u);
             return "success";
         }else{
             HttpServletRequest request=ServletActionContext.getRequest();
-            request.setAttribute("Message", "ĞŞ¸ÄÃÜÂëÊ§°Ü");
+            request.setAttribute("Message", "ä¿®æ”¹å¯†ç å¤±è´¥");
         }
         return "failure";
     }
@@ -60,4 +62,10 @@ public class ChangePswAction extends ActionSupport implements SessionAware{
     public void setNewpassword(String newpassword) {
         this.newpassword = newpassword;
     }
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

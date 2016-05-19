@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
@@ -64,11 +66,11 @@
             <li><a href="">Another nav item</a></li>
             <li><a href="">More navigation</a></li>
           </ul>
-          <s:if test="%{user.post==管理员}">
+          <c:if test='${session.user.post eq "管理员"}'>
           <ul class="nav nav-sidebar">
             <li><a href="selectAllUser" >员工操作</a></li>
           </ul>
-          </s:if>
+          </c:if>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
@@ -241,6 +243,63 @@
     		{ $("#example_bottom").popover({html: true ,placement:'bottom',title: '${session.user["username"]}', 
     			content: '<strong>${session.user["usex"]}<br>${session.user["post"]}</strong><a class="btn btn-danger" data-toggle="modal" data-target="#pswModal" role="button">修改密码</a>'});
     		});
+    $(document).ready(function() {
+    
+  		$('#pswForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	password: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 10,
+                        message: '密码长度必须小于10位'
+                    },
+                }
+            },
+        	newpassword: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 10,
+                        message: '密码长度必须小于10位'
+                    },
+                    identical: {
+                        field: 'repassword',
+                        message: '两次新密码不同'
+                    }
+                }
+            },
+            repassword: {
+                validators: {
+                	notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 10,
+                        message: '密码长度必须小于10位'
+                    },
+                    identical: {
+                        field: 'newpassword',
+                        message: '两次新密码不同'
+                    }
+                }
+            }
+        }
+  });
+});
 	</script>
   </body>
 </html>	

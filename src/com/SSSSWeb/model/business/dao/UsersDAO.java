@@ -106,6 +106,7 @@ public class UsersDAO {
         oldUser.setPost(u.getPost());
         oldUser.setUsername(u.getUsername());
         oldUser.setUsex(u.getUsex());
+        oldUser.setPhonenum(u.getPhonenum());
         session.save(oldUser);
         tx.commit();
         session.close();
@@ -118,11 +119,11 @@ public class UsersDAO {
         session.close();
         return u;
     }
-    public void ChangePsw(Users user, String newpassword) {
+    public void ChangePsw(Users user, String password) {
         Session session = sf.openSession();
         Transaction tx = session.beginTransaction(); 
         Users oldUser=(Users)session.get(Users.class, user.getUserid());
-        oldUser.setPassword(newpassword);
+        oldUser.setPassword(password);
         System.out.println(session.save(oldUser));
         tx.commit();
         session.close();

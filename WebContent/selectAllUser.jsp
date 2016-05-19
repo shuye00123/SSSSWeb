@@ -67,7 +67,7 @@
             <li><a href="">Another nav item</a></li>
             <li><a href="">More navigation</a></li>
           </ul>
-          <c:if test="${user.post eq '管理员'}">
+          <c:if test='${user.post eq "管理员"}'>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="selectAllUser" >员工操作</a></li>
           </ul>

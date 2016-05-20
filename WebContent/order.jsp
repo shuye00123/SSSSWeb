@@ -143,10 +143,10 @@
 															<td rowspan="<s:property value="#z.count" />"><s:property value="#z.order_state" /></td>
 															
 																<s:if test='#z.order_state == "待发货"'>
-																	<td rowspan="<s:property value="#z.count" />"><a href="#" class="btn btn-primary">取消订单</a></td>
+																	<td rowspan="<s:property value="#z.count" />"><a href="rOrdersA?order_id=<s:property value="#u.order_id" />" class="btn btn-primary">取消订单</a></td>
 																</s:if> 
 																<s:elseif test='#z.order_state == "已发货"'>
-																	<td rowspan="<s:property value="#z.count" />"><a href="#" class="btn btn-primary">确认收货</a></td>
+																	<td rowspan="<s:property value="#z.count" />"><a href="suOrdersA?order_id=<s:property value="#u.order_id" />" class="btn btn-primary">确认收货</a></td>
 																</s:elseif> 
 																<s:elseif test='#z.order_state == "交易成功"'>
 																	<td rowspan="<s:property value="#z.count" />">交易成功</td>
@@ -229,7 +229,7 @@
 															<td><s:property value="#u.num" /></td>
 															<td rowspan="<s:property value="#z.count" />"><labelclass="total">100.00</label></td>
 															<td rowspan="<s:property value="#z.count" />"><s:property value="#z.order_state" /></td>
-																	<td rowspan="<s:property value="#z.count" />"><a href="#" class="btn btn-primary">取消订单</a></td>
+																	<td rowspan="<s:property value="#z.count" />"><a href="rOrdersA?order_id=<s:property value="#u.order_id" />" class="btn btn-primary">取消订单</a></td>
 																
 														</tr>
 													</s:if>
@@ -306,7 +306,7 @@
 																class="total">100.00</label></td>
 															<td rowspan="<s:property value="#z.count" />"><s:property value="#z.order_state" /></td>
 															
-																	<td rowspan="<s:property value="#z.count" />"><a href="#" class="btn btn-primary">确认收货</a></td>
+																	<td rowspan="<s:property value="#z.count" />"><a href="suOrdersA?order_id=<s:property value="#u.order_id" />" class="btn btn-primary">确认收货</a></td>
 																
 														</tr>
 													</s:if>

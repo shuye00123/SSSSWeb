@@ -79,14 +79,25 @@
      	<action name="sOrdersA" class="sOrdersA">
      		<result>/order.jsp</result>
      	</action>
-     	<action name="dshopCart" class="dOrdersA">
-     		<result>/order.jsp</result>
+     	<action name="dshopCart" class="dshopCart">
+     		<result name="success" type="redirectAction">  
+                 <param name="actionName">sshopCart</param>  
+                 <param name="list">${list}</param>
+             </result>  
      	</action>
      	<action name="rOrdersA" class="rOrdersA">
-     		<result>/order.jsp</result>
+     		<result name="success" type="redirectAction">  
+                 <param name="actionName">sOrdersA</param>  
+                 <param name="list">${list}</param>
+                 <param name="list1">${list1}</param>
+             </result>  
      	</action>
      	<action name="suOrdersA" class="suOrdersA">
-     		<result>/order.jsp</result>
+     		<result name="success" type="redirectAction">  
+                 <param name="actionName">sOrdersA</param>  
+                 <param name="list">${list}</param>
+                 <param name="list1">${list1}</param>
+             </result>  
      	</action>
      	
      	
@@ -99,7 +110,9 @@
      		<result>/buy.jsp</result>
      	</action>
      	<action name="logout" class="logout">
-     		<result>/login.jsp</result>
+     		<result name="success" type="redirectAction">  
+                 <param name="actionName">iCoustomerA</param>
+             </result>  
      	</action>
      	<action name="eCoustomerA" class="eCoustomerA">
      		<result>/user.jsp</result>

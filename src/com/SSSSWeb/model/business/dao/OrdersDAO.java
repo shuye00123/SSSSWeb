@@ -16,6 +16,7 @@ import com.SSSSWeb.model.domain.Orders;
 import com.SSSSWeb.model.domain.Orders_Count;
 import com.SSSSWeb.model.domain.Orders_Info;
 import com.SSSSWeb.model.domain.Orders_List;
+import com.SSSSWeb.model.domain.STOCK_INF;
 import com.SSSSWeb.model.domain.Supplier;
 import com.SSSSWeb.model.domain.Users;
 
@@ -80,7 +81,7 @@ public class OrdersDAO {
 		Session session = sf.openSession();
 		String hql="select distinct o.order_id,o.order_time,o.send_time,o.settle_time,o.order_state,o.customer_id,t.order_list_id,t.id,t.num,g.code,g.chn_name,g.eng_name,g.color,g.price,c.url,s.quantity " +
 				" from Orders o,Orders_List t, GOODS_INF g, CAR_IMG_INF c ,STOCK_INF s " +
-				" where o.order_id=t.order_id and g.id=t.id and c.goods_id=g.id and s.goods_id=g.id and o.customer_id =" + c.getCustomer_id() +" and c.level = 1 and o.order_state!= '购物车'  ";
+				" where o.order_id=t.order_id and g.id=t.id and c.goods_id=g.id and s.goods_id=g.id and o.customer_id =" + c.getCustomer_id() +" and c.level = 1 and o.order_state!= '购物车'  group by t.order_list_id";
 		Query query = session.createQuery(hql);
 		ArrayList resultList = (ArrayList) query.list();
 		session.close();
@@ -91,7 +92,7 @@ public class OrdersDAO {
 		Session session = sf.openSession();
 		String hql="select distinct o.order_id,o.order_time,o.send_time,o.settle_time,o.order_state,o.customer_id,t.order_list_id,t.id,t.num,g.code,g.chn_name,g.eng_name,g.color,g.price,c.url,s.quantity " +
 				" from Orders o,Orders_List t, GOODS_INF g, CAR_IMG_INF c ,STOCK_INF s " +
-				" where o.order_id=t.order_id and g.id=t.id and c.goods_id=g.id and o.customer_id = " + c.getCustomer_id() +" and c.level = 1 and o.order_state= '购物车' and s.goods_id=g.id ";
+				" where o.order_id=t.order_id and g.id=t.id and c.goods_id=g.id and o.customer_id = " + c.getCustomer_id() +" and c.level = 1 and o.order_state= '购物车' and s.goods_id=g.id group by t.order_list_id";
 		Query query = session.createQuery(hql);
 		ArrayList resultList = (ArrayList) query.list();
 		session.close();
@@ -109,6 +110,14 @@ public class OrdersDAO {
 		l.setNum(num);
 		l.setOrder_id(o.getOrder_id());
 		session.save(l);
+		String hql="from STOCK_INF where goods_id = "+id;
+		Query query=session.createQuery(hql);
+		STOCK_INF c=(STOCK_INF)query.uniqueResult();
+		Transaction tx1 = session.beginTransaction(); 
+		STOCK_INF oldstock=(STOCK_INF)session.get(STOCK_INF.class, c.getId());
+		oldstock.setQuantity(oldstock.getQuantity()-num);
+		session.save(oldstock);
+		tx1.commit();
 		session.close();
 	}
 
@@ -133,6 +142,27 @@ public class OrdersDAO {
 			oldOrders.setOrder_state("交易失败"); 
 			session.save(oldOrders);
 			tx.commit();
+			String hql=" from Orders_List where order_id="+order_id;
+			Query query = session.createQuery(hql);
+			
+			ArrayList<Orders_List> resultList = (ArrayList) query.list();
+			
+			
+			for(int i=0;i<resultList.size();i++){
+				
+				
+				String sql="from STOCK_INF where goods_id = "+resultList.get(i).getId();
+				Query q=session.createQuery(sql);
+				STOCK_INF s=(STOCK_INF)q.uniqueResult();
+				
+				Transaction tx1 = session.beginTransaction(); 
+				
+				
+				STOCK_INF oldstock=(STOCK_INF)session.get(STOCK_INF.class,s.getId());
+				oldstock.setQuantity(oldstock.getQuantity()+resultList.get(i).getNum());
+				session.save(oldstock);
+				tx1.commit();
+			}
 			session.close();
 	}
 
@@ -146,10 +176,10 @@ public class OrdersDAO {
 			session.close();
 	}
 
-	public void DeleteShopCart(int order_id) {
+	public void DeleteShopCart(int id) {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction(); 
-		Orders su=(Orders) session.get(Orders.class, order_id);
+		Orders_List su=(Orders_List) session.get(Orders_List.class,id);
 		session.delete(su);
 		tx.commit();
 		session.close();

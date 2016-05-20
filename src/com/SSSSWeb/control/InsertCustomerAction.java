@@ -28,7 +28,10 @@ public class InsertCustomerAction extends ActionSupport implements ModelDriven<C
 
 	@Override
 	public String execute() throws Exception {
-		cs.InsertCustomer(customer);
+		if(customer.getCustomer_no()!=null){
+			cs.InsertCustomer(customer);
+		}
+		
 		return "success";
 	}
 	

@@ -199,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="row">
             <div class="col-md-9 col-md-offset-3">
             <s:if test="null==#session.customer||#session.customer.isEmpty()">
-            	<button class="btn default"  onclick="refuse();return false;"><img class="img" src="image/shoppingCar.png"/>&nbsp;加入购物车</button>
+            	<button class="btn default"  onclick="refuse(); return false;"><img class="img" src="image/shoppingCar.png"/>&nbsp;加入购物车</button>
             </s:if>
             <s:else>
             	<button class="btn btn-danger"><img class="img" src="image/shoppingCar.png"/>&nbsp;加入购物车</button>
@@ -249,7 +249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </s:iterator>
         <div class="divider"></div>
         <s:iterator value="list" var="u">
-        	<img class="img2" src="image/11.jpg" ><!-- file:///<s:property value="#u.img"/> -->
+        	<img class="img2" src="<s:property value="#u.img"/>" ><!-- file:///<s:property value="#u.img"/> -->
         </s:iterator>
         
 </div>

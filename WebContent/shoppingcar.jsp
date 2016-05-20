@@ -129,7 +129,7 @@
                         <a class="btn btn-default add" href="#">+</a>
                     </td>
                     <td><label class="total"><s:set name="a" value="0" /> <s:property value="#u.num*#u.price"/></label></td>
-                    <td><a href="#" id="delete">删除</a></td>
+                    <td><a href="dshopCart?id=<s:property value="#u.order_list_id"/>" id="delete">删除</a></td>
                 </tr>
                 </s:iterator>
                

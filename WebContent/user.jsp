@@ -50,7 +50,7 @@
                     <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="shoppingcar.jsp"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
                         <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
                         <li class="divider"></li>
                         <li><a href="logout">退出</a></li>
@@ -64,7 +64,7 @@
     <div class="row">
 <div class="list-group col-md-2">
             <a href="user.jsp" class="list-group-item active"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人信息</a>
-            <a href="sshopCart" class="list-group-item"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
+            <a href="shoppingcar.jsp" class="list-group-item"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
             <a href="sOrdersA" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a>
         </div>
         <div class="col-md-10 line">

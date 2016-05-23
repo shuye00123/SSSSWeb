@@ -63,7 +63,7 @@
      	
      	<!-- Goods -->
      	<action name="sGoodsA" class="sGoodsA">
-     		<result>/menu-list.jsp</result>
+     		<result>/menu_list.jsp</result>
      	</action>
      	<action name="sDetialGoodsA" class="sDetialGoodsA">
      		<result>/detial.jsp</result>
@@ -71,32 +71,26 @@
      	
      	<!-- Orders -->
      	<action name="ishopCart" class="ishopCart">
-     		<result>/detial.jsp</result>
-     	</action>
-     	<action name="sshopCart" class="sshopCart">
-     		<result>/shoppingcar.jsp</result>
+     		<result name="success" type="redirectAction">  
+                 <param name="actionName">sDetialGoodsA</param>  
+                 <param name="id">${id}</param> 
+             </result> 
      	</action>
      	<action name="sOrdersA" class="sOrdersA">
      		<result>/order.jsp</result>
      	</action>
      	<action name="dshopCart" class="dshopCart">
-     		<result name="success" type="redirectAction">  
-                 <param name="actionName">sshopCart</param>  
-                 <param name="list">${list}</param>
-             </result>  
+     		<result>/shoppingcar.jsp</result>
      	</action>
      	<action name="rOrdersA" class="rOrdersA">
      		<result name="success" type="redirectAction">  
                  <param name="actionName">sOrdersA</param>  
-                 <param name="list">${list}</param>
-                 <param name="list1">${list1}</param>
+                 
              </result>  
      	</action>
      	<action name="suOrdersA" class="suOrdersA">
      		<result name="success" type="redirectAction">  
                  <param name="actionName">sOrdersA</param>  
-                 <param name="list">${list}</param>
-                 <param name="list1">${list1}</param>
              </result>  
      	</action>
      	
@@ -130,12 +124,28 @@
     
    <!--  json -->
     <package name="ajax_json" extends="json-default">
+    
     	 <action name="ssA" class="ssA">
      		<result name="success" type="json"/>
      	</action> 
+     	
      	<action name="iOrdersA" class="iOrdersA">
      		<result name="success" type="json"/>
      	</action>
+     	
+     	<action name="sshopCart" class="sshopCart">
+     		<result name="success" type="json"/>
+     	</action>
+     	
+     	<action name="sNewsA" class="sNewsA">
+     		<result name="success" type="json"/>
+     	</action>
+     	
+     	<action name="sACoustomerA" class="sACoustomerA">
+     		<result name="success" type="json"/>
+     	</action>
+     	
+     	
     </package> 
 
 </struts>

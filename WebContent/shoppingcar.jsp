@@ -81,7 +81,7 @@
                     <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="shoppingcar.jsp"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
                         <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
                         <li class="divider"></li>
                         <li><a href="logout">退出</a></li>
@@ -95,7 +95,7 @@
     <div class="row">
         <div class="list-group col-md-2">
             <a href="user.jsp" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人信息</a>
-            <a href="sshopCart" class="list-group-item active"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
+            <a href="shoppingcar.jsp" class="list-group-item active"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
             <a href="sOrdersA" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a>
         </div>
         <div class="col-md-10">
@@ -112,27 +112,6 @@
                </tr>
                </thead>
                 <tbody id="list">
-                <s:iterator value="list" var="u">
-                <tr>
-                    <td><input  type="checkbox" value="<s:property value="#u.id"/>"></td>
-                    <td>
-                        <a href="#"><img class="img" src="<s:property value="#u.img"/>"></a>
-						<input type="hidden" value="<s:property value="#u.order_list_id"/>">
-                    </td>
-                    <td>
-                        <a class="break" href="sDetialGoodsA?id=<s:property value="#u.id"/>"><s:property value="#u.chn_name"/></a>
-                    </td>
-                    <td><s:property value="#u.price"/></td>
-                    <td>
-                        <a class="btn btn-default reduce" >-</a>
-                        <input type="text" name="num" class="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" value="<s:property value="#u.num"/>" />
-                        <a class="btn btn-default add" href="#">+</a>
-                    </td>
-                    <td><label class="total"><s:set name="a" value="0" /> <s:property value="#u.num*#u.price"/></label></td>
-                    <td><a href="dshopCart?id=<s:property value="#u.order_list_id"/>" id="delete">删除</a></td>
-                </tr>
-                </s:iterator>
-               
                 </tbody>
             </table>
 
@@ -150,19 +129,19 @@
 <script src="js/bootstrap.min.js"></script>
 <script>
     $(function(){
-    	$(".add").click(function(){
+    	$('body').on('click','.add',function(){
 			var me = this;
             var t=$(this).parent().find('input[class*=text]');
             t.val(parseInt(t.val())+1);
             var a=parseInt(t.val());
-            var b = parseInt($(me).parent().siblings().find('label[class*=quantity]').val());
+            var b = parseInt($(me).parent().find('input[class*=quantity]').val());
             if(a>b){
             	alert("超过库存范围");
-            	t.val($("#quantity").val());
+            	t.val(b);
             }
             setTotal(me);
         });
-        $(".reduce").click(function(){
+    	$('body').on('click','.reduce',function(){
 			var me = this;
             var t=$(this).parent().find('input[class*=text]');
             t.val(parseInt(t.val())-1);
@@ -179,14 +158,14 @@
             $(obj).parent().siblings().find('label[class*=total]').html(s.toFixed(2));
         }
         
-		$(".text").blur(function(){
+        $('body').on('blur','.text',function(){
 			var t=$(this);
             t.val(parseInt(t.val()));
             var a=parseInt(t.val());
-            var b = parseInt($(me).parent().siblings().find('label[class*=quantity]').val());
+            var b = parseInt(t.parent().find('input[class*=quantity]').val());
             if(a>b){
             	alert("超过库存范围");
-            	t.val($("#quantity").val());
+            	t.val(b);
             }
             if(parseInt(t.val())<1||isNaN(t.val())){
                 t.val(1);
@@ -195,14 +174,14 @@
 		});
         
         
-        $("#all").click(function(){    
+        $("#all").on('click',function(){    
             if(this.checked){    
                 $("#list :checkbox").prop('checked',true);
             }else{    
                 $("#list :checkbox").prop('checked',false);
             }    
          });  
-        $("#list :checkbox").click(function(){ 
+        $("#list").on('click',' :checkbox',function(){ 
         	var chknum = $("#list :checkbox").size();//选项总个数 
         	var chk=0;
         	$("#list :checkbox").each(function () {   
@@ -244,6 +223,7 @@
    			data:{'Alldata':all}, 
    			success:function(data){ 
    		 	alert("下单成功");
+   		 	window.location.href ='shoppingcar.jsp';
       		},
       		error :function(data){
       			alert(data);
@@ -251,6 +231,58 @@
       		}  
  		});
         });
+        
+       
+		$.ajax({
+			type : 'post',
+			url : 'sshopCart.action',
+			dataType : 'json',
+			success : function(data) {
+				var json = eval(data);
+	   			 $.each(json, function (i) {  
+	             	$.each(json[i], function (j) { 
+	             		var id = json[i][j].id;  
+	             		var img = json[i][j].img; 
+	             		var order_list_id = json[i][j].order_list_id; 
+	             		var chn_name = json[i][j].chn_name; 
+	             		var price = json[i][j].price; 
+	             		var num = json[i][j].num; 
+	             		var quantity = json[i][j].quantity;
+	             		if(quantity<num){
+	             			num = quantity;
+	             		}
+	             		$("#list").append("<tr>"+
+	                    '<td><input  type="checkbox" value="'+id+'"></td>'+
+	                    '<td>'+
+	                        '<a href="sDetialGoodsA?id='+id+'"><img class="img" src="'+img+'"></a>'+
+							'<input type="hidden" value="'+order_list_id+'" >'+
+	                    '</td>'+
+	                    '<td>'+
+	                        '<a class="break" href="sDetialGoodsA?id='+id+'">'+chn_name+'</a>'+
+	                    '</td>'+
+	                    '<td><input type="hidden" id="price" value="'+price+'">'+price+'</td>'+
+	                    '<td>'+
+	                        '<a class="btn btn-default reduce" >-</a>'+
+	                        '<input type="text" name="num" class="text" onkeyup="this.value=this.value.replace(/\D/g,'+"''"+')" onafterpaste="this.value=this.value.replace(/\D/g,'+"''"+')" value="'+num+'" />'+
+	                        '<a class="btn btn-default add" href="#">+</a>'+
+	                        '<input type="hidden" class="quantity"  value="'+quantity+'">'+
+	                    '</td>'+
+	                    '<td><label class="total">'+num*price+'</label></td>'+
+	                    '<td><a href="dshopCart?id='+order_list_id+'" id="delete">删除</a></td>'+
+	                '</tr>' );
+	             	});
+	   			 });
+				
+				
+			},
+			error : function(data) {
+				alert(data);
+				alert("加载失败");
+			}
+		});
+	
+       
+        
     });
     
     

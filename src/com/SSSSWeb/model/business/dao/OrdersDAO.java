@@ -17,6 +17,7 @@ import com.SSSSWeb.model.domain.Orders_Count;
 import com.SSSSWeb.model.domain.Orders_Info;
 import com.SSSSWeb.model.domain.Orders_List;
 import com.SSSSWeb.model.domain.STOCK_INF;
+import com.SSSSWeb.model.domain.Sale;
 import com.SSSSWeb.model.domain.Supplier;
 import com.SSSSWeb.model.domain.Users;
 
@@ -173,6 +174,25 @@ public class OrdersDAO {
 			oldOrders.setOrder_state("交易成功"); 
 			session.save(oldOrders);
 			tx.commit();
+			String hql=" from Orders_List where order_id="+order_id;
+			Query query = session.createQuery(hql);
+			
+			ArrayList<Orders_List> resultList = (ArrayList) query.list();
+			
+			
+			for(int i=0;i<resultList.size();i++){
+				String sql="from Sale where goods_id = "+resultList.get(i).getId();
+				Query q=session.createQuery(sql);
+				Sale s=(Sale)q.uniqueResult();
+				
+				Transaction tx1 = session.beginTransaction(); 
+				
+				
+				Sale oldstock=(Sale)session.get(Sale.class,s.getId());
+				oldstock.setNum(oldstock.getNum()+resultList.get(i).getNum());
+				session.save(oldstock);
+				tx1.commit();
+			}
 			session.close();
 	}
 

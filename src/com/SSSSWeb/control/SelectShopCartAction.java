@@ -3,6 +3,9 @@ package com.SSSSWeb.control;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.SSSSWeb.model.business.service.OrdersService;
@@ -14,17 +17,13 @@ public class SelectShopCartAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 	private List list; 
 	
-	public OrdersService getOs() {
-		return os;
-	}
+	
 
 	public void setOs(OrdersService os) {
 		this.os = os;
 	}
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
+	
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
@@ -40,8 +39,11 @@ public class SelectShopCartAction extends ActionSupport implements SessionAware{
 
 	@Override
 	public String execute() throws Exception {
+		HttpServletResponse hsr = ServletActionContext.getResponse();
 		Customer c=(Customer)session.get("customer");
 		list = os.SelectShopCart(c);
+		hsr.setCharacterEncoding("UTF-8");
+        hsr.getWriter().write("");
 		return "success";
 	}
 }

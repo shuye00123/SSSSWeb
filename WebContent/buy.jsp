@@ -1,427 +1,387 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="/struts-tags" prefix="s" %>
-<%
+﻿
+
+    <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+        <%@ taglib uri="/struts-tags" prefix="s" %>
+            <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<style>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <style>
 
         body {
-            padding-top: 50px;
-            padding-bottom: 40px;
-            color: #5a5a5a;
+        padding-top: 50px;
+        padding-bottom: 40px;
+        color: #5a5a5a;
         }
+
+        .carousel a {
+        color: #FFF;
+        }
+
+        .carousel a:hover {
+        color: #FFF;
+        text-decoration:none;
+        }
+
+        #summary-container a {
+        color: #5A5A5A;
+        }
+
+        #summary-container a:hover {
+        color: #5A5A5A;
+        text-decoration:none;
+        }
+
+        .feature-heading a {
+        color: #2A6496;
+        }
+
+        .feature-heading a:hover {
+        color: #2A6496;
+        text-decoration:none;
+        }
+
+        .lead a {
+        color: #5A5A5A;
+        }
+
+        .lead a:hover {
+        color: #5A5A5A;
+        text-decoration:none;
+        }
+
+
 
         /* 轮播广告 */
 
         .carousel {
-            height: 500px;
-            margin-bottom: 60px;
+        height: 500px;
+        margin-bottom: 60px;
         }
 
         .carousel .item {
-            height: 500px;
-            background-color: #000;
+        height: 500px;
+        background-color: #000;
         }
 
         .carousel .item img {
-            width: 100%;
+        width: 100%;
         }
 
         .carousel-caption {
-            z-index: 10;
+        z-index: 10;
         }
 
         .carousel-caption p {
-            margin-bottom: 20px;
-            font-size: 20px;
-            line-height: 1.8;
+        margin-bottom: 20px;
+        font-size: 20px;
+        line-height: 1.8;
         }
 
         /* 简介 */
 
         .summary {
-            padding-right: 15px;
-            padding-left: 15px;
+        padding-right: 15px;
+        padding-left: 15px;
         }
 
         .summary .col-md-4 {
-            margin-bottom: 20px;
-            text-align: center;
+        margin-bottom: 20px;
+        text-align: center;
         }
 
         /* 特性 */
 
         .feature-divider {
-            margin: 40px 0;
+        margin: 40px 0;
         }
 
         .feature {
-            padding: 30px 0;
+        padding: 30px 0;
         }
 
         .feature-heading {
-            font-size: 50px;
-            color: #2a6496;
+        font-size: 50px;
+        color: #2a6496;
         }
 
         .feature-heading .text-muted {
-            font-size: 28px;
+        font-size: 28px;
         }
+
 
         /* 响应式布局 */
 
         @media (max-width: 768px) {
 
-            .summary {
-                padding-right: 3px;
-                padding-left: 3px;
-            }
+        .summary {
+        padding-right: 3px;
+        padding-left: 3px;
+        }
 
-            .carousel {
-                height: 300px;
-                margin-bottom: 30px;
-            }
+        .carousel {
+        height: 300px;
+        margin-bottom: 30px;
+        }
 
-            .carousel .item {
-                height: 300px;
-            }
+        .carousel .item {
+        height: 300px;
+        }
 
-            .carousel img {
-                min-height: 300px;
-            }
+        .carousel img {
+        min-height: 300px;
+        }
 
-            .carousel-caption p {
-                font-size: 16px;
-                line-height: 1.4;
-            }
+        .carousel-caption p {
+        font-size: 16px;
+        line-height: 1.4;
+        }
 
-            .feature-heading {
-                font-size: 34px;
-            }
+        .feature-heading {
+        font-size: 34px;
+        }
 
-            .feature-heading .text-muted {
-                font-size: 22px;
-            }
+        .feature-heading .text-muted {
+        font-size: 22px;
+        }
         }
 
         @media (min-width: 992px) {
-            .feature-heading {
-                margin-top: 120px;
-            }
+        .feature-heading {
+        margin-top: 120px;
         }
-    </style>
+        }
+        </style>
 
-</head>
-<body>
+        </head>
+        <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="buy.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp首页</a>
+        </button>
+        <a class="navbar-brand" href="buy.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp首页</a>
 
 
-    </div>
+        </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-	
-      <form action="sGoodsA" method="post" class="navbar-form navbar-left" role="search">
-			<div class="form-group">
-			<input type="text" class="form-control" name="chn_name" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">搜索</button>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+
+        <form action="sGoodsA" method="post" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+        <input type="text" class="form-control" name="chn_name" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">搜索</button>
         </form>
-      <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
         <s:if test="null==#session.customer||#session.customer.isEmpty()">
-           		<li>
-                    <a href="login.jsp">登录</a>
-                </li>
-                </s:if>
-                <s:else>
-                <li class="dropdown">
-                    <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
-                        <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
-                        <li class="divider"></li>
-                        <li><a href="logout">退出</a></li>
-                    </ul>
-                </li>
-                </s:else>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<!-- 广告轮播 -->
-<div id="ad-carousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#ad-carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#ad-carousel" data-slide-to="1"></li>
-        <li data-target="#ad-carousel" data-slide-to="2"></li>
-        <li data-target="#ad-carousel" data-slide-to="3"></li>
-        <li data-target="#ad-carousel" data-slide-to="4"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="image/chrome-big.jpg" alt="1 slide">
+            <li>
+            <a href="login.jsp">登录</a>
+            </li>
+        </s:if>
+        <s:else>
+            <li class="dropdown">
+            <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+            <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
+            <li><a href="shoppingcar.jsp"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+            <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
+            <li class="divider"></li>
+            <li><a href="logout">退出</a></li>
+            </ul>
+            </li>
+        </s:else>
+        </ul>
+        </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+        </nav>
 
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Chrome</h1>
+        <div id="ad-carousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators" id="top1">
 
-                    <p>Google Chrome，又称Google浏览器，是一个由Google（谷歌）公司开发的网页浏览器。</p>
+        </ol>
+        <div class="carousel-inner" id="top2">
 
-                    <p><a class="btn btn-lg btn-primary" href="http://www.google.cn/intl/zh-CN/chrome/browser/"
-                          role="button" target="_blank">点我下载</a></p>
-                </div>
-            </div>
         </div>
-        <div class="item">
-            <img src="image/firefox-big.jpg" alt="2 slide">
-
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Firefox</h1>
-
-                    <p>Mozilla Firefox，中文名通常称为“火狐”或“火狐浏览器”，是一个开源网页浏览器。</p>
-
-                    <p><a class="btn btn-lg btn-primary" href="http://www.firefox.com.cn/download/" target="_blank"
-                          role="button">点我下载</a></p>
-                </div>
-            </div>
         </div>
-        <div class="item">
-            <img src="image/safari-big.jpg" alt="3 slide">
 
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Safari</h1>
+        <div class="container summary">
 
-                    <p>Safari，是苹果计算机的最新操作系统Mac OS X中的浏览器。</p>
+        <!-- 简介 -->
+        <div class="row" id="summary-container" >
 
-                    <p><a class="btn btn-lg btn-primary" href="http://www.apple.com/cn/safari/" target="_blank"
-                          role="button">点我下载</a></p>
-                </div>
-            </div>
         </div>
-        <div class="item">
-            <img src="image/opera-big.jpg" alt="4 slide">
 
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Opera</h1>
+        <!-- 特性 -->
 
-                    <p>Opera浏览器，是一款挪威Opera Software ASA公司制作的支持多页面标签式浏览的网络浏览器。</p>
+        <hr class="feature-divider">
 
-                    <p><a class="btn btn-lg btn-primary" href="http://www.opera.com/zh-cn" target="_blank"
-                          role="button">点我下载</a></p>
-                </div>
-            </div>
+        <ul class="nav nav-tabs" role="tablist" id="feature-tab">
+
+        </ul>
+
+        <div class="tab-content" id="bottom2">
+
         </div>
-        <div class="item">
-            <img src="image/ie-big.jpg" alt="5 slide">
 
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>IE</h1>
-
-                    <p>Internet Explorer，简称 IE，是微软公司推出的一款网页浏览器。</p>
-
-                    <p><a class="btn btn-lg btn-primary" href="http://ie.microsoft.com/" target="_blank"
-                          role="button">点我下载</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#ad-carousel" data-slide="prev"><span
-            class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="right carousel-control" href="#ad-carousel" data-slide="next"><span
-            class="glyphicon glyphicon-chevron-right"></span></a>
-</div>
-
-<div class="container summary">
-
-    <!-- 简介 -->
-    <div class="row" id="summary-container">
-        <div class="col-md-4">
-            <img class="img-circle" src="image/chrome-logo-small.jpg" alt="chrome">
-
-            <h2>Chrome</h2>
-
-            <p>Google Chrome，又称Google浏览器，是一个由Google（谷歌）公司开发的网页浏览器。</p>
-
-            <p><a class="btn btn-default" href="#" role="button">点我下载</a></p>
-        </div>
-        <div class="col-md-4">
-            <img class="img-circle" src="image/firefox-logo-small.jpg" alt="firefox">
-
-            <h2>Firefox</h2>
-
-            <p>Mozilla Firefox，中文名通常称为“火狐”或“火狐浏览器”，是一个开源网页浏览器。</p>
-
-            <p><a class="btn btn-default" href="#" role="button">点我下载</a></p>
-        </div>
-        <div class="col-md-4">
-            <img class="img-circle" src="image/safari-logo-small.jpg" alt="safari">
-
-            <h2>Safari</h2>
-
-            <p>Safari，是苹果计算机的最新操作系统Mac OS X中的浏览器。</p>
-
-            <p><a class="btn btn-default" href="#" role="button">点我下载</a></p>
-        </div>
-    </div>
-
-    <!-- 特性 -->
-
-    <hr class="feature-divider">
-
-    <ul class="nav nav-tabs" role="tablist" id="feature-tab">
-        <li class="active"><a href="#tab-chrome" role="tab" data-toggle="tab">Chrome</a></li>
-        <li><a href="#tab-firefox" role="tab" data-toggle="tab">Firefox</a></li>
-        <li><a href="#tab-safari" role="tab" data-toggle="tab">Safari</a></li>
-        <li><a href="#tab-opera" role="tab" data-toggle="tab">Opera</a></li>
-        <li><a href="#tab-ie" role="tab" data-toggle="tab">IE</a></li>
-    </ul>
-
-    <div class="tab-content">
-        <div class="tab-pane active" id="tab-chrome">
-            <div class="row feature">
-                <div class="col-md-7">
-
-                    <h2 class="feature-heading">Google Chrome <span
-                            class="text-muted">使用最广的浏览器</span></h2>
-
-                    <p class="lead">Google Chrome，又称Google浏览器，是一个由Google（谷歌）公司开发的网页浏览器。
-                        该浏览器是基于其他开源软件所撰写，包括WebKit，目标是提升稳定性、速度和安全性，并创造出简单且有效率的使用者界面。</p>
-                </div>
-                <div class="col-md-5">
-                    <img class="feature-images img-responsive" src="image/chrome-logo.jpg"
-                         alt="Chrome">
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane" id="tab-firefox">
-            <div class="row feature">
-                <div class="col-md-5">
-                    <img class="feature-images img-responsive" src="image/firefox-logo.jpg"
-                         alt="Firefox">
-                </div>
-                <div class="col-md-7">
-
-                    <h2 class="feature-heading">Mozilla Firefox <span class="text-muted">美丽的狐狸</span>
-                    </h2>
-
-                    <p class="lead">Mozilla Firefox，中文名通常称为“火狐”或“火狐浏览器”，是一个开源网页浏览器，
-                        使用Gecko引擎（非ie内核），支持多种操作系统如Windows、Mac和linux。</p>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane" id="tab-safari">
-            <div class="row feature">
-                <div class="col-md-7">
-
-                    <h2 class="feature-heading">Safari <span class="text-muted">Mac用户首选</span></h2>
-
-                    <p class="lead">Safari，是苹果计算机的最新操作系统Mac OS X中的浏览器，使用了KDE的KHTML作为浏览器的运算核心。
-                        Safari在2003年1月7日首度发行测试版，并成为Mac OS X v10.3与之后的默认浏览器，也是iPhone与IPAD和iPod touch的指定浏览器。</p>
-                </div>
-                <div class="col-md-5">
-                    <img class="feature-images img-responsive" src="image/safari-logo.jpg"
-                         alt="Safari">
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane" id="tab-opera">
-            <div class="row feature">
-                <div class="col-md-5">
-                    <img class="feature-images img-responsive" src="image/opera-logo.jpg"
-                         alt="Opera">
-                </div>
-                <div class="col-md-7">
-
-                    <h2 class="feature-heading">Opera <span class="text-muted">小众但易用</span>
-                    </h2>
-
-                    <p class="lead">Opera浏览器，是一款挪威Opera Software ASA公司制作的支持多页面标签式浏览的网络浏览器。
-                        是跨平台浏览器可以在Windows、Mac和Linux三个操作系统平台上运行。.</p>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane" id="tab-ie">
-            <div class="row feature">
-                <div class="col-md-7">
-
-                    <h2 class="feature-heading">IE <span class="text-muted">你懂的</span></h2>
-
-                    <p class="lead">Internet Explorer，原称Microsoft Internet Explorer(6版本以前)和Windows Internet
-                        Explorer(7，8，9，10版本)，
-                        简称IE，是美国微软公司推出的一款网页浏览器。它采用的排版引擎(俗称内核)为Trident。</p>
-                </div>
-                <div class="col-md-5">
-                    <img class="feature-images img-responsive" src="image/ie-logo.jpg"
-                         alt="IE">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 关于 -->
-    <div class="modal fade" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
-         aria-hidden="true">
+        <!-- 关于 -->
+        <div class="modal fade" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
+        aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span
-                            aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
-                    <h4 class="modal-title" id="modal-label">关于</h4>
-                </div>
-                <div class="modal-body">
-                    <p>慕课网隶属于北京慕课科技中心(有限合伙)，是一家从事互联网免费教学的网络教育公司。秉承“开拓、创新、公平、分享”的精神，
-                        将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">了解了</button>
-                </div>
-            </div>
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span
+        aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+        <h4 class="modal-title" id="modal-label">关于</h4>
         </div>
-    </div>
+        <div class="modal-body">
+        <p>慕课网隶属于北京慕课科技中心(有限合伙)，是一家从事互联网免费教学的网络教育公司。秉承“开拓、创新、公平、分享”的精神，
+        将互联网特性全面的应用在教育领域，致力于为教育机构及求学者打造一站式互动在线教育品牌。</p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">了解了</button>
+        </div>
+        </div>
+        </div>
+        </div>
 
 
-    <footer>
+        <footer>
         <p class="pull-right"><a href="#top">回到顶部</a></p>
 
         <p>&copy; 2014 慕课网 </p>
-    </footer>
+        </footer>
 
-</div>
+        </div>
 
 
-<script src="js/jquery-1.12.3.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script >
-$(function(){
-	
-});
-</script>
-</body>
-</html>
+        <script src="js/jquery-1.12.3.min.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script >
+        $(function(){
+        $.ajax({
+        type : 'post',
+        url : 'sNewsA.action',
+        dataType : 'json',
+        success : function(data) {
+        var json = eval(data);
+        var l = 0;
+        var k = 0;
+        $.each(json, function (i) {
+        $.each(json[i], function (j) {
+        var news_title = json[i][j].news_title;
+        var img_adr = json[i][j].img_adr;
+        var news_detial = json[i][j].news_detial;
+        var link = json[i][j].link;
+        var position = json[i][j].position ;
+        if(position==="上"){
+        if(l==0){
+        $("#top1").append('<li data-target="#ad-carousel" data-slide-to="'+l+'" class="active"></li>');
+        $("#top2").append('<div class="item active">'+
+        '<a href="'+link+'"><img src="'+img_adr+'" alt="'+l+1+' slide"></a>'+
+        '<div class="container">'+
+        '<div class="carousel-caption">'+
+        '<h1><a href="'+link+'">'+news_title+'</a></h1>'+
+        '<p><a href="'+link+'">'+news_detial+'</a></p>'+
+        '</div>'+
+        '</div>'+
+        '</div>');
+        }else{
+        $("#top1").append('<li data-target="#ad-carousel" data-slide-to="'+l+'"></li>');
+        $("#top2").append('<div class="item">'+
+        '<a href="'+link+'"><img src="'+img_adr+'" alt="'+l+1+' slide"></a>'+
+        '<div class="container">'+
+        '<div class="carousel-caption">'+
+        '<h1><a href="'+link+'">'+news_title+'</a></h1>'+
+        '<p><a href="'+link+'">'+news_detial+'</a></p>'+
+        '</div>'+
+        '</div>'+
+        '</div>');
+        }
+        l++;
+        }else if(position==="中"){
+        $("#summary-container").append('<div class="col-md-4">'+
+        '<a href="'+link+'"><img class="img-circle" src="'+img_adr+'" alt="'+news_title+'"></a>'+
+        '<h2><a href="'+link+'">'+news_title+'</a></h2>'+
+        '<p><a href="'+link+'">'+news_detial+'</a></p>'+
+        '</div>');
+        }else{
+        if(k==0){
+        $("#feature-tab").append('<li class="active"><a href="#'+news_title+'" role="tab" data-toggle="tab">'+news_title+'</a></li>');
+        $("#bottom2").append('<div class="tab-pane active" id="'+news_title+'">'+
+        '<div class="row feature">'+
+        '<div class="col-md-7">'+
+        '<h2 class="feature-heading"><a href="'+link+'">'+news_title+'</a></h2>'+
+        '<p class="lead"><a href="'+link+'">'+news_detial+'</a></p>'+
+        '</div>'+
+        '<div class="col-md-5">'+
+        '<a href="'+link+'"><img class="feature-images img-responsive" src="'+img_adr+'" alt="'+news_title+'"></a>'+
+        '</div>'+
+        '</div>'+
+        '</div>');
+        }else{
+
+        if(k%2==0){
+        $("#feature-tab").append('<li><a href="#'+news_title+'" role="tab" data-toggle="tab">'+news_title+'</a></li>');
+        $("#bottom2").append('<div class="tab-pane" id="'+news_title+'">'+
+        '<div class="row feature">'+
+        '<div class="col-md-7">'+
+        '<h2 class="feature-heading"><a href="'+link+'">'+news_title+'</a></h2>'+
+        '<p class="lead"><a href="'+link+'">'+news_detial+'</a></p>'+
+        '</div>'+
+        '<div class="col-md-5">'+
+        '<a href="'+link+'"><img class="feature-images img-responsive" src="'+img_adr+'" alt="'+news_title+'"></a>'+
+        '</div>'+
+        '</div>'+
+        '</div>');
+        }else{
+        $("#feature-tab").append('<li><a href="#'+news_title+'" role="tab" data-toggle="tab">'+news_title+'</a></li>');
+        $("#bottom2").append('<div class="tab-pane" id="'+news_title+'">'+
+        '<div class="row feature">'+
+        '<div class="col-md-5">'+
+        '<a href="'+link+'"><img class="feature-images img-responsive" src="'+img_adr+'" alt="'+news_title+'"></a>'+
+        '</div>'+
+        '<div class="col-md-7">'+
+        '<h2 class="feature-heading"><a href="'+link+'">'+news_title+'</a></h2>'+
+        '<p class="lead"><a href="'+link+'">'+news_detial+'</a></p>'+
+        '</div>'+
+        '</div>'+
+        '</div>');
+        }
+        }
+
+        k++;
+        }
+
+        });
+        });
+        $("#top2").append('<a class="left carousel-control" href="#ad-carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>'+
+        '<a class="right carousel-control" href="#ad-carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>');
+
+        },
+        error : function(data) {
+        alert(data);
+        alert("加载失败");
+        }
+        });
+        });
+        </script>
+        </body>
+        </html>

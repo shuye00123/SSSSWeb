@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="shoppingcar.jsp"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
                         <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
                         <li class="divider"></li>
                         <li><a href="logout">退出</a></li>
@@ -157,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="container">
     <s:iterator value="list" var="u">
         <div class="Goods">
-        <a href="sDetialGoodsA?id=<s:property value="#u.id"/>"> <img class="detialImg" src="file:///<s:property value="#u.img"/>"/></a>
+        <a href="sDetialGoodsA?id=<s:property value="#u.id"/>"> <img class="detialImg" src="<s:property value="#u.img"/>"/></a>
         <div class="clear"><p class="money">&nbsp;¥<s:property value="#u.price"/></p><p class="saleNum">已售<s:property value="#u.num"/>件</p></div>
         <a class="goodsText" href="sDetialGoodsA?id=<s:property value="#u.id"/>"><s:property value="#u.chn_name"/></a>
         </div>

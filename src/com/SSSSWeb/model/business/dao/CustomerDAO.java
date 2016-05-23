@@ -1,5 +1,7 @@
 package com.SSSSWeb.model.business.dao;
 
+import java.util.ArrayList;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,5 +61,15 @@ public class CustomerDAO {
 		session.save(oldCustomer);
 		tx.commit();
 		session.close();
+	}
+
+	public ArrayList<Customer> SelectCustomer() {
+		Session session = sf.openSession();
+		String hql= "select c.customer_id,c.customer_no,c.customer_no,c.customer_name,c.sex,c.job,c.tel,c.addr,c.idcard,c.remark "
+				+ " from Customer c";	
+		Query query = session.createQuery(hql);
+		ArrayList<Customer> resultList = (ArrayList) query.list();
+		session.close();
+		return resultList;
 	}
 }

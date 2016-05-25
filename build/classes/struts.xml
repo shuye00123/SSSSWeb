@@ -38,13 +38,13 @@
      		<result name="success">/selectUser.jsp</result>
      	</action>
         <action name="changeUser" class="ChangeUserAction">
-     		<result name="success">/main.jsp</result>
+     		<result type="chain" name="success">selectAllUser</result>
      	</action>
      	<action name="changePsw" class="ChangePswAction">
      		<result name="success">/main.jsp</result>
      	</action>
      	<action name="deleteUser" class="DeleteUserAction">
-     		<result name="success">/main.jsp</result>
+     		<result type="chain" name="success">selectAllUser</result>
      	</action>
      	<action name="addUser" class="AddUserAction">
      		<result name="success">/main.jsp</result>

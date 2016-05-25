@@ -89,6 +89,7 @@ public class UsersDAO {
     }
     public ArrayList selectUser(String key, int pageSize, int pageNow){
         Session session = sf.openSession();
+        System.out.print(pageNow);
         String hql = "select * from Users "+"where username= '"+key+"' limit "+(pageNow*pageSize-pageSize)+","+pageSize;
         Query query = session.createSQLQuery(hql);
         if(query.list().isEmpty()){

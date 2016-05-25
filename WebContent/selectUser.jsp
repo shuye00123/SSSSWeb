@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
@@ -100,11 +101,13 @@
           </tbody>
           </table>
           	<s:url id="url_pre" value="selectUser">  
-         		<s:param name="pageNow" value="pageNow-1"></s:param>  
+         		<s:param name="pageNow" value="pageNow-1"></s:param>
+         		<s:param name="key" value="%{key}"></s:param>  
      		</s:url>  
   
      		<s:url id="url_next" value="selectUser">  
-         		<s:param name="pageNow" value="pageNow+1"></s:param>  
+         		<s:param name="pageNow" value="pageNow+1"></s:param>
+         		<s:param name="key" value="%{key}"></s:param>    
      		</s:url>    
   			
   			<s:if test="%{pageNow!=1}">
@@ -113,11 +116,13 @@
        		<s:else>
        			<s:a href="%{url_pre}" class="btn btn-primary btn-lg disabled" role="button">上一页</s:a>
        		</s:else>
-     		<s:iterator value="list" status="status">
-        	<s:url id="url" value="selectUser">  
-            	<s:param name="pageNow" value="pageNow"/>  
-        	</s:url>  
-     		</s:iterator>  
+     		<s:bean name="org.apache.struts2.util.Counter" id="counter">
+   				<s:param name="first" value="1" />
+   				<s:param name="last" value="%{pageNum}" />
+   				<s:iterator>
+     				<a href="selectUser?pageNow=<s:property/>&key=${key}" class="btn btn-primary btn-lg" role="button"><s:property/></a>
+   				</s:iterator>
+			</s:bean> 
   			<s:if test="%{pageNum>pageNow}">
      			<s:a href="%{url_next}" class="btn btn-primary btn-lg" role="button">下一页</s:a>
      		</s:if>

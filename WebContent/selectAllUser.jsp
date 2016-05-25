@@ -118,11 +118,13 @@
        		<s:else>
        			<s:a href="%{url_pre}" class="btn btn-primary btn-lg disabled" role="button">上一页</s:a>
        		</s:else>
-     		<s:iterator value="list" status="status">
-        	<s:url id="url" value="selectAllUser">  
-            	<s:param name="pageNow" value="pageNow"/>  
-        	</s:url>  
-     		</s:iterator>  
+       		<s:bean name="org.apache.struts2.util.Counter" id="counter">
+   				<s:param name="first" value="1" />
+   				<s:param name="last" value="%{pageNum}" />
+   				<s:iterator>
+     				<a href="selectAllUser?pageNow=<s:property/>" class="btn btn-primary btn-lg" role="button"><s:property/></a>
+   				</s:iterator>
+			</s:bean>
   			<s:if test="%{pageNum>pageNow}">
      			<s:a href="%{url_next}" class="btn btn-primary btn-lg" role="button">下一页</s:a>
      		</s:if>

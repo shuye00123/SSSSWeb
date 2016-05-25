@@ -1,5 +1,6 @@
 package com.SSSSWeb.control;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,11 @@ public class SelectUserAction extends ActionSupport {
     private int pageSize=2;
     private int pageNow=1;
     
-    public int getPageSize() {
+    public void setPageNow(int pageNow) {
+		this.pageNow = pageNow;
+	}
+
+	public int getPageSize() {
         return pageSize;
     }
     
@@ -53,7 +58,8 @@ public class SelectUserAction extends ActionSupport {
     @Override
     public String execute() throws Exception {
         try{
-            list = service.SelectUser(key,pageSize,pageNow);
+        	System.out.println(pageNow);
+        	list = service.SelectUser(key,pageSize,pageNow);
             setPageNum(service.PageNum(pageSize, key));
             return "success";
         }catch(Exception e){

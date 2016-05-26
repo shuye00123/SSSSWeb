@@ -17,16 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         .detial-left {
             height: 350px;
             width: 350px;
-            position:absolute;
             margin: 22px 0 0;
         }
 
         .detial-right {
             height: 400px;
             width: 700px;
-            position:absolute;
-            right: 0;
-            top: 0;
         }
 
         .img {
@@ -61,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 
 		.top1 {
-		margin-top:500px;
+		margin-top:100px;
 		}
 		
 		.size {
@@ -121,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <div class="container top">
-    <div class="detial-left">
+    <div class="detial-left col-md-4">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
 
@@ -172,7 +168,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </a>
 </div>
     </div>
-    <div class="detial-right">
+    <div class="detial-right col-md-7 col-md-offset-1">
     <form action= 'ishopCart' method = "post" id="form">
     <s:set name="c" value="1" />
     <s:iterator value="list" var="u">

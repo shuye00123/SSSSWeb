@@ -14,8 +14,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	<style>
 		.line {
-            margin-top:200px;
+            margin-top:300px;
             line-height:50px;
+            width: 450px;
+            overflow: hidden;
+            padding: 0 25px 15px 25px;
+            background: #444;
+            background: rgba(0, 0, 0, 0.35);
+    -       moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
+            text-align: left;
 		}
 
         .text {
@@ -25,11 +32,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
 
         .btnslide {
-            margin-top:10px;
+            margin:10px 0;
         }
-	
+
+        .form-signin-heading {
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        .actionMessage{
+            color: red;
+        }
 	</style>
-	<s:head/>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -57,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <button type="submit" class="btn btn-danger">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-           	<s:if test="null==#session.customer||#session.customer.isEmpty()||session==null">
+           	<s:if test="#session.customer==null||#session.customer.isEmpty()||#session==null">
            		<li>
                     <a href="login.jsp">登录</a>
                 </li>
@@ -81,18 +95,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <div class="container line">
-    <div class="col-sm-4 col-sm-offset-4">
+    <div >
         <form action="login" method="post" class="form-signin" role="form">
             <h2 class="form-signin-heading">用户登录</h2>
             <s:actionmessage/>
-            <input type="text" class="form-control text" name="customer_no" placeholder="请输入用户名" required autofocus>
-            <input type="password" class="form-control text" name="customer_password" placeholder="请输入密码" required>
+            <s:property value="#session.customer" />
+            <input type="text" class="form-control text" name="customer_no"  autocomplete="off" style="ime-mode:disabled" placeholder="请输入用户名" required autofocus>
+            <input type="password" class="form-control text" name="customer_password"  autocomplete="off" placeholder="请输入密码" required>
             <button class='btn btn-lg btn-primary btn-block' type='submit'>登录</button>
 
         </form>
 
     </div>
-    <div class="col-sm-4 col-sm-offset-4 btnslide">
+    <div class="  btnslide">
         <button class="btn btn-lg btn-default btn-block" data-toggle="modal" data-target="#myMo">注册</button>
         <div class="modal fade" id="myMo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -161,9 +176,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script src="js/jquery-1.12.3.min.js"></script>
 <script src="js/bootstrapValidator.min.js"></script>
+<script src="js/jquery.backstretch.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script >
 $(function(){
+    $.backstretch("image/1.jpg");
+
 	$('#myMo').modal({
  		show: false,
  		backdrop: 'static', 
@@ -241,9 +259,7 @@ $(function(){
         }
     });
 
-   /*  $('#sub').click(function() {
-    $('#defaultForm').bootstrapValidator('validate');
-    }); */
+
 
 
 });

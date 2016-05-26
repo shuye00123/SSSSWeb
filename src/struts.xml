@@ -112,9 +112,7 @@
      		<result name="error">/login.jsp</result>
      	</action>
      	<action name="logout" class="logout">
-     		<result name="success" type="redirectAction">  
-                 <param name="actionName">iCoustomerA</param>
-             </result>  
+     		<result>/login.jsp</result>
      	</action>
      	<action name="eCoustomerA" class="eCoustomerA">
      		<result>/user.jsp</result>

@@ -12,13 +12,28 @@
         .top {
             margin-top: 70px;
         }
-
+        .img {
+            width: 70px;
+            height: 70px;
+        }
 
         .head {
             line-height: 40px;
         }
 
+    .text {
+    width:40px;
+    line-height:25px;
+    text-align: center;
+    }
 
+    .break {
+    word-wrap: break-word;
+    }
+
+    #list a{
+        color: #000;
+    }
     </style>
 </head>
 <body>

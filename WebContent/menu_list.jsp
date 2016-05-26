@@ -125,33 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="container top">
     <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#">综合排序</a></li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                类别<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-                <li role="presentation" ><a href="#">汽车</a></li>
-                <li role="presentation"><a href="#">配件</a></li>
-            </ul>
-        </li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                销量<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-                <li role="presentation" ><a href="#">从高到低</a></li>
-                <li role="presentation"><a href="#">从低到高</a></li>
-            </ul>
-        </li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                价格<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-                <li role="presentation" ><a href="#">从高到低</a></li>
-                <li role="presentation"><a href="#">从低到高</a></li>
-            </ul>
-        </li>
+
     </ul>
 </div>
 <div class="container">

@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
 
         .carousel a:hover {
-        color: gray;
+        color: #f0f0f0;
         text-decoration:none;
         }
 

@@ -36,8 +36,7 @@ public class GoodsDAO {
 		Session session = sf.openSession();
 		String hql="select distinct g.id,g.code,g.chn_name,g.eng_name,g.type,g.color,g.standard,g.displacement,g.place,g.brand,g.provider,g.price,g.text,c.url,s.quantity,sa.num"
 				+ " from GOODS_INF g inner join CAR_IMG_INF c on g.id=c.goods_id inner join STOCK_INF s on g.id=s.goods_id inner join sale sa on g.id=sa.goods_id  "
-				+ " where g.id ="+id+" " 
-				+ " group by g.id ";
+				+ " where g.id ="+id;
 				
 		Query query = session.createSQLQuery(hql);
 		ArrayList resultList = (ArrayList) query.list();

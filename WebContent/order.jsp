@@ -11,8 +11,15 @@
 <style>
 .top {
 	margin-top: 70px;
+	color: #666;
 }
 
+	.top a {
+	color: #666;
+	}
+	.top .btn-success, .top .btn-danger {
+	color: #fff;
+	}
 .img {
 	width: 70px;
 	height: 70px;
@@ -23,7 +30,8 @@
 }
 
 .table-bordered td,.table-bordered th {
-	border: 2px solid #C8F0FF !important;
+	border: 1px solid #eaf8ff !important;
+
 }
 
 
@@ -131,7 +139,7 @@
 												<s:set name="k" value="#u.order_id" />
 												<s:if test="#z.order_id ==#u.order_id ">
 													<s:if test="#j!=#k">
-														<tr style="background-color: #C8F0FF">
+														<tr style="background-color: #eaf8ff">
 															<th width="60px"><s:if
 																	test='#z.order_state == "待发货"'>
 																	<s:date name="#u.order_time" format="yyyy/MM/dd hh:mm" />
@@ -168,12 +176,12 @@
 															<s:if test='#z.order_state == "待发货"'>
 																<td rowspan="<s:property value="#z.count" />"><a
 																	href="rOrdersA?order_id=<s:property value="#u.order_id" />"
-																	class="btn btn-primary">取消订单</a></td>
+																	class="btn btn-danger">取消订单</a></td>
 															</s:if>
 															<s:elseif test='#z.order_state == "已发货"'>
 																<td rowspan="<s:property value="#z.count" />"><a
 																	href="suOrdersA?order_id=<s:property value="#u.order_id" />"
-																	class="btn btn-primary">确认收货</a></td>
+																	class="btn btn-success">确认收货</a></td>
 															</s:elseif>
 															<s:elseif test='#z.order_state == "交易成功"'>
 																<td rowspan="<s:property value="#z.count" />">交易成功</td>
@@ -243,7 +251,7 @@
 													<s:set name="k" value="#u.order_id" />
 													<s:if test="#z.order_id ==#u.order_id ">
 														<s:if test="#j!=#k">
-															<tr style="background-color: #C8F0FF">
+															<tr style="background-color: #eaf8ff">
 																<th width="60px"><s:date name="#u.order_time"
 																		format="yyyy/MM/dd hh:mm" /></th>
 																<th width="250px">订单号:<s:property
@@ -271,7 +279,7 @@
 																		value="#z.order_state" /></td>
 																<td rowspan="<s:property value="#z.count" />"><a
 																	href="rOrdersA?order_id=<s:property value="#u.order_id" />"
-																	class="btn btn-primary">取消订单</a></td>
+																	class="btn btn-danger">取消订单</a></td>
 
 															</tr>
 														</s:if>
@@ -335,7 +343,7 @@
 													<s:set name="k" value="#u.order_id" />
 													<s:if test="#z.order_id ==#u.order_id ">
 														<s:if test="#j!=#k">
-															<tr style="background-color: #C8F0FF">
+															<tr style="background-color: #eaf8ff">
 																<th width="60px"><s:date name="#u.send_time"
 																		format="yyyy/MM/dd hh:mm" /></th>
 																<th width="250px">订单号:<s:property
@@ -363,7 +371,7 @@
 
 																<td rowspan="<s:property value="#z.count" />"><a
 																	href="suOrdersA?order_id=<s:property value="#u.order_id" />"
-																	class="btn btn-primary">确认收货</a></td>
+																	class="btn btn-success">确认收货</a></td>
 
 															</tr>
 														</s:if>
@@ -428,7 +436,7 @@
 													<s:set name="k" value="#u.order_id" />
 													<s:if test="#z.order_id ==#u.order_id ">
 														<s:if test="#j!=#k">
-															<tr style="background-color: #C8F0FF">
+															<tr style="background-color: #eaf8ff">
 																<th width="60px"><s:date name="#u.settle_time"
 																		format="yyyy/MM/dd hh:mm" /></th>
 																<th width="250px">订单号:<s:property
@@ -522,7 +530,7 @@
 
 
 														<s:if test="#j!=#k">
-															<tr style="background-color: #C8F0FF">
+															<tr style="background-color: #eaf8ff">
 																<th width="60px"><s:date name="#u.settle_time"
 																		format="yyyy/MM/dd hh:mm" /></th>
 																<th width="250px">订单号:<s:property
@@ -585,6 +593,12 @@
 				</div>
 			</div>
 		</div>
+		<hr style="margin: 20px 0;">
+		<footer style="margin: 20px 0;">
+        <p class="pull-right"><a href="#top">回到顶部</a></p>
+
+        <p>&copy; 汽车4S店系统</p>
+        </footer>
 	</div>
 
 

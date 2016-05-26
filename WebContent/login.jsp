@@ -14,8 +14,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	<style>
 		.line {
-            margin-top:200px;
+            margin-top:300px;
             line-height:50px;
+            width: 450px;
+            overflow: hidden;
+            padding: 0 25px 15px 25px;
+            background: #444;
+            background: rgba(0, 0, 0, 0.35);
+    -       moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
+            text-align: left;
 		}
 
         .text {
@@ -25,9 +32,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
 
         .btnslide {
-            margin-top:10px;
+            margin:10px 0;
         }
-	
+
+        .form-signin-heading {
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        .actionMessage{
+            color: red;
+        }
 	</style>
 </head>
 <body>
@@ -53,12 +68,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="form-group">
                     <input type="text" class="form-control" name="chn_name" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">搜索</button>
+                <button type="submit" class="btn btn-danger">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-           	<s:if test="null==#session.customer||#session.customer.isEmpty()||session==null">
+           	<s:if test="#session.customer==null||#session.customer.isEmpty()||#session==null">
            		<li>
-           		<% System.out.println(session);%>
                     <a href="login.jsp">登录</a>
                 </li>
                 </s:if>
@@ -67,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="shoppingcar.jsp"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
                         <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
                         <li class="divider"></li>
                         <li><a href="logout">退出</a></li>
@@ -81,17 +95,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <div class="container line">
-    <div class="col-sm-4 col-sm-offset-4">
+    <div >
         <form action="login" method="post" class="form-signin" role="form">
             <h2 class="form-signin-heading">用户登录</h2>
-            <input type="text" class="form-control text" name="customer_no" placeholder="请输入用户名" required autofocus>
-            <input type="password" class="form-control text" name="customer_password" placeholder="请输入密码" required>
+            <s:actionmessage/>
+            <s:property value="#session.customer" />
+            <input type="text" class="form-control text" name="customer_no"  autocomplete="off" style="ime-mode:disabled" placeholder="请输入用户名" required autofocus>
+            <input type="password" class="form-control text" name="customer_password"  autocomplete="off" placeholder="请输入密码" required>
             <button class='btn btn-lg btn-primary btn-block' type='submit'>登录</button>
 
         </form>
 
     </div>
-    <div class="col-sm-4 col-sm-offset-4 btnslide">
+    <div class="  btnslide">
         <button class="btn btn-lg btn-default btn-block" data-toggle="modal" data-target="#myMo">注册</button>
         <div class="modal fade" id="myMo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -100,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">注册</h4>
                     </div>
-                    <form action="iCoustomerA" method="post">
+                    <form id="defaultForm" action="iCoustomerA" method="post">
                     <div class="modal-body">
                         
                             <input type="hidden" value="111"/>
@@ -147,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary">注册</button>
+                        <button type="submit"  id="sub" class="btn btn-primary">注册</button>
                     </div>
                     </form>
                 </div>
@@ -159,10 +175,93 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <script src="js/jquery-1.12.3.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
+<script src="js/bootstrapValidator.min.js"></script>
+<script src="js/jquery.backstretch.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script >
 $(function(){
+    $.backstretch("image/1.jpg");
+
+	$('#myMo').modal({
+ 		show: false,
+ 		backdrop: 'static', 
+ 		keyboard: false
+ 	});
+
+
+    $('#defaultForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	customer_no: {
+                validators: {
+                    notEmpty: {
+                        message: '此字段不能为空'
+                    },
+                    stringLength: {
+                        min: 4,
+                        max: 30,
+                        message: '用户名最少4位，最大30为'
+                    }
+                }
+            },
+            customer_password : {
+                validators: {
+                    notEmpty: {
+                        message: '此字段不能为空'
+                    },
+                    stringLength: {
+                        min: 4,
+                        max: 30,
+                        message: '密码最少4位，最大30位'
+                    }
+                }
+            },
+            customer_name : {
+                validators: {
+                    notEmpty: {
+                        message: '此字段不能为空'
+                    }
+                }
+            },
+            job : {
+                validators: {
+                    notEmpty: {
+                        message: '此字段不能为空'
+                    }
+                }
+            },
+            tel : {
+                validators: {
+                    notEmpty: {
+                        message: '此字段不能为空'
+                    }
+                }
+            },
+            addr : {
+                validators: {
+                    notEmpty: {
+                        message: '此字段不能为空'
+                    }
+                }
+            },
+            idcard : {
+                validators: {
+                    notEmpty: {
+                        message: '此字段不能为空'
+                    }
+                }
+            }
+        }
+    });
+
+
+
+
 });
 </script>
 </body>

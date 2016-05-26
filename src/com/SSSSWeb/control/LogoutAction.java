@@ -40,7 +40,7 @@ public class LogoutAction  extends ActionSupport implements SessionAware{
 	public String execute() throws Exception {
 		 HttpServletRequest request = ServletActionContext.getRequest();
 	     HttpSession session = request.getSession();
-	     session.invalidate();
+	     session.removeAttribute("customer");  
 		return "success";
 	}
 	

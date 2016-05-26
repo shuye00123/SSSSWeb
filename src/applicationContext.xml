@@ -31,6 +31,8 @@
         		<value>com.SSSSWeb.model.domain.Orders_List</value>
         		<value>com.SSSSWeb.model.domain.Orders_Count</value>
         		<value>com.SSSSWeb.model.domain.Orders_Info</value>
+        		<value>com.SSSSWeb.model.domain.Sale</value>
+        		<value>com.SSSSWeb.model.domain.News</value>
     		</list>
   		</property>
   		
@@ -173,8 +175,21 @@
 	<bean id="sCoustomerA" class="com.SSSSWeb.control.CustomerChangePswAction">
 		<property name="cs" ref="customerService"></property>
 	</bean>
+	<bean id="sACoustomerA" class="com.SSSSWeb.control.SelectCustomerAction">
+		<property name="cs" ref="customerService"></property>
+	</bean>
 	
 	
+	<!-- News -->
+	<bean id="newsDAO" class="com.SSSSWeb.model.business.dao.NewsDAO">
+		<property name="sf" ref="sessionFactory"></property>
+	</bean>
+	<bean id="newsService" class="com.SSSSWeb.model.business.service.NewsService">
+		<property name="newsDAO" ref="newsDAO"></property>
+	</bean>
+	<bean id="sNewsA" class="com.SSSSWeb.control.SelectNewsAction">
+		<property name="ns" ref="newsService"></property>
+	</bean>
 	
 	
 	

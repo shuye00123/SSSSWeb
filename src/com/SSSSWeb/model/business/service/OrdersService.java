@@ -133,8 +133,8 @@ public class OrdersService {
 	}
 
 	@Transactional
-	public void DeleteShopCart(int order_id) {
-		ordersDAO.DeleteShopCart(order_id);
+	public void DeleteShopCart(int id) {
+		ordersDAO.DeleteShopCart(id);
 	}
 
 	

@@ -22,12 +22,10 @@ public class GoodsDAO {
 	public  ArrayList<GoodsDetial>  SelectGoods(String chn_name) {
 		Session session = sf.openSession();
 		String hql="select g.id,g.code,g.chn_name,g.eng_name,g.type,g.color,g.standard,g.displacement,g.place,g.brand,g.provider,g.price,g.text,c.url,s.quantity,sa.num"
-				+ " from GOODS_INF g,CAR_IMG_INF c,STOCK_INF s,sale sa  "
-				+ " where g.chn_name like '%"+chn_name+"%'"
+				+ " from  GOODS_INF g inner join CAR_IMG_INF c on g.id=c.goods_id inner join STOCK_INF s on g.id=s.goods_id inner join sale sa on g.id=sa.goods_id  "
+				+ " where g.chn_name like '%"+chn_name+"%' or eng_name like '%"+chn_name+"%' or code like '%"+chn_name+"%' "
 				+ " and c.level=1 "
-				+ " and g.id=c.goods_ID "
-				+ " and g.id=sa.goods_ID "
-				+ " and g.id=s.goods_ID ";
+				+ " group by g.id ";
 		Query query = session.createSQLQuery(hql);
 		ArrayList resultList = (ArrayList) query.list();
 		session.close();
@@ -36,12 +34,10 @@ public class GoodsDAO {
 
 	public ArrayList<GoodsDetial> SelectDetialGoods(int id) {
 		Session session = sf.openSession();
-		String hql="select g.id,g.code,g.chn_name,g.eng_name,g.type,g.color,g.standard,g.displacement,g.place,g.brand,g.provider,g.price,g.text,c.url,s.quantity,sa.num"
-				+ " from GOODS_INF g,CAR_IMG_INF c,STOCK_INF s,sale sa  "
-				+ " where g.id ="+id+" " 
-				+ " and g.id=c.goods_ID "
-				+ " and g.id=sa.goods_ID "
-				+ " and g.id=s.goods_ID ";
+		String hql="select distinct g.id,g.code,g.chn_name,g.eng_name,g.type,g.color,g.standard,g.displacement,g.place,g.brand,g.provider,g.price,g.text,c.url,s.quantity,sa.num"
+				+ " from GOODS_INF g inner join CAR_IMG_INF c on g.id=c.goods_id inner join STOCK_INF s on g.id=s.goods_id inner join sale sa on g.id=sa.goods_id  "
+				+ " where g.id ="+id;
+				
 		Query query = session.createSQLQuery(hql);
 		ArrayList resultList = (ArrayList) query.list();
 		session.close();

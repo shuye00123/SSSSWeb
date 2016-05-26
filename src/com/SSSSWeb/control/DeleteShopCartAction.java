@@ -5,7 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class DeleteShopCartAction  extends ActionSupport{
 	private OrdersService os;
-	private int order_id;
+	private int id;
 	
 	
 	public OrdersService getOs() {
@@ -18,19 +18,20 @@ public class DeleteShopCartAction  extends ActionSupport{
 	}
 
 
-	public int getOrder_id() {
-		return order_id;
+
+	public int getId() {
+		return id;
 	}
 
 
-	public void setOrder_id(int order_id) {
-		this.order_id = order_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
 	@Override
 	public String execute() throws Exception {
-		os.DeleteShopCart(order_id);
+		os.DeleteShopCart(id);
 		return "success";
 	}
 }

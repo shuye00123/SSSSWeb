@@ -43,14 +43,14 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="chn_name" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">搜索</button>
+                <button type="submit" class="btn btn-danger">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="shoppingcar.jsp"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
                         <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
                         <li class="divider"></li>
                         <li><a href="logout">退出</a></li>
@@ -64,44 +64,48 @@
     <div class="row">
 <div class="list-group col-md-2">
             <a href="user.jsp" class="list-group-item active"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人信息</a>
-            <a href="sshopCart" class="list-group-item"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
+            <a href="shoppingcar.jsp" class="list-group-item"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a>
             <a href="sOrdersA" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a>
         </div>
-        <div class="col-md-10 line">
-            <div class="row">
-                <div class="col-md-2 text-right">用户名:</div>
-                <div class="col-md-9"><s:property value="#session.customer.customer_no " /></div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 text-right">姓名:</div>
-                <div class="col-md-9"><s:property value="#session.customer.customer_name " /></div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 text-right">性别:</div>
-                <div class="col-md-9"><s:property value="#session.customer.sex " /></div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 text-right">职业:</div>
-                <div class="col-md-9"><s:property value="#session.customer.job " /></div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 text-right">联系电话:</div>
-                <div class="col-md-9"><s:property value="#session.customer.tel " /></div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 text-right">联系地址:</div>
-                <div class="col-md-9"><s:property value="#session.customer.addr " /></div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 text-right">身份证:</div>
-                <div class="col-md-9"><s:property value="#session.customer.idcard  " /></div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 text-right">备注:</div>
-                <div class="col-md-9"><s:property value="#session.customer.remark " /></div>
-            </div>
+        <div class="col-md-8 line">
+            <h4><b>基本资料</b></h4>
+            <hr class="feature-divider">
+            <table class="table table-hover">
+            <tr>
+                <td class="col-md-4">用户名:</td>
+                <td class="col-md-8"><s:property value="#session.customer.customer_no " /></td>
+            </tr>
+            <tr >
+                <td class="col-md-4">姓名:</td>
+                <td class="col-md-8"><s:property value="#session.customer.customer_name " /></td>
+            </tr>
+            <tr>
+                <td class="col-md-4 ">性别:</td>
+                <td class="col-md-8"><s:property value="#session.customer.sex " /></td>
+            </tr>
+            <tr >
+                <td class="col-md-4">职业:</td>
+                <td class="col-md-8"><s:property value="#session.customer.job " /></td>
+            </tr>
+            <tr >
+                <td class="col-md-4 ">联系电话:</td>
+                <td class="col-md-8"><s:property value="#session.customer.tel " /></td>
+            </tr>
+            <tr>
+                <td class="col-md-4 ">联系地址:</td>
+                <td class="col-md-8"><s:property value="#session.customer.addr " /></td>
+            </tr>
+            <tr >
+                <td class="col-md-4 ">身份证:</td>
+                <td class="col-md-8"><s:property value="#session.customer.idcard  " /></td>
+            </tr>
+            <tr >
+                <td class="col-md-4 ">备注:</td>
+                <td class="col-md-8"><s:property value="#session.customer.remark " /></td>
+            </tr>
+            </table>
             <div class="row top">
-                <div class="col-md-2"><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal">编辑</a></div>
+                <div class="col-md-2"><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#myModal">编辑</a></div>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -159,8 +163,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-10"><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal1">修改密码</a></div>
-                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="col-md-10"><a href="#" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">修改密码</a></div>
+                <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -170,16 +174,12 @@
                             <form method="post" action="cPswA">
                             <div class="modal-body">
                                     <div class="form-group">
-                                        <label>原密码:</label>
-                                        <input type="password" class="form-control" name="passwordold" placeholder="原密码">
+                                        <label>新密码:</label>
+                                        <input type="password" class="form-control" required name="passwordnew" placeholder="新密码">
                                     </div>
                                     <div class="form-group">
                                         <label>新密码:</label>
-                                        <input type="password" class="form-control" name="passwordnew" placeholder="新密码">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>新密码:</label>
-                                        <input type="password" class="form-control" name="repasswordnew" placeholder="确认新密码">
+                                        <input type="password" class="form-control" required name="repasswordnew" placeholder="确认新密码">
                                     </div>
                                     
 
@@ -201,44 +201,22 @@
 
 
 <script src="js/jquery-1.12.3.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
+<script src="js/bootstrapValidator.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
      $(function(){
-        $("#myModal1").validate({
-            rules:{
-                passwordold: {
-                    required: true,
-                    minlength: 2,
-                    maxlength: 20
-                },
-                passwordnew: {
-                    required: true,
-                    minlength: 2,
-                    maxlength: 20
-                },
-                repasswordnew: {
-                    required: true,
-                    equalTo: "#passwordnew"
-                }
-            },
-            messages:{
-                passwordold:{
-                    required: "密码不能为空",
-                    minlength: "密码最小长度为2",
-                    maxlength: "密码最大长度为20"
-                },
-                passwordnew: {
-                    required: "新密码不能为空",
-                    minlength: "新密码最小长度为2",
-                    maxlength: "新密码最大长度为20"
-                },
-                repasswordnew: {
-                    required: "确认新密码不能为空",
-                    equalTo: "两次新密码输入不一致"
-                }
-            }
-        });
+    	 $('#myModal').modal({
+    	 		show: false,
+    	 		backdrop: 'static', 
+    	 		keyboard: false
+    	 	});
+    	 $('.bs-example-modal-sm').modal({
+ 	 		show: false,
+ 	 		backdrop: 'static', 
+ 	 		keyboard: false
+ 	 	});
+
+
 
     });  
 </script>

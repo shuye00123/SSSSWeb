@@ -29,7 +29,11 @@ public class InsertCustomerAction extends ActionSupport implements ModelDriven<C
 	@Override
 	public String execute() throws Exception {
 		if(customer.getCustomer_no()!=null){
-			cs.InsertCustomer(customer);
+			Boolean b = cs.InsertCustomer(customer);
+			if(!b){
+				addActionMessage("注册失败用户名已存在！！");
+				return "error";
+			}
 		}
 		
 		return "success";

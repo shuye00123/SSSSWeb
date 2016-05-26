@@ -13,42 +13,12 @@
             margin-top: 70px;
         }
 
-        .img {
-            width: 70px;
-            height: 70px;
-        }
-
-        .text {
-            width:40px;
-            line-height:25px;
-            text-align: center;
-        }
-
-        .break {
-            word-wrap: break-word;
-        }
-
-        .center {
-            width: 100%;
-            height: 90px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #fcfcfc;
-            margin:10px 0;
-        }
 
         .head {
             line-height: 40px;
         }
 
-        .list {
-            float:left;
-            padding-left: 10px;
-        }
 
-        .check {
-            padding-left: 40px;
-        }
     </style>
 </head>
 <body>
@@ -74,7 +44,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="chn_name" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">搜索</button>
+                <button type="submit" class="btn btn-danger">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -99,6 +69,8 @@
             <a href="sOrdersA" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a>
         </div>
         <div class="col-md-10">
+            <h3><b>全部商品</b></h3>
+            <hr class="feature-divider">
             <table class="table table-hover">
                <thead>
                <tr>
@@ -124,6 +96,8 @@
         <a href="#" class="btn btn-danger pull-right" id="submit">结算</a>
     </ul>
 </div>
+
+
 <script src="js/jquery-1.12.3.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

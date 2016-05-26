@@ -12,7 +12,30 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SelectCustomerAction extends ActionSupport{
 	private CustomerService cs;
 	private List list;
+	private int pagecount;
+	private int page;
+
 	
+
+
+	public int getPage() {
+		return page;
+	}
+
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+
+	public int getPagecount() {
+		return pagecount;
+	}
+
+
+	public void setPagecount(int pagecount) {
+		this.pagecount = pagecount;
+	}
 
 
 	public List getList() {
@@ -33,7 +56,15 @@ public class SelectCustomerAction extends ActionSupport{
 	@Override
 	public String execute() throws Exception {
 		HttpServletResponse hsr = ServletActionContext.getResponse();
-		list = cs.SelectCustomer();
+		int i=1;
+		int count = cs.selectCount();  
+		if(count%i==0){
+			pagecount = count/i;
+		}else{
+			pagecount = count/i + 1;
+		}
+		
+		list = cs.SelectCustomer(page,i);
 		hsr.setCharacterEncoding("UTF-8");
         hsr.getWriter().write("");
 		return "success";

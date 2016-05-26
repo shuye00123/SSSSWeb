@@ -21,6 +21,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	font-size : 20px;
             padding-top: 10px;
         }
+        
+        .img3 {
+        	 width: 15px;
+            height: 15px;
+        }
     </style>
 </head>
 
@@ -43,7 +48,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
 </table>
 
+<div class="container">
+<div class="col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-5" id="page">
 
+
+</div>
 
 
 
@@ -60,6 +69,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			dataType:'json', 
    			success:function(data){ 
    		 	var json = eval(data);
+   		 var first,end;
+		 	if(json.page==0){
+			 	fnext=0
+		 	}else{
+				fnext=json.page-1;
+		 	}
+			if(json.page==(json.pagecount-1)){
+				enext=json.page;
+		 	}else{
+				enext=json.page+1;
+		 	}
+		 var aim = json.page+1;
+		 var end = json.pagecount-1;
+			 
+		$("#page").append('<a href="sACA?page=0" ><img class="img3" src="image/111.png" ></a> &nbsp;'+
+		'<a href="sACA?page='+fnext+'" ><img class="img3" src="image/112.png" ></a> &nbsp;'+
+		'第'+aim+'页'+
+		'&nbsp;|&nbsp;'+
+		'共'+json.pagecount+'页 &nbsp;'+
+		'<a href="sACA?page='+enext+'" ><img class="img3" src="image/113.png" ></a> &nbsp;'+
+		'<a href="sACA?page='+end+'" ><img class="img3" src="image/114.png" ></a>');
    			 $.each(json, function (i) {  
              	$.each(json[i], function (j) {  
              		var customer_no = json[i][j].customer_no;  

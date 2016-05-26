@@ -13,8 +13,18 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SelectSupplierAction extends ActionSupport{
 	private SupplierService sp;
 	private List list;
+	private int pagecount;
+	private int page;
 
-	
+
+	public int getPagecount() {
+		return pagecount;
+	}
+
+
+	public void setPagecount(int pagecount) {
+		this.pagecount = pagecount;
+	}
 
 
 	public void setSp(SupplierService sp) {
@@ -32,10 +42,32 @@ public class SelectSupplierAction extends ActionSupport{
 	}
 
 
+	
+
+
+	public int getPage() {
+		return page;
+	}
+
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+
 	@Override
 	public String execute() throws Exception {
 		HttpServletResponse hsr = ServletActionContext.getResponse();
-		list = sp.SelectSupplier();
+		int i=1;
+		int count = sp.selectCount();
+		if(count%i==0){
+			pagecount = count/i;
+		}else{
+			pagecount = count/i + 1;
+		}
+		
+		
+		list = sp.SelectSupplier(page,i);
 		hsr.setCharacterEncoding("UTF-8");
         hsr.getWriter().write("");
 		return "success";

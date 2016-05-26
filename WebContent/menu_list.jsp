@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="form-group">
 			<input type="text" class="form-control" name="chn_name" placeholder="Search">
           </div>
-          <button type="submit" class="btn btn-default">搜索</button>
+          <button type="submit" class="btn btn-danger">搜索</button>
         </form>
       <ul class="nav navbar-nav navbar-right">
        <s:if test="null==#session.customer||#session.customer.isEmpty()">
@@ -164,11 +164,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </s:iterator>
 
 
-    
-
+   
 </div>
 
+<div class="container">
+<hr style="margin: 20px 0;">
+		<footer style="margin: 20px 0;">
+        <p class="pull-right"><a href="#top">回到顶部</a></p>
 
+        <p>&copy; 汽车4S店系统</p>
+        </footer>
+        </div>
 
 
 <script src="js/jquery-1.12.3.min.js"></script>

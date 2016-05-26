@@ -29,8 +29,8 @@ public class SupplierService {
 
 
 	@Transactional
-	public ArrayList<Supplier> SelectSupplier() {
-		ArrayList su=supplierDAO.SelectSupplier();
+	public ArrayList<Supplier> SelectSupplier(int page, int a) {
+		ArrayList su=supplierDAO.SelectSupplier(page,a);
 		ArrayList reslist = new ArrayList();
 		for(int i=0;i<su.size();i++){
 			
@@ -65,6 +65,12 @@ public class SupplierService {
 	public void InsertSupplier(Supplier supplier) {
 		supplierDAO.InsertSupplier(supplier);
 		
+	}
+
+
+	public int selectCount() {
+		int count = supplierDAO.selectCount();
+		return count;
 	}
 
 

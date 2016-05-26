@@ -21,8 +21,9 @@ public class CustomerService {
 		this.customerDAO = customerDAO;
 	}
 	@Transactional
-	public void InsertCustomer(Customer customer) {
-		customerDAO.InsertCustomer(customer);
+	public Boolean InsertCustomer(Customer customer) {
+		Boolean b = customerDAO.InsertCustomer(customer);
+		return b;
 	}
 
 	
@@ -43,8 +44,8 @@ public class CustomerService {
 	}
 
 	@Transactional
-	public List<Customer> SelectCustomer() {
-		ArrayList list=customerDAO.SelectCustomer();
+	public List<Customer> SelectCustomer(int page, int a) {
+		ArrayList list=customerDAO.SelectCustomer(page,a);
 		ArrayList reslist = new ArrayList();
  		for(int i=0;i<list.size();i++){
  			Object[] obj = (Object[]) list.get(i);
@@ -63,6 +64,11 @@ public class CustomerService {
 			
 		}
 		return reslist;	
+	}
+
+	public int selectCount() {
+		int count = customerDAO.selectCount();
+		return count;
 	}
 
 	

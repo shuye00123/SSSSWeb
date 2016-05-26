@@ -22,6 +22,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             width: 20px;
             height: 20px;
         }
+        
+        .img3 {
+        	 width: 15px;
+            height: 15px;
+        }
 
         .head {
             width:100%;
@@ -151,10 +156,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
 </div>
+<div class="container">
+<div class="col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-5" id="page">
 
+
+</div>
 
 <script src="js/jquery-1.12.3.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
+<script src="js/bootstrapValidator.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
 
@@ -175,6 +184,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			dataType:'json', 
    			success:function(data){ 
    		 	var json = eval(data);
+   		 	var first,end;
+   		 	if(json.page==0){
+   			 	fnext=0
+   		 	}else{
+   				fnext=json.page-1;
+   		 	}
+   			if(json.page==(json.pagecount-1)){
+  				enext=json.page;
+  		 	}else{
+  				enext=json.page+1;
+  		 	}
+   		 var aim = json.page+1;
+   		 var end = json.pagecount-1;
+   			 
+   		$("#page").append('<a href="ssupplierA?page=0" ><img class="img3" src="image/111.png" ></a> &nbsp;'+
+   		'<a href="ssupplierA?page='+fnext+'" ><img class="img3" src="image/112.png" ></a> &nbsp;'+
+   		'第'+aim+'页'+
+   		'&nbsp;|&nbsp;'+
+   		'共'+json.pagecount+'页 &nbsp;'+
+   		'<a href="ssupplierA?page='+enext+'" ><img class="img3" src="image/113.png" ></a> &nbsp;'+
+   		'<a href="ssupplierA?page='+end+'" ><img class="img3" src="image/114.png" ></a>');
    			 $.each(json, function (i) {  
              	$.each(json[i], function (j) {  
              		var supplier_id = json[i][j].supplier_id;  

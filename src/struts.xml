@@ -50,7 +50,10 @@
      		<result name="success">/main.jsp</result>
      	</action>
      	
-        <!-- Supplier -->
+        <!-- Supplier --> 
+        <action name="ssupplierA" class="ssA">
+     		<result>/supplier.jsp</result>
+     	</action> 
      	<action name="siA" class="siA">
      		<result>/supplier.jsp</result>
      	</action> 
@@ -97,11 +100,16 @@
      	
      	
      	<!-- Customer -->
+     	<action name="sACA" class="sACoustomerA">
+     		<result>/customer.jsp</result>
+     	</action>
      	<action name="iCoustomerA" class="iCoustomerA">
-     		<result>/login.jsp</result>
+     		<result name="success">/login.jsp</result>
+     		<result name="error">/login.jsp</result>
      	</action>
      	<action name="login" class="login">
      		<result>/buy.jsp</result>
+     		<result name="error">/login.jsp</result>
      	</action>
      	<action name="logout" class="logout">
      		<result name="success" type="redirectAction">  
@@ -125,7 +133,7 @@
    <!--  json -->
     <package name="ajax_json" extends="json-default">
     
-    	 <action name="ssA" class="ssA">
+    	<action name="ssA" class="ssA">
      		<result name="success" type="json"/>
      	</action> 
      	

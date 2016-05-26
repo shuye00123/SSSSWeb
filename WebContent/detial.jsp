@@ -94,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="form-group">
 			<input type="text" class="form-control" name="chn_name" placeholder="Search">
           </div>
-          <button type="submit" class="btn btn-default">搜索</button>
+          <button type="submit" class="btn btn-danger">搜索</button>
         </form>
       <ul class="nav navbar-nav navbar-right">
         <s:if test="null==#session.customer||#session.customer.isEmpty()">
@@ -240,10 +240,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <p class="col-md-2">种类:</p> <p class="col-md-3"><s:if test="#u.type==1">车辆</s:if><s:else>配件</s:else></p>
                 <p class="col-md-2">排量:</p> <p class="col-md-3"><s:property value="#u.displacement"/></p>
                 </div>
-                <div class="row">
-                <p class="col-md-2">供应商:</p> <p class="col-md-3"><s:property value="#u.provider"/></p>
-                <p class="col-md-2"></p> <p class="col-md-3"></p>
-                </div>
+                
                 <div class="divider"></div>
             </s:if>
             <s:set name="d" value="#d+1" />
@@ -252,7 +249,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <s:iterator value="list" var="u">
         	<img class="img2" src="<s:property value="#u.img"/>" ><!-- file:///<s:property value="#u.img"/> -->
         </s:iterator>
-        
+        <hr style="margin: 20px 0;">
+		<footer style="margin: 20px 0;">
+        <p class="pull-right"><a href="#top">回到顶部</a></p>
+
+        <p>&copy; 汽车4S店系统</p>
+        </footer>
 </div>
 
 

@@ -22,7 +22,7 @@
 		</default-interceptor-ref> -->
 		<global-results>
 			<result name="failure">/main.jsp</result>
-			<!-- <result name="input">/signin.jsp</result> -->
+			<result name="input">/signin.jsp</result>
 		</global-results>
      	
      	<action name="signin" class="SignInAction">
@@ -38,13 +38,13 @@
      		<result name="success">/selectUser.jsp</result>
      	</action>
         <action name="changeUser" class="ChangeUserAction">
-     		<result name="success">/selectAllUser.jsp</result>
+     		<result type="chain" name="success">selectAllUser</result>
      	</action>
      	<action name="changePsw" class="ChangePswAction">
      		<result name="success">/main.jsp</result>
      	</action>
      	<action name="deleteUser" class="DeleteUserAction">
-     		<result name="success">/main.jsp</result>
+     		<result type="chain" name="success">selectAllUser</result>
      	</action>
      	<action name="addUser" class="AddUserAction">
      		<result name="success">/main.jsp</result>

@@ -9,14 +9,5 @@ README
 * Hibernate5.0.1<br>
 jar包可以再/webcontent/WEB-INF/lib里找到
 
-###MySQL库结构
-```sql
-create table users (
-userid int(6) not null auto_increment,
-username varchar(8),
-password varchar(10),
-usex varchar(2),
-post varchar(12),
-primary key (userid)
-);
-```
+###注意事项
+* eclipse中Tomcat的server.xml找到connector 加上useBodyEncodingForURI="true"

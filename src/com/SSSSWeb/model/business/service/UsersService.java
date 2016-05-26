@@ -6,6 +6,8 @@ package com.SSSSWeb.model.business.service;
 
 import java.util.ArrayList;
 
+import com.shuye.mdp.md4p;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.SSSSWeb.model.business.dao.UsersDAO;
@@ -19,7 +21,6 @@ import com.SSSSWeb.model.domain.Users;
  */
 public class UsersService {
     private UsersDAO usersDAO;
-
     public UsersDAO getUsersDAO() {
         return usersDAO;
     }
@@ -31,6 +32,7 @@ public class UsersService {
     @Transactional
     public int insertUser(Users user) {
         int i;
+        user.setPassword(md4p.p2md(user.getPassword()));
         i=usersDAO.insertUser(user);
         return i;
     }
@@ -41,12 +43,15 @@ public class UsersService {
     }
     @Transactional
     public Users checkUser(Users user) {
+    	user.setPassword(md4p.p2md(user.getPassword()));
         user=usersDAO.CheckUser(user);
         return user;
     }
     @Transactional
-    public void ChangePsw(Users user, String newpassword) {
-        usersDAO.ChangePsw(user, newpassword);
+    public void ChangePsw(Users user, String password) {
+        password=md4p.p2md(password);
+        System.out.println(user.getPassword());
+    	usersDAO.ChangePsw(user, password);
         
     }
     @Transactional

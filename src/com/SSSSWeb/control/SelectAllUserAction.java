@@ -2,6 +2,10 @@ package com.SSSSWeb.control;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.SSSSWeb.model.business.service.UsersService;
 import com.SSSSWeb.model.domain.Users;
 import com.opensymphony.xwork2.ActionSupport;
@@ -46,17 +50,17 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
     @Override
     public String execute() throws Exception {
         String value = null;
-        //try{
+        try{
             list = service.SelectAllUser(pageSize, pageNow);
             pageNum = service.PageNum(pageSize, value);
             postlist = service.postList();
             return "success";
-        /*}catch(Exception e){
+        }catch(Exception e){
             HttpServletRequest request=ServletActionContext.getRequest();
             System.out.println(e.toString());
             request.setAttribute("Message", e.toString());
         }
-        return "failure";*/
+        return "failure";
     }
 	public Users getModel(){
         return user;

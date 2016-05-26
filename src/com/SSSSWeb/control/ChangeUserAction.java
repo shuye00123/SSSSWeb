@@ -43,12 +43,7 @@ public class ChangeUserAction extends ActionSupport implements SessionAware{
     public void setUserid(int userid) {
         this.userid = userid;
     }
-    public Users getUser() {
-        return user;
-    }
-    public void setUser(Users user) {
-        this.user = user;
-    }
+    
     public String getUsername() {
         return username;
     }

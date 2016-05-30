@@ -6,7 +6,12 @@ package com.SSSSWeb.interceptor;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.SSSSWeb.control.SignInAction;
+import com.SSSSWeb.model.domain.Users;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
@@ -21,7 +26,7 @@ public class CheckPrivilegeInterceptor extends AbstractInterceptor {
     private static final long serialVersionUID = 191080623183896676L;
    
     public String intercept(ActionInvocation invocation) throws Exception{
-        System.out.println("intercetor test!");
+        System.out.println("intercetor!");
         
         Object action = invocation.getAction();
         if(action instanceof SignInAction){
@@ -31,6 +36,10 @@ public class CheckPrivilegeInterceptor extends AbstractInterceptor {
         Map session = ac.getSession();
         if(session.get("user") == null){
         	return "input";
+        }else{
+        	if(((Users)session.get("user")).getPost()!="管理员"){
+                return "input";
+        	}
         }
         return invocation.invoke();
     }

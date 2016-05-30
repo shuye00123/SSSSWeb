@@ -50,10 +50,12 @@ public class SignInAction extends ActionSupport implements SessionAware, ModelDr
     	Users u = service.checkUser(user);
         if (u !=null) {
             session.put("user", u);
+           
             return "success";
         }else{
             HttpServletRequest request=ServletActionContext.getRequest();
             request.setAttribute("Message", "false");
+            
         }
         return "input"; 
     }

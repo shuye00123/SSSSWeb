@@ -10,6 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+
+
+
 /**
  * 
  * @author sy25471
@@ -17,8 +23,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="users")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Users {
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int userid;
     private String username;
     private String password;

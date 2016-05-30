@@ -34,13 +34,35 @@
     		</list>
   		</property>
   		
-  		<property name="hibernateProperties">
+		<property name="hibernateProperties">
     		<value>
       			hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
       			hibernate.show_sql=true
+      			hibernate.cache.use_second_level_cache=true
+      			
+      			hibernate.cache.use_query_cache=true
+      			hibernate.cache.use_structured_entries=true
+      			hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
     		</value>
-  		</property>
+  		 </property>
+  		 <!--  <property name="hibernate.cache.provider_class">
+  		 	<value>
+  				 org.hibernate.cache.EhCacheProvider
+  		 	</value>
+  		 </property>
+  		 <property name="hibernate.cache.provider_configuration_file_resource_path">  
+         	<value>
+         		ehcache.xml
+         	</value>  
+      	 </property> -->
 	</bean>
+	<bean id="cacheManagerEhcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <property name="configLocation">
+        	<value>classpath:ehcache.xml</value>
+        </property>
+        <!-- 由于hibernate也使用了Ehcache, 保证双方都使用同一个缓存管理器 -->
+        <property name="shared" value="true"/>
+    </bean>
 	
 	<bean id="usersDAO" class="com.SSSSWeb.model.business.dao.UsersDAO">
 		<property name="sf" ref="sessionFactory"></property>

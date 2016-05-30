@@ -5,6 +5,7 @@
 package com.SSSSWeb.model.business.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.shuye.mdp.md4p;
 
@@ -77,18 +78,18 @@ public class UsersService {
         return u;
     }
     @Transactional
-    public ArrayList<Users> SelectAllUser(int pageSize, int pageNow){
+    public List<Users> SelectAllUser(int pageSize, int pageNow){
         ArrayList list = usersDAO.selectAllUser(pageSize, pageNow);
-        ArrayList resultList = new ArrayList();
+        List<Users> resultList = new ArrayList();
         for(int i=0;i<list.size();i++){
-            Object[] obj = (Object[]) list.get(i);
+            Users obj = (Users)list.get(i);
             Users u = new Users();
-            u.setUserid(Integer.valueOf(obj[0].toString()));
-            u.setUsername(obj[1].toString());
-            u.setPassword(obj[2].toString());
-            u.setPhonenum(obj[3].toString());
-            u.setUsex(obj[4].toString());
-            u.setPost(obj[5].toString());
+            u.setUserid(obj.getUserid());
+            u.setUsername(obj.getUsername());
+            u.setPassword(obj.getPassword());
+            u.setPhonenum(obj.getPhonenum());
+            u.setUsex(obj.getUsex());
+            u.setPost(obj.getPost());
             resultList.add(u);
         }
         return resultList;

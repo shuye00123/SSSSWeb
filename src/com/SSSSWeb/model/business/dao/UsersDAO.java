@@ -81,8 +81,11 @@ public class UsersDAO {
     }
     public ArrayList selectAllUser(int pageSize, int pageNow){
         Session session = sf.openSession();
-        String hql = "select * from Users limit "+(pageNow*pageSize-pageSize)+","+pageSize;
-        Query query = session.createSQLQuery(hql);
+        String hql = "from Users";
+        Query query = session.createQuery(hql);
+        query.setFirstResult(pageNow*pageSize-pageSize);
+        query.setMaxResults(pageSize);
+        query.setCacheable(true);
         ArrayList resultList = (ArrayList) query.list();
         session.close();
         return resultList;

@@ -21,7 +21,7 @@ public class SelectUserAction extends ActionSupport {
     private UsersService service;
     private String key;
     private int pageNum;
-    private int pageSize=2;
+    private int pageSize=4;
     private int pageNow=1;
     
     public void setPageNow(int pageNow) {

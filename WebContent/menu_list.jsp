@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="form-group">
 			<input type="text" class="form-control" name="chn_name" placeholder="Search">
           </div>
-          <button type="submit" class="btn btn-default">搜索</button>
+          <button type="submit" class="btn btn-danger">搜索</button>
         </form>
       <ul class="nav navbar-nav navbar-right">
        <s:if test="null==#session.customer||#session.customer.isEmpty()">
@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <a href="user.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><s:property value="#session.customer.customer_name " /><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="user.jsp"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp个人中心</a></li>
-                        <li><a href="sshopCart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
+                        <li><a href="shoppingcar.jsp"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp购物车</a></li>
                         <li><a href="sOrdersA"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp我的订单</a></li>
                         <li class="divider"></li>
                         <li><a href="logout">退出</a></li>
@@ -125,50 +125,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="container top">
     <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#">综合排序</a></li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                类别<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-                <li role="presentation" ><a href="#">汽车</a></li>
-                <li role="presentation"><a href="#">配件</a></li>
-            </ul>
-        </li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                销量<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-                <li role="presentation" ><a href="#">从高到低</a></li>
-                <li role="presentation"><a href="#">从低到高</a></li>
-            </ul>
-        </li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                价格<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-                <li role="presentation" ><a href="#">从高到低</a></li>
-                <li role="presentation"><a href="#">从低到高</a></li>
-            </ul>
-        </li>
+
     </ul>
 </div>
 <div class="container">
     <s:iterator value="list" var="u">
         <div class="Goods">
-        <a href="sDetialGoodsA?id=<s:property value="#u.id"/>"> <img class="detialImg" src="file:///<s:property value="#u.img"/>"/></a>
+        <a href="sDetialGoodsA?id=<s:property value="#u.id"/>"> <img class="detialImg" src="<s:property value="#u.img"/>"/></a>
         <div class="clear"><p class="money">&nbsp;¥<s:property value="#u.price"/></p><p class="saleNum">已售<s:property value="#u.num"/>件</p></div>
         <a class="goodsText" href="sDetialGoodsA?id=<s:property value="#u.id"/>"><s:property value="#u.chn_name"/></a>
         </div>
     </s:iterator>
 
 
-    
-
+   
 </div>
 
+<div class="container">
+<hr style="margin: 20px 0;">
+		<footer style="margin: 20px 0;">
+        <p class="pull-right"><a href="#top">回到顶部</a></p>
 
+        <p>&copy; 汽车4S店系统</p>
+        </footer>
+        </div>
 
 
 <script src="js/jquery-1.12.3.min.js"></script>

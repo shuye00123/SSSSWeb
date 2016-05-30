@@ -38,12 +38,14 @@ public class LoginAction extends ActionSupport implements SessionAware, ModelDri
 	}
 	@Override
 	public String execute() throws Exception {
+		clearErrorsAndMessages();
 		Customer c = cs.checkCustomer(customer);
 	     if (c !=null) {
 	         session.put("customer",c);
 	         return "success";
 	     }
 	     else{
+	    	 addActionMessage("用户名或密码错误！");
 	    	 return "error"; 
 	     }  
 	        

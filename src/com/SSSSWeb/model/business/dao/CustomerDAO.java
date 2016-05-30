@@ -1,5 +1,7 @@
 package com.SSSSWeb.model.business.dao;
 
+import java.util.ArrayList;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,10 +21,20 @@ public class CustomerDAO {
 		this.sf = sf;
 	}
 
-	public void InsertCustomer(Customer customer) {
+	public Boolean InsertCustomer(Customer customer) {
 		Session session = sf.openSession();
-		session.save(customer);
+		String hql = " from  Customer where customer_no = '"+customer.getCustomer_no()+"'" ;
+		Query query=session.createQuery(hql);
+	    Customer c=(Customer)query.uniqueResult();
+		Boolean b;
+		if(c==null){
+			session.save(customer);
+			b=true;
+		}else{
+			b=false;
+		}
 		session.close();
+		return b;
 	}
 
 	public Customer checkCustomer(Customer customer) {
@@ -59,5 +71,27 @@ public class CustomerDAO {
 		session.save(oldCustomer);
 		tx.commit();
 		session.close();
+	}
+
+	public ArrayList<Customer> SelectCustomer(int page, int i) {
+		Session session = sf.openSession();
+		String hql= "select c.customer_id,c.customer_no,c.customer_no,c.customer_name,c.sex,c.job,c.tel,c.addr,c.idcard,c.remark "
+				+ " from Customer c";	
+		Query query = session.createQuery(hql);
+		page=page*i;
+		query.setFirstResult(page);
+		query.setMaxResults(i);
+		ArrayList resultList = (ArrayList) query.list();
+		session.close();
+		return resultList;
+	}
+
+	public int selectCount() {
+		Session session = sf.openSession();
+		String hql = " select count(*) from Customer ";
+		Query q=session.createQuery(hql);
+		int count=Integer.parseInt(q.uniqueResult().toString());
+		session.close();
+		return count;
 	}
 }

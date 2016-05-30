@@ -3,6 +3,7 @@ package com.SSSSWeb.model.business.dao;
 import java.util.ArrayList;
 
 
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,12 +24,19 @@ public class SupplierDAO {
 		return sf;
 	}
 
-	public ArrayList<Supplier> SelectSupplier() {
+	public ArrayList<Supplier> SelectSupplier(int page, int i) {
 		Session session = sf.openSession();
 		String hql="select s.supplier_id,s.supplier_name,s.contact,s.contact_tel,s.contact_addr,s.account_bank,s.account_num,s.remark  " +
 				"from Supplier s";
 		Query query = session.createQuery(hql);
+		
+			page=page*i;
+			query.setFirstResult(page);
+			query.setMaxResults(i);
+		
+		
 		ArrayList resultList = (ArrayList) query.list();
+		
 		session.close();
 		return resultList;
 	}
@@ -63,6 +71,15 @@ public class SupplierDAO {
 		Session session = sf.openSession();
 		session.save(supplier);
 		session.close();
+	}
+
+	public int selectCount() {
+		Session session = sf.openSession();
+		String hql = " select count(*) from Supplier ";
+		Query q=session.createQuery(hql);
+		int count=Integer.parseInt(q.uniqueResult().toString());
+		session.close();
+		return count;
 	}
 
 }

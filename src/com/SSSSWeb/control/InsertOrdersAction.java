@@ -2,12 +2,11 @@ package com.SSSSWeb.control;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
@@ -47,7 +46,6 @@ public class InsertOrdersAction extends ActionSupport implements SessionAware{
 	@Override
 	public String execute() throws Exception {
 		HttpServletResponse hsr = ServletActionContext.getResponse();
-		String a=Alldata;
 		Customer c=(Customer)session.get("customer");
 		Orders o = os.InsertOrders(c);
 		JSONArray json = JSONArray.fromObject(Alldata);

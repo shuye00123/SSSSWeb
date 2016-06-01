@@ -85,8 +85,10 @@ public class UsersDAO {
         Query query = session.createQuery(hql);
         query.setFirstResult(pageNow*pageSize-pageSize);
         query.setMaxResults(pageSize);
+        System.out.println("从第"+(pageNow*pageSize-pageSize)+"开始");
         query.setCacheable(true);
         ArrayList resultList = (ArrayList) query.list();
+        System.out.println(((Users)resultList.get(0)).getUserid());
         session.close();
         return resultList;
     }

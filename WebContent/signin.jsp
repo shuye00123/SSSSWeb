@@ -45,7 +45,7 @@
 		  </div>
           <script type="text/JavaScript"> 
 			var msg="${requestScope.Message}";
-			if(msg!=""){
+			if(msg=="false"){
 				var html ='<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>用户名或密码错误</div>';
 				var target = document.getElementById('err');
 				target.innerHTML = html;

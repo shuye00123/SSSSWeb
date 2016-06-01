@@ -17,7 +17,7 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
      *   */
     private static final long serialVersionUID = 6409965646263698989L;
     private List list;
-    private int pageSize=2;
+    private int pageSize=4;
     private int pageNow=1;
     private int pageNum;
     private List postlist;
@@ -52,6 +52,7 @@ public class SelectAllUserAction extends ActionSupport implements ModelDriven<Us
         String value = null;
         try{
             list = service.SelectAllUser(pageSize, pageNow);
+            System.out.println("当前页为"+pageNow);
             pageNum = service.PageNum(pageSize, value);
             postlist = service.postList();
             return "success";

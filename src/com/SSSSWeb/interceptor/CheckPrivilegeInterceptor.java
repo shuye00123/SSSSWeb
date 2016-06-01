@@ -34,10 +34,12 @@ public class CheckPrivilegeInterceptor extends AbstractInterceptor {
         }
         ActionContext ac = invocation.getInvocationContext();
         Map session = ac.getSession();
+        System.out.println(session.get("user")== null);
+        System.out.println(((Users)session.get("user")).getPost().equals("管理员"));
         if(session.get("user") == null){
         	return "input";
         }else{
-        	if(((Users)session.get("user")).getPost()!="管理员"){
+        	if(!((Users)session.get("user")).getPost().equals("管理员")){
                 return "input";
         	}
         }

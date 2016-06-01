@@ -26,14 +26,17 @@
      	</action>
      	<action name="selectAllUser" class="SelectAllUserAction">
      		<result name="success">/selectAllUser.jsp</result>
+     		<interceptor-ref name="defaultStack"/>
      		<interceptor-ref name="authority"></interceptor-ref>
      	</action>
      	<action name="selectUser" class="SelectUserAction">
      		<result name="success">/selectUser.jsp</result>
-     		
+     		<interceptor-ref name="defaultStack"/>
+     		<interceptor-ref name="authority"></interceptor-ref>
      	</action>
         <action name="changeUser" class="ChangeUserAction">
      		<result type="chain" name="success">selectAllUser</result>
+     		<interceptor-ref name="defaultStack"/>
      		<interceptor-ref name="authority"></interceptor-ref>
      	</action>
      	<action name="changePsw" class="ChangePswAction">
@@ -41,10 +44,12 @@
      	</action>
      	<action name="deleteUser" class="DeleteUserAction">
      		<result type="chain" name="success">selectAllUser</result>
+     		<interceptor-ref name="defaultStack"/>
      		<interceptor-ref name="authority"></interceptor-ref>
      	</action>
      	<action name="addUser" class="AddUserAction">
-     		<result name="success">/main.jsp</result>
+     		<result type="chain" name="success">selectAllUser</result>
+     		<interceptor-ref name="defaultStack"/>
      		<interceptor-ref name="authority"></interceptor-ref>
      	</action>
      	
